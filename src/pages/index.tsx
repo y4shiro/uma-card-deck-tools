@@ -1,3 +1,4 @@
+import { Button } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -13,6 +14,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
+        <Button>Chakra UI Button</Button>
         <h1 className={styles.title}>
           Welcome to <a href='https://nextjs.org'>Next.js!</a>
         </h1>
