@@ -16,7 +16,7 @@
 
 - macOS Monterey 12.3.1
 - Node.js 16.13.2
-- React 18.2.l02
+- React 18.2.0
 - Next.js 12.1.6
 - TypeScript 4.7.4
 - ESLint / Prettier
