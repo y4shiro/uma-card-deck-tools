@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 
 import Header from '@/components/Header';
+import CardDeck from '@/features/CardDeck';
 
 const Home: NextPage = () => (
   <div>
@@ -17,6 +18,7 @@ const Home: NextPage = () => (
 
     <main>
       <Center>
+        <CardDeck />
         <Button>Chakra UI Button</Button>
         <Text>hello</Text>
       </Center>
