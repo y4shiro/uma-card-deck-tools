@@ -1,10 +1,10 @@
-import { Button, Container, Text, VStack } from '@chakra-ui/react';
+import { Container, Text, VStack } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
 
 import Header from '@/components/Header';
 import CardDeck from '@/features/CardDeck';
+import Status from '@/features/Status';
 
 const Home: NextPage = () => (
   <div>
@@ -19,7 +19,7 @@ const Home: NextPage = () => (
     <Container as='main' maxW='container.lg' bgColor='gray.100'>
       <VStack p='4'>
         <CardDeck />
-        <Button>Chakra UI Button</Button>
+        <Status />
         <Text>hello</Text>
       </VStack>
     </Container>
