@@ -1,11 +1,11 @@
-import { Box, Text } from '@chakra-ui/react';
-import React from 'react';
+import { HStack, Link, Text } from '@chakra-ui/react';
 
 const Header = (): JSX.Element => {
   return (
-    <Box w='100%' h='16' bgColor='green.500' alignContent='center'>
+    <HStack as='nav' w='100%' h='16' p='4' bgColor='green.500' justify='space-between'>
       <Text>Header Components</Text>
-    </Box>
+      <Link>About</Link>
+    </HStack>
   );
 };
 
