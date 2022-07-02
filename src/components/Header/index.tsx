@@ -6,10 +6,10 @@ const Header = (): JSX.Element => {
     <HStack as='nav' w='100%' h='16' p='4' bgColor='green.500' justify='space-between'>
       <Text>Header Components</Text>
       <HStack gap='4'>
-        <NextLink href='/'>
+        <NextLink href='/' passHref>
           <Link>Top</Link>
         </NextLink>
-        <NextLink href='/about'>
+        <NextLink href='/about' passHref>
           <Link>About</Link>
         </NextLink>
       </HStack>
