@@ -1,21 +1,20 @@
 import { Container, Text, VStack } from '@chakra-ui/react';
-import type { NextPage } from 'next';
+import type { NextPageWithLayout } from 'next';
 import Head from 'next/head';
 
 import { Header } from '@/components/Header';
 import CardDeck from '@/features/CardDeck';
 import Skills from '@/features/Skills';
 import Status from '@/features/Status';
+import { Layout } from '@/layouts/Layout';
 
-const Home: NextPage = () => (
+const Home: NextPageWithLayout = () => (
   <div>
     <Head>
       <title>Top - ウマ娘サポカ編成ツール</title>
       <meta name='description' content='ウマ娘サポートカード編成ツール' />
       <link rel='icon' href='/favicon.ico' />
     </Head>
-
-    <Header />
 
     <Container as='main' maxW='container.lg' bgColor='gray.100'>
       <VStack p='4'>
@@ -27,5 +26,7 @@ const Home: NextPage = () => (
     </Container>
   </div>
 );
+
+Home.getLayout = (page) => <Layout>{page}</Layout>;
 
 export default Home;
