@@ -1,4 +1,4 @@
-import { Button, Container, Text } from '@chakra-ui/react';
+import { Button, Container, Text, VStack } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -17,9 +17,11 @@ const Home: NextPage = () => (
     <Header />
 
     <Container as='main' maxW='container.lg' bgColor='gray.100'>
-      <CardDeck />
-      <Button>Chakra UI Button</Button>
-      <Text>hello</Text>
+      <VStack p='4'>
+        <CardDeck />
+        <Button>Chakra UI Button</Button>
+        <Text>hello</Text>
+      </VStack>
     </Container>
   </div>
 );
