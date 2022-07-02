@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 
 import Header from '@/components/Header';
+import Terms from '@/features/Terms';
 
 const About: NextPage = () => (
   <div>
@@ -17,6 +18,7 @@ const About: NextPage = () => (
     <Container as='main' maxW='container.lg' bgColor='gray.100'>
       <VStack p='4'>
         <Text>About Page</Text>
+        <Terms />
       </VStack>
     </Container>
   </div>
