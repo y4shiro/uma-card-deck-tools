@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 
 import Header from '@/components/Header';
+import Licence from '@/features/License';
 import Terms from '@/features/Terms';
 
 const About: NextPage = () => (
@@ -19,6 +20,7 @@ const About: NextPage = () => (
       <VStack p='4'>
         <Text>About Page</Text>
         <Terms />
+        <Licence />
       </VStack>
     </Container>
   </div>
