@@ -4,6 +4,7 @@ import Head from 'next/head';
 
 import Header from '@/components/Header';
 import CardDeck from '@/features/CardDeck';
+import Skills from '@/features/Skills';
 import Status from '@/features/Status';
 
 const Home: NextPage = () => (
@@ -20,6 +21,7 @@ const Home: NextPage = () => (
       <VStack p='4'>
         <CardDeck />
         <Status />
+        <Skills />
         <Text>hello</Text>
       </VStack>
     </Container>
