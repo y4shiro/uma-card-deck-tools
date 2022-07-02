@@ -1,4 +1,5 @@
-import { Box, Center, Grid, GridItem } from '@chakra-ui/react';
+import { Box, Grid } from '@chakra-ui/react';
+import Card from './Card';
 
 const CardDeck = (): JSX.Element => {
   const cardDeck = ['1', '2', '3', '4', '5', '6'];
@@ -11,16 +12,6 @@ const CardDeck = (): JSX.Element => {
         ))}
       </Grid>
     </Box>
-  );
-};
-
-const Card = ({ value }: { value: string }): JSX.Element => {
-  return (
-    <GridItem h='240px' w='180px' borderRadius='16' bgColor='gray.400'>
-      <Center h='100%' w='100%'>
-        {value}
-      </Center>
-    </GridItem>
   );
 };
 
