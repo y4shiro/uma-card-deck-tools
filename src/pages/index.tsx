@@ -2,7 +2,7 @@ import { Container, Text, VStack } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
-import Header from '@/components/Header';
+import { Header } from '@/components/Header';
 import CardDeck from '@/features/CardDeck';
 import Skills from '@/features/Skills';
 import Status from '@/features/Status';
