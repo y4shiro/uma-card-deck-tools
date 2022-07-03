@@ -1,0 +1,21 @@
+{
+  "cards": [
+    {
+      "id": 30001,
+      "name": "[日本一のステージを] スペシャルウィーク",
+      "charactorName": "スペシャルウィーク",
+      "rarity": "SSR",
+      "type": "Gats",
+      "effects": {
+        "friendshipBonus": 20,
+        "boostEffect": 60,
+        "initialGaugeUp": 25,
+        "hintLevelUp": 2,
+        "hintRateUp": 40,
+        "goodLuck": 35,
+        "powerBonus": 1,
+        "trainingEffect": 10
+      }
+    }
+  ]
+}
