@@ -2,7 +2,6 @@ import { Container, Text, VStack } from '@chakra-ui/react';
 import type { NextPageWithLayout } from 'next';
 import Head from 'next/head';
 
-import { Header } from '@/components/Header';
 import Contacts from '@/features/Contacts';
 import Licence from '@/features/License';
 import Terms from '@/features/Terms';
@@ -15,8 +14,6 @@ const About: NextPageWithLayout = () => (
       <meta name='description' content='ウマ娘サポートカード編成ツール' />
       <link rel='icon' href='/favicon.ico' />
     </Head>
-
-    <Header />
 
     <Container as='main' maxW='container.lg' bgColor='gray.100'>
       <VStack p='4'>
