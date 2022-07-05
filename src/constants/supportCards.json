@@ -7,14 +7,14 @@
       "rarity": "SSR",
       "type": "Guts",
       "effects": {
-        "friendshipBonus": 20,
-        "boostEffect": 60,
-        "initialGaugeUp": 25,
-        "hintLevelUp": 2,
-        "hintRateUp": 40,
-        "goodLuck": 35,
-        "powerBonus": 1,
-        "trainingEffect": 10
+        "friendshipBonus": [15, 16, 18, 20, 20],
+        "boostEffect": [40, 45, 50, 55, 60],
+        "initialGaugeUp": [20, 21, 23, 25, 25],
+        "hintLevelUp": [2, 2, 2, 2, 2],
+        "hintRateUp": [30, 33, 36, 40, 40],
+        "goodLuck": [20, 25, 30, 35, 35],
+        "powerBonus": [0, 1, 1, 1, 1],
+        "trainingEffect": [0, 0, 0, 5, 10]
       }
     },
     {
@@ -24,14 +24,14 @@
       "rarity": "SSR",
       "type": "Speed",
       "effects": {
-        "friendshipBonus": 35,
-        "boostEffect": 40,
-        "initialGaugeUp": 25,
-        "laceBonus": 5,
-        "fanBonus": 15,
-        "goodLuck": 65,
-        "skillPtBonus": 1,
-        "initialSpeedUp": 25
+        "friendshipBonus": [25, 27, 30, 32, 35],
+        "goodLuck": [50, 53, 57, 61, 65],
+        "boostEffect": [30, 33, 36, 40, 40],
+        "initialGaugeUp": [20, 21, 23, 25, 25],
+        "laceBonus": [5, 5, 5, 5, 5],
+        "fanBonus": [10, 11, 13, 15, 15],
+        "skillPtBonus": [0, 1, 1, 1, 1],
+        "initialSpeedBonus": [0, 0, 0, 15, 30]
       }
     }
   ]
