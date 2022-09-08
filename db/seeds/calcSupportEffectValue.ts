@@ -1,0 +1,126 @@
+const EFFECT_LIMITS = [
+  'init',
+  'limit_lv5',
+  'limit_lv10',
+  'limit_lv15',
+  'limit_lv20',
+  'limit_lv25',
+  'limit_lv30',
+  'limit_lv35',
+  'limit_lv40',
+  'limit_lv45',
+  'limit_lv50',
+] as const;
+
+type dataType = {
+  [key: string]: number;
+};
+
+const data: dataType[] = [
+  {
+    id: 10001,
+    type: 1,
+    init: 5,
+    limit_lv5: -1,
+    limit_lv10: -1,
+    limit_lv15: 10,
+    limit_lv20: 10,
+    limit_lv25: -1,
+    limit_lv30: -1,
+    limit_lv35: 15,
+    limit_lv40: -1,
+    limit_lv45: -1,
+    limit_lv50: -1,
+  },
+  {
+    id: 10002,
+    type: 19,
+    init: 5,
+    limit_lv5: -1,
+    limit_lv10: -1,
+    limit_lv15: -1,
+    limit_lv20: 35,
+    limit_lv25: -1,
+    limit_lv30: -1,
+    limit_lv35: -1,
+    limit_lv40: 50,
+    limit_lv45: -1,
+    limit_lv50: -1,
+  },
+];
+
+const getValue = (effect: dataType, cur: typeof EFFECT_LIMITS[number]) => {
+  if (effect[cur] !== -1) return console.log(`${cur} : ${effect[cur]}`); // カラムに -1 以外の数値が入っている場合はそのまま返す
+
+  const index = EFFECT_LIMITS.indexOf(cur); // 計算したいカラムの順番、例えば "limit_lv25" なら 5
+  let min: number = 0; // index 0 番目から計算したいカラムに含まれる数値の最小値
+  let min_limit: typeof EFFECT_LIMITS[number] = 'init'; // 数値の最小値の index
+  let max: number = 0; // index 0 番目から計算したいカラムに含まれる数値の最大値
+  let max_limit: typeof EFFECT_LIMITS[number] = 'limit_lv50'; // 数値の最大値の index
+
+  // effect オブジェクトの 0 番目から計算したいカラムまでを走査し、数値の最小値と index を求める
+  for (let limit of EFFECT_LIMITS.slice(0, index)) {
+    if (effect[limit] >= min) {
+      min = effect[limit];
+      min_limit = limit;
+    }
+  }
+
+  // effect オブジェクトの計算したいカラムから最大値までを走査し、数値の最大値と index を求める
+  for (let limit of EFFECT_LIMITS.slice(index, EFFECT_LIMITS.length)) {
+    if (effect[limit] !== -1) {
+      max = effect[limit];
+      max_limit = limit;
+      break;
+    }
+  }
+
+  // 最小値が最大値以上、最大値と最小値の差分が 1、最小値が 0 のいずれかの場合は min を返す
+  if (max <= min || max - min === 1 || min === 0) {
+    console.log(`${cur} : ${min}`);
+  } else {
+    const result = Math.floor(
+      min +
+        ((max - min) * (EFFECT_LIMITS.indexOf(cur) - EFFECT_LIMITS.indexOf(min_limit))) /
+          (EFFECT_LIMITS.indexOf(max_limit) - EFFECT_LIMITS.indexOf(min_limit)),
+    );
+    console.log(`${cur} : ${result}`);
+  }
+};
+
+const main = () => {
+  let array: dataType[] = [];
+
+  data.map((value) => {
+    delete value.id;
+    delete value.type;
+    array.push(value);
+  });
+
+  getValue(array[0], 'init');
+  getValue(array[0], 'limit_lv5');
+  getValue(array[0], 'limit_lv10');
+  getValue(array[0], 'limit_lv15');
+  getValue(array[0], 'limit_lv20');
+  getValue(array[0], 'limit_lv25');
+  getValue(array[0], 'limit_lv30');
+  getValue(array[0], 'limit_lv35');
+  getValue(array[0], 'limit_lv40');
+  getValue(array[0], 'limit_lv45');
+  getValue(array[0], 'limit_lv50');
+  getValue(array[1], 'init');
+  getValue(array[1], 'limit_lv5');
+  getValue(array[1], 'limit_lv10');
+  getValue(array[1], 'limit_lv15');
+  getValue(array[1], 'limit_lv20');
+  getValue(array[1], 'limit_lv25');
+  getValue(array[1], 'limit_lv30');
+  getValue(array[1], 'limit_lv35');
+  getValue(array[1], 'limit_lv40');
+  getValue(array[1], 'limit_lv45');
+  getValue(array[1], 'limit_lv50');
+};
+
+main();
+
+export {};
