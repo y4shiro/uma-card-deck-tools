@@ -59,7 +59,7 @@ const getValue = (effect: dataType, cur: typeof EFFECT_LIMITS[number]) => {
   let max_limit: typeof EFFECT_LIMITS[number] = 'limit_lv50'; // 数値の最大値の index
 
   // effect オブジェクトの 0 番目から計算したいカラムまでを走査し、数値の最小値と index を求める
-  for (let limit of EFFECT_LIMITS.slice(0, index)) {
+  for (const limit of EFFECT_LIMITS.slice(0, index)) {
     if (effect[limit] >= min) {
       min = effect[limit];
       min_limit = limit;
@@ -67,11 +67,10 @@ const getValue = (effect: dataType, cur: typeof EFFECT_LIMITS[number]) => {
   }
 
   // effect オブジェクトの計算したいカラムから最大値までを走査し、数値の最大値と index を求める
-  for (let limit of EFFECT_LIMITS.slice(index, EFFECT_LIMITS.length)) {
+  for (const limit of EFFECT_LIMITS.slice(index, EFFECT_LIMITS.length)) {
     if (effect[limit] !== -1) {
       max = effect[limit];
       max_limit = limit;
-      break;
     }
   }
 
@@ -92,8 +91,8 @@ const main = () => {
   let array: dataType[] = [];
 
   data.map((value) => {
-    delete value.id;
-    delete value.type;
+    if (value.id) delete value.id;
+    if (value.type) delete value.type;
     array.push(value);
   });
 
