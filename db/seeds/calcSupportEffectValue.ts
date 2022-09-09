@@ -151,6 +151,7 @@ const convetSqlQuery = (arr: (number | string)[][]): string => {
 
 const main = () => {
   const arr: number[][] = [];
+  const filterKeys: typeof EFFECT_LIMITS[number][] = ['init', 'lv5', 'lv10', 'lv15'];
 
   data.map((effect) => {
     const tmp = [];
@@ -158,6 +159,7 @@ const main = () => {
     tmp.push(effect['type']);
 
     EFFECT_LIMITS.map((limit_vallue) => {
+      if (filterKeys.some((key) => key.includes(result.label))) return; // filterKeys に該当する場合は処理をスキップ
       const result = getValue(effect, limit_vallue);
       tmp.push(result.value);
     });
