@@ -33,6 +33,21 @@ const data: dataType[] = [
     lv50: -1,
   },
   {
+    id: 10001,
+    type: 2,
+    init: 10,
+    lv5: -1,
+    lv10: -1,
+    lv15: -1,
+    lv20: 25,
+    lv25: -1,
+    lv30: -1,
+    lv35: -1,
+    lv40: 35,
+    lv45: -1,
+    lv50: -1,
+  },
+  {
     id: 10002,
     type: 19,
     init: 5,
@@ -53,10 +68,7 @@ const getValue = (
   effect: dataType,
   cur: typeof EFFECT_LIMITS[number],
 ): { label: typeof EFFECT_LIMITS[number]; value: number } => {
-  if (effect[cur] !== -1) {
-    const val = effect[cur];
-    return { label: cur, value: val };
-  } // カラムに -1 以外の数値が入っている場合はそのまま返す
+  if (effect[cur] !== -1) return { label: cur, value: effect[cur] }; // カラムに -1 以外の数値が入っている場合はそのまま返す
 
   const index = EFFECT_LIMITS.indexOf(cur); // 計算したいカラムの順番、例えば "lv25" なら 5
   let min: number = 0; // index 0 番目から計算したいカラムに含まれる数値の最小値
@@ -93,16 +105,38 @@ const getValue = (
   }
 };
 
+const convetSqlQuery = (arr: number[][]): string => {
+  let result: string = '';
+
+  arr.map((single_arr, i, arr) => {
+    let tmp = `(${single_arr.toString()})`;
+
+    if (arr.length - 1 === i) tmp += ';';
+    else tmp += ',\n';
+
+    result = result + tmp;
+  });
+
+  return result;
+};
+
 const main = () => {
+  const arr: number[][] = [];
+
   data.map((effect) => {
-    console.log(`id: ${effect['id']}`);
-    console.log(`type: ${effect['type']}`);
+    const tmp = [];
+    tmp.push(effect['id']);
+    tmp.push(effect['type']);
 
     EFFECT_LIMITS.map((limit_vallue) => {
       const result = getValue(effect, limit_vallue);
-      console.log(result);
+      tmp.push(result.value);
     });
+
+    arr.push(tmp);
   });
+
+  console.log(convetSqlQuery(arr));
 };
 
 main();
