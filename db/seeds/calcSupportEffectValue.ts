@@ -96,28 +96,11 @@ const main = () => {
     array.push(value);
   });
 
-  getValue(array[0], 'init');
-  getValue(array[0], 'limit_lv5');
-  getValue(array[0], 'limit_lv10');
-  getValue(array[0], 'limit_lv15');
-  getValue(array[0], 'limit_lv20');
-  getValue(array[0], 'limit_lv25');
-  getValue(array[0], 'limit_lv30');
-  getValue(array[0], 'limit_lv35');
-  getValue(array[0], 'limit_lv40');
-  getValue(array[0], 'limit_lv45');
-  getValue(array[0], 'limit_lv50');
-  getValue(array[1], 'init');
-  getValue(array[1], 'limit_lv5');
-  getValue(array[1], 'limit_lv10');
-  getValue(array[1], 'limit_lv15');
-  getValue(array[1], 'limit_lv20');
-  getValue(array[1], 'limit_lv25');
-  getValue(array[1], 'limit_lv30');
-  getValue(array[1], 'limit_lv35');
-  getValue(array[1], 'limit_lv40');
-  getValue(array[1], 'limit_lv45');
-  getValue(array[1], 'limit_lv50');
+  array.map((effect) => {
+    EFFECT_LIMITS.map((limit_vallue) => {
+      getValue(effect, limit_vallue);
+    });
+  });
 };
 
 main();
