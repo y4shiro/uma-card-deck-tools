@@ -1,15 +1,15 @@
 const EFFECT_LIMITS = [
   'init',
-  'limit_lv5',
-  'limit_lv10',
-  'limit_lv15',
-  'limit_lv20',
-  'limit_lv25',
-  'limit_lv30',
-  'limit_lv35',
-  'limit_lv40',
-  'limit_lv45',
-  'limit_lv50',
+  'lv5',
+  'lv10',
+  'lv15',
+  'lv20',
+  'lv25',
+  'lv30',
+  'lv35',
+  'lv40',
+  'lv45',
+  'lv50',
 ] as const;
 
 type dataType = {
@@ -21,42 +21,42 @@ const data: dataType[] = [
     id: 10001,
     type: 1,
     init: 5,
-    limit_lv5: -1,
-    limit_lv10: -1,
-    limit_lv15: 10,
-    limit_lv20: 10,
-    limit_lv25: -1,
-    limit_lv30: -1,
-    limit_lv35: 15,
-    limit_lv40: -1,
-    limit_lv45: -1,
-    limit_lv50: -1,
+    lv5: -1,
+    lv10: -1,
+    lv15: 10,
+    lv20: 10,
+    lv25: -1,
+    lv30: -1,
+    lv35: 15,
+    lv40: -1,
+    lv45: -1,
+    lv50: -1,
   },
   {
     id: 10002,
     type: 19,
     init: 5,
-    limit_lv5: -1,
-    limit_lv10: -1,
-    limit_lv15: -1,
-    limit_lv20: 35,
-    limit_lv25: -1,
-    limit_lv30: -1,
-    limit_lv35: -1,
-    limit_lv40: 50,
-    limit_lv45: -1,
-    limit_lv50: -1,
+    lv5: -1,
+    lv10: -1,
+    lv15: -1,
+    lv20: 35,
+    lv25: -1,
+    lv30: -1,
+    lv35: -1,
+    lv40: 50,
+    lv45: -1,
+    lv50: -1,
   },
 ];
 
 const getValue = (effect: dataType, cur: typeof EFFECT_LIMITS[number]) => {
   if (effect[cur] !== -1) return console.log(`${cur} : ${effect[cur]}`); // カラムに -1 以外の数値が入っている場合はそのまま返す
 
-  const index = EFFECT_LIMITS.indexOf(cur); // 計算したいカラムの順番、例えば "limit_lv25" なら 5
+  const index = EFFECT_LIMITS.indexOf(cur); // 計算したいカラムの順番、例えば "lv25" なら 5
   let min: number = 0; // index 0 番目から計算したいカラムに含まれる数値の最小値
   let min_limit: typeof EFFECT_LIMITS[number] = 'init'; // 数値の最小値の index
   let max: number = 0; // index 0 番目から計算したいカラムに含まれる数値の最大値
-  let max_limit: typeof EFFECT_LIMITS[number] = 'limit_lv50'; // 数値の最大値の index
+  let max_limit: typeof EFFECT_LIMITS[number] = 'lv50'; // 数値の最大値の index
 
   // effect オブジェクトの 0 番目から計算したいカラムまでを走査し、数値の最小値と index を求める
   for (const limit of EFFECT_LIMITS.slice(0, index)) {
