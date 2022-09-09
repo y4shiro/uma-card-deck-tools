@@ -149,25 +149,30 @@ const convetSqlQuery = (arr: (number | string)[][]): string => {
   return result;
 };
 
-const main = () => {
+const calcEffectValues = (table: dataType[], filterKeys: typeof EFFECT_LIMITS[number][]) => {
   const arr: number[][] = [];
-  const filterKeys: typeof EFFECT_LIMITS[number][] = ['init', 'lv5', 'lv10', 'lv15'];
 
-  data.map((effect) => {
+  table.map((effect) => {
     const tmp = [];
     tmp.push(effect['id']);
     tmp.push(effect['type']);
 
     EFFECT_LIMITS.map((limit_vallue) => {
-      if (filterKeys.some((key) => key.includes(result.label))) return; // filterKeys に該当する場合は処理をスキップ
       const result = getValue(effect, limit_vallue);
+      if (filterKeys.some((key) => key.includes(result.label))) return; // filterKeys に該当する場合は処理をスキップ
       tmp.push(result.value);
     });
 
     arr.push(tmp);
   });
 
-  const cahngeArr = changeContentsToRarity(arr);
+  return arr;
+};
+
+const main = () => {
+  const filterKeys: typeof EFFECT_LIMITS[number][] = ['init', 'lv5', 'lv10', 'lv15'];
+  const effectArr = calcEffectValues(data, filterKeys);
+  const cahngeArr = changeContentsToRarity(effectArr);
   console.log(convetSqlQuery(cahngeArr));
 };
 
