@@ -109,12 +109,10 @@ const convetSqlQuery = (arr: number[][]): string => {
   let result: string = '';
 
   arr.map((single_arr, i, arr) => {
-    let tmp = `(${single_arr.toString()})`;
+    const str = `(${single_arr.toString()})`;
+    const eol = arr.length - 1 === i ? ';' : ',\n'; // 配列の最後の場合のみ ; を付与、それ以外は , と改行コードを付与
 
-    if (arr.length - 1 === i) tmp += ';';
-    else tmp += ',\n';
-
-    result = result + tmp;
+    result += str + eol;
   });
 
   return result;
