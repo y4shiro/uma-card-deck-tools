@@ -88,15 +88,7 @@ const getValue = (effect: dataType, cur: typeof EFFECT_LIMITS[number]) => {
 };
 
 const main = () => {
-  let array: dataType[] = [];
-
-  data.map((value) => {
-    if (value.id) delete value.id;
-    if (value.type) delete value.type;
-    array.push(value);
-  });
-
-  array.map((effect) => {
+  data.map((effect) => {
     EFFECT_LIMITS.map((limit_vallue) => {
       getValue(effect, limit_vallue);
     });
