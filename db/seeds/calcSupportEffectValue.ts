@@ -33,21 +33,6 @@ const data: dataType[] = [
     lv50: -1,
   },
   {
-    id: 10001,
-    type: 2,
-    init: 10,
-    lv5: -1,
-    lv10: -1,
-    lv15: -1,
-    lv20: 25,
-    lv25: -1,
-    lv30: -1,
-    lv35: -1,
-    lv40: 35,
-    lv45: -1,
-    lv50: -1,
-  },
-  {
     id: 10002,
     type: 19,
     init: 5,
@@ -60,6 +45,36 @@ const data: dataType[] = [
     lv35: -1,
     lv40: 50,
     lv45: -1,
+    lv50: -1,
+  },
+  {
+    id: 20001,
+    type: 1,
+    init: 10,
+    lv5: -1,
+    lv10: -1,
+    lv15: -1,
+    lv20: 15,
+    lv25: 15,
+    lv30: -1,
+    lv35: -1,
+    lv40: 20,
+    lv45: -1,
+    lv50: -1,
+  },
+  {
+    id: 30001,
+    type: 1,
+    init: 10,
+    lv5: -1,
+    lv10: -1,
+    lv15: -1,
+    lv20: -1,
+    lv25: 15,
+    lv30: 15,
+    lv35: -1,
+    lv40: -1,
+    lv45: 20,
     lv50: -1,
   },
 ];
@@ -105,7 +120,23 @@ const getValue = (
   }
 };
 
-const convetSqlQuery = (arr: number[][]): string => {
+const changeContentsToRarity = (arr: number[][]): (number | string)[][] => {
+  let resultArr: (number | string)[][] = [];
+
+  arr.map((single_arr) => {
+    const rarity = Math.floor(single_arr[0] / 10000);
+    const editedArr: (number | string)[] = [...single_arr];
+
+    if (rarity <= 2) editedArr[editedArr.length - 1] = 'null';
+    if (rarity === 1) editedArr[editedArr.length - 2] = 'null';
+
+    resultArr.push(editedArr);
+  });
+
+  return resultArr;
+};
+
+const convetSqlQuery = (arr: (number | string)[][]): string => {
   let result: string = '';
 
   arr.map((single_arr, i, arr) => {
@@ -134,7 +165,8 @@ const main = () => {
     arr.push(tmp);
   });
 
-  console.log(convetSqlQuery(arr));
+  const cahngeArr = changeContentsToRarity(arr);
+  console.log(convetSqlQuery(cahngeArr));
 };
 
 main();
