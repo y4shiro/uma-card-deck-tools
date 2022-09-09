@@ -12,11 +12,11 @@ const EFFECT_LIMITS = [
   'lv50',
 ] as const;
 
-type dataType = {
+type effectTableType = {
   [key: string]: number;
 };
 
-const data: dataType[] = [
+const effectTable: effectTableType[] = [
   {
     id: 10001,
     type: 1,
@@ -80,52 +80,52 @@ const data: dataType[] = [
 ];
 
 const getValue = (
-  effect: dataType,
+  effectTable: effectTableType,
   cur: typeof EFFECT_LIMITS[number],
-): { label: typeof EFFECT_LIMITS[number]; value: number } => {
-  if (effect[cur] !== -1) return { label: cur, value: effect[cur] }; // カラムに -1 以外の数値が入っている場合はそのまま返す
+): { key: typeof EFFECT_LIMITS[number]; value: number } => {
+  if (effectTable[cur] !== -1) return { key: cur, value: effectTable[cur] }; // カラムに -1 以外の数値が入っている場合はそのまま返す
 
   const index = EFFECT_LIMITS.indexOf(cur); // 計算したいカラムの順番、例えば "lv25" なら 5
   let min: number = 0; // index 0 番目から計算したいカラムに含まれる数値の最小値
-  let min_limit: typeof EFFECT_LIMITS[number] = 'init'; // 数値の最小値の index
+  let minLimit: typeof EFFECT_LIMITS[number] = 'init'; // 数値の最小値の index
   let max: number = 0; // index 0 番目から計算したいカラムに含まれる数値の最大値
-  let max_limit: typeof EFFECT_LIMITS[number] = 'lv50'; // 数値の最大値の index
+  let maxLimit: typeof EFFECT_LIMITS[number] = 'lv50'; // 数値の最大値の index
 
   // effect オブジェクトの 0 番目から計算したいカラムまでを走査し、数値の最小値と index を求める
   for (const limit of EFFECT_LIMITS.slice(0, index)) {
-    if (effect[limit] >= min) {
-      min = effect[limit];
-      min_limit = limit;
+    if (effectTable[limit] >= min) {
+      min = effectTable[limit];
+      minLimit = limit;
     }
   }
 
   // effect オブジェクトの計算したいカラムから最大値までを走査し、数値の最大値と index を求める
   for (const limit of EFFECT_LIMITS.slice(index, EFFECT_LIMITS.length)) {
-    if (effect[limit] !== -1) {
-      max = effect[limit];
-      max_limit = limit;
+    if (effectTable[limit] !== -1) {
+      max = effectTable[limit];
+      maxLimit = limit;
     }
   }
 
   // 最小値が最大値以上、最大値と最小値の差分が 1、最小値が 0 のいずれかの場合は min を返す
   if (max <= min || max - min === 1 || min === 0) {
-    return { label: cur, value: min };
+    return { key: cur, value: min };
   } else {
     const result = Math.floor(
       min +
-        ((max - min) * (EFFECT_LIMITS.indexOf(cur) - EFFECT_LIMITS.indexOf(min_limit))) /
-          (EFFECT_LIMITS.indexOf(max_limit) - EFFECT_LIMITS.indexOf(min_limit)),
+        ((max - min) * (EFFECT_LIMITS.indexOf(cur) - EFFECT_LIMITS.indexOf(minLimit))) /
+          (EFFECT_LIMITS.indexOf(maxLimit) - EFFECT_LIMITS.indexOf(minLimit)),
     );
-    return { label: cur, value: result };
+    return { key: cur, value: result };
   }
 };
 
 const changeContentsToRarity = (arr: number[][]): (number | string)[][] => {
   let resultArr: (number | string)[][] = [];
 
-  arr.map((single_arr) => {
-    const rarity = Math.floor(single_arr[0] / 10000);
-    const editedArr: (number | string)[] = [...single_arr];
+  arr.map((singleArr) => {
+    const rarity = Math.floor(singleArr[0] / 10000);
+    const editedArr: (number | string)[] = [...singleArr];
 
     if (rarity <= 2) editedArr[editedArr.length - 1] = 'null';
     if (rarity === 1) editedArr[editedArr.length - 2] = 'null';
@@ -139,9 +139,9 @@ const changeContentsToRarity = (arr: number[][]): (number | string)[][] => {
 const convetSqlQuery = (arr: (number | string)[][]): string => {
   let result: string = '';
 
-  arr.map((single_arr, i, arr) => {
-    const str = `(${single_arr.toString()})`;
-    const eol = arr.length - 1 === i ? ';' : ',\n'; // 配列の最後の場合のみ ; を付与、それ以外は , と改行コードを付与
+  arr.map((singleArr, index, arr) => {
+    const str = `(${singleArr.toString()})`;
+    const eol = arr.length - 1 === index ? ';' : ',\n'; // 配列の最後の場合のみ ; を付与、それ以外は , と改行コードを付与
 
     result += str + eol;
   });
@@ -149,29 +149,29 @@ const convetSqlQuery = (arr: (number | string)[][]): string => {
   return result;
 };
 
-const calcEffectValues = (table: dataType[], filterKeys: typeof EFFECT_LIMITS[number][]) => {
-  const arr: number[][] = [];
+const calcEffectValues = (table: effectTableType[], filterKeys: typeof EFFECT_LIMITS[number][]) => {
+  const resultArr: number[][] = [];
 
-  table.map((effect) => {
+  table.map((effectRecord) => {
     const tmp = [];
-    tmp.push(effect['id']);
-    tmp.push(effect['type']);
+    tmp.push(effectRecord['id']);
+    tmp.push(effectRecord['type']);
 
-    EFFECT_LIMITS.map((limit_vallue) => {
-      const result = getValue(effect, limit_vallue);
-      if (filterKeys.some((key) => key.includes(result.label))) return; // filterKeys に該当する場合は処理をスキップ
+    EFFECT_LIMITS.map((effectLimitKey) => {
+      const result = getValue(effectRecord, effectLimitKey);
+      if (filterKeys.some((key) => key.includes(result.key))) return; // filterKeys に該当する場合は処理をスキップ
       tmp.push(result.value);
     });
 
-    arr.push(tmp);
+    resultArr.push(tmp);
   });
 
-  return arr;
+  return resultArr;
 };
 
 const main = () => {
   const filterKeys: typeof EFFECT_LIMITS[number][] = ['init', 'lv5', 'lv10', 'lv15'];
-  const effectArr = calcEffectValues(data, filterKeys);
+  const effectArr = calcEffectValues(effectTable, filterKeys);
   const cahngeArr = changeContentsToRarity(effectArr);
   console.log(convetSqlQuery(cahngeArr));
 };
