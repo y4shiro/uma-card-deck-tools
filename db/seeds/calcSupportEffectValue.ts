@@ -96,7 +96,8 @@ const changeContentsToRarity = (arr: number[][]): (number | string)[][] => {
 };
 
 const convetSqlQuery = (arr: (number | string)[][]): string => {
-  let result: string = '';
+  let result: string =
+    'insert into card_effects (card_id, effect_id, lv20, lv25, lv30, lv35, lv40, lv45, lv50)\nvalues\n';
 
   arr.map((singleArr, index, arr) => {
     const str = `(${singleArr.toString()})`;
