@@ -1,3 +1,5 @@
+// This code depends on Deno
+// deno run --allow-write calcSupportEffectValue.ts
 import effectTableJSON from './effectTable.json' assert { type: 'json' };
 
 const EFFECT_LIMITS = [
@@ -109,11 +111,17 @@ const convetSqlQuery = (arr: (number | string)[][]): string => {
   return result;
 };
 
+const outputSQL = (str: string) => {
+  // @ts-ignore
+  Deno.writeTextFile('./insert_card_effects_table.sql', str);
+};
+
 const main = (tables: effectTableType[]) => {
   const filterKeys: typeof EFFECT_LIMITS[number][] = ['init', 'limitLv5', 'limitLv10', 'limitLv15'];
   const effectArr = calcEffectValues(tables, filterKeys);
   const cahngeArr = changeContentsToRarity(effectArr);
-  console.log(convetSqlQuery(cahngeArr));
+  const sqlQueryString = convetSqlQuery(cahngeArr);
+  outputSQL(sqlQueryString);
 };
 
 main(effectTableJSON);
