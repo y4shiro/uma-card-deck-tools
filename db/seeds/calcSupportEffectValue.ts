@@ -120,6 +120,26 @@ const getValue = (
   }
 };
 
+const calcEffectValues = (table: effectTableType[], filterKeys: typeof EFFECT_LIMITS[number][]) => {
+  const resultArr: number[][] = [];
+
+  table.map((effectRecord) => {
+    const tmp = [];
+    tmp.push(effectRecord['id']);
+    tmp.push(effectRecord['type']);
+
+    EFFECT_LIMITS.map((effectLimitKey) => {
+      const result = getValue(effectRecord, effectLimitKey);
+      if (filterKeys.some((key) => key.includes(result.key))) return; // filterKeys に該当する場合は処理をスキップ
+      tmp.push(result.value);
+    });
+
+    resultArr.push(tmp);
+  });
+
+  return resultArr;
+};
+
 const changeContentsToRarity = (arr: number[][]): (number | string)[][] => {
   let resultArr: (number | string)[][] = [];
 
@@ -147,26 +167,6 @@ const convetSqlQuery = (arr: (number | string)[][]): string => {
   });
 
   return result;
-};
-
-const calcEffectValues = (table: effectTableType[], filterKeys: typeof EFFECT_LIMITS[number][]) => {
-  const resultArr: number[][] = [];
-
-  table.map((effectRecord) => {
-    const tmp = [];
-    tmp.push(effectRecord['id']);
-    tmp.push(effectRecord['type']);
-
-    EFFECT_LIMITS.map((effectLimitKey) => {
-      const result = getValue(effectRecord, effectLimitKey);
-      if (filterKeys.some((key) => key.includes(result.key))) return; // filterKeys に該当する場合は処理をスキップ
-      tmp.push(result.value);
-    });
-
-    resultArr.push(tmp);
-  });
-
-  return resultArr;
 };
 
 const main = () => {
