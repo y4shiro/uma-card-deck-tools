@@ -1,83 +1,22 @@
+import effectTableJSON from './effectTable.json' assert { type: 'json' };
+
 const EFFECT_LIMITS = [
   'init',
-  'lv5',
-  'lv10',
-  'lv15',
-  'lv20',
-  'lv25',
-  'lv30',
-  'lv35',
-  'lv40',
-  'lv45',
-  'lv50',
+  'limitLv5',
+  'limitLv10',
+  'limitLv15',
+  'limitLv20',
+  'limitLv25',
+  'limitLv30',
+  'limitLv35',
+  'limitLv40',
+  'limitLv45',
+  'limitLv50',
 ] as const;
 
 type effectTableType = {
   [key: string]: number;
 };
-
-const effectTable: effectTableType[] = [
-  {
-    id: 10001,
-    type: 1,
-    init: 5,
-    lv5: -1,
-    lv10: -1,
-    lv15: 10,
-    lv20: 10,
-    lv25: -1,
-    lv30: -1,
-    lv35: 15,
-    lv40: -1,
-    lv45: -1,
-    lv50: -1,
-  },
-  {
-    id: 10002,
-    type: 19,
-    init: 5,
-    lv5: -1,
-    lv10: -1,
-    lv15: -1,
-    lv20: 35,
-    lv25: -1,
-    lv30: -1,
-    lv35: -1,
-    lv40: 50,
-    lv45: -1,
-    lv50: -1,
-  },
-  {
-    id: 20001,
-    type: 1,
-    init: 10,
-    lv5: -1,
-    lv10: -1,
-    lv15: -1,
-    lv20: 15,
-    lv25: 15,
-    lv30: -1,
-    lv35: -1,
-    lv40: 20,
-    lv45: -1,
-    lv50: -1,
-  },
-  {
-    id: 30001,
-    type: 1,
-    init: 10,
-    lv5: -1,
-    lv10: -1,
-    lv15: -1,
-    lv20: -1,
-    lv25: 15,
-    lv30: 15,
-    lv35: -1,
-    lv40: -1,
-    lv45: 20,
-    lv50: -1,
-  },
-];
 
 const getValue = (
   effectTable: effectTableType,
@@ -85,11 +24,11 @@ const getValue = (
 ): { key: typeof EFFECT_LIMITS[number]; value: number } => {
   if (effectTable[cur] !== -1) return { key: cur, value: effectTable[cur] }; // カラムに -1 以外の数値が入っている場合はそのまま返す
 
-  const index = EFFECT_LIMITS.indexOf(cur); // 計算したいカラムの順番、例えば "lv25" なら 5
+  const index = EFFECT_LIMITS.indexOf(cur); // 計算したいカラムの順番、例えば "limitLv25" なら 5
   let min: number = 0; // index 0 番目から計算したいカラムに含まれる数値の最小値
   let minLimit: typeof EFFECT_LIMITS[number] = 'init'; // 数値の最小値の index
   let max: number = 0; // index 0 番目から計算したいカラムに含まれる数値の最大値
-  let maxLimit: typeof EFFECT_LIMITS[number] = 'lv50'; // 数値の最大値の index
+  let maxLimit: typeof EFFECT_LIMITS[number] = 'limitLv50'; // 数値の最大値の index
 
   // effect オブジェクトの 0 番目から計算したいカラムまでを走査し、数値の最小値と index を求める
   for (const limit of EFFECT_LIMITS.slice(0, index)) {
@@ -169,13 +108,11 @@ const convetSqlQuery = (arr: (number | string)[][]): string => {
   return result;
 };
 
-const main = () => {
-  const filterKeys: typeof EFFECT_LIMITS[number][] = ['init', 'lv5', 'lv10', 'lv15'];
-  const effectArr = calcEffectValues(effectTable, filterKeys);
+const main = (tables: effectTableType[]) => {
+  const filterKeys: typeof EFFECT_LIMITS[number][] = ['init', 'limitLv5', 'limitLv10', 'limitLv15'];
+  const effectArr = calcEffectValues(tables, filterKeys);
   const cahngeArr = changeContentsToRarity(effectArr);
   console.log(convetSqlQuery(cahngeArr));
 };
 
-main();
-
-export {};
+main(effectTableJSON);
