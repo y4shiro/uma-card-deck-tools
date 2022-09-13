@@ -9,7 +9,7 @@ type cardType = {
   event_skills: eventSkill[];
 };
 
-type afterCardType = {
+type shapedCardType = {
   support_id: number;
   event_skills: number[];
 };
@@ -24,13 +24,13 @@ const omitProperty = (eventSkills: eventSkill[]): number[] => {
   return resultArr;
 };
 
-const shapingJSON = (cards: cardType[]): afterCardType[] => {
-  const result: afterCardType[] = [];
+const shapingJSON = (cards: cardType[]): shapedCardType[] => {
+  const result: shapedCardType[] = [];
 
   cards.map((card) => {
     const skillArr = omitProperty(card.event_skills);
 
-    const obj: afterCardType = {
+    const obj: shapedCardType = {
       support_id: card.support_id,
       event_skills: skillArr,
     };
@@ -41,10 +41,26 @@ const shapingJSON = (cards: cardType[]): afterCardType[] => {
   return result;
 };
 
-const main = (cards: cardType[]) => {
-  const resultJSON = shapingJSON(cards);
+const convetSqlQuery = (shapedJSON: shapedCardType[]): string => {
+  let sqlQuery: string = 'insert into card_event_skills (card_id, skill_id)\nvalues\n';
 
-  console.log(resultJSON);
+  shapedJSON.map((record, arrIndex, json) => {
+    record.event_skills.map((skillId, skillIndex, skills) => {
+      const str = `(${record.support_id}, ${skillId})`;
+      const eol = json.length - 1 === arrIndex && skills.length - 1 === skillIndex ? ';' : ',\n'; // 最後の値のみ ; を付与、それ以外は , と改行コードを付与
+
+      sqlQuery += str + eol;
+    });
+  });
+
+  return sqlQuery;
+};
+
+const main = (cards: cardType[]) => {
+  const shapedJSON = shapingJSON(cards);
+  const sqlQuery = convetSqlQuery(shapedJSON);
+
+  console.log(sqlQuery);
 };
 
 main(supportCards);
