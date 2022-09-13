@@ -24,7 +24,9 @@ const omitProperty = (eventSkills: eventSkill[]): number[] => {
   return resultArr;
 };
 
-const main = (cards: cardType[]) => {
+const shapingJSON = (cards: cardType[]): afterCardType[] => {
+  const result: afterCardType[] = [];
+
   cards.map((card) => {
     const skillArr = omitProperty(card.event_skills);
 
@@ -33,8 +35,16 @@ const main = (cards: cardType[]) => {
       event_skills: skillArr,
     };
 
-    console.log(obj);
+    result.push(obj);
   });
+
+  return result;
+};
+
+const main = (cards: cardType[]) => {
+  const resultJSON = shapingJSON(cards);
+
+  console.log(resultJSON);
 };
 
 main(supportCards);
