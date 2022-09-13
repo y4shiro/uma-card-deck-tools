@@ -1,6 +1,6 @@
 // This code depends on Deno
 // deno run --allow-write calcSupportEffectValue.ts
-import effectTableJSON from './effectTable.json' assert { type: 'json' };
+import effectTableJSON from './source/effectTable.json' assert { type: 'json' };
 
 const EFFECT_LIMITS = [
   'init',
