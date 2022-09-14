@@ -1,17 +1,23 @@
 // This code depends on Deno
 // deno run --allow-write createCardEventSkillsSql.ts
-import supportCards from './source/supportCard_test.json' assert { type: 'json' };
+import supportCards from './source/supportsRow.json' assert { type: 'json' };
 
 type eventSkill = { id: number };
 
-type cardType = {
+type CardType = {
   support_id: number;
   event_skills: eventSkill[];
 };
 
-type shapedCardType = {
+type ShapedCardType = {
   support_id: number;
   event_skills: number[];
+};
+
+type RowJSON = {
+  pageProps: {
+    supportData: CardType[];
+  };
 };
 
 const omitProperty = (eventSkills: eventSkill[]): number[] => {
@@ -24,13 +30,16 @@ const omitProperty = (eventSkills: eventSkill[]): number[] => {
   return resultArr;
 };
 
-const shapingJSON = (cards: cardType[]): shapedCardType[] => {
-  const result: shapedCardType[] = [];
+const shapingJSON = (json: RowJSON): ShapedCardType[] => {
+  const {
+    pageProps: { supportData: cards },
+  } = json;
+  const result: ShapedCardType[] = [];
 
   cards.map((card) => {
     const skillArr = omitProperty(card.event_skills);
 
-    const obj: shapedCardType = {
+    const obj: ShapedCardType = {
       support_id: card.support_id,
       event_skills: skillArr,
     };
@@ -41,7 +50,7 @@ const shapingJSON = (cards: cardType[]): shapedCardType[] => {
   return result;
 };
 
-const convetSqlQuery = (shapedJSON: shapedCardType[]): string => {
+const convetSqlQuery = (shapedJSON: ShapedCardType[]): string => {
   let sqlQuery: string = 'insert into card_event_skills (card_id, skill_id)\nvalues\n';
 
   shapedJSON.map((record, arrIndex, json) => {
@@ -56,11 +65,15 @@ const convetSqlQuery = (shapedJSON: shapedCardType[]): string => {
   return sqlQuery;
 };
 
-const main = (cards: cardType[]) => {
-  const shapedJSON = shapingJSON(cards);
-  const sqlQuery = convetSqlQuery(shapedJSON);
+const outputSQL = (sqlQuery: string) => {
+  // @ts-ignore
+  Deno.writeTextFile('./insert_card_event_skills_table.sql', sqlQuery);
+};
 
-  console.log(sqlQuery);
+const main = (json: RowJSON) => {
+  const shapedJSON = shapingJSON(json);
+  const sqlQuery = convetSqlQuery(shapedJSON);
+  outputSQL(sqlQuery);
 };
 
 main(supportCards);
