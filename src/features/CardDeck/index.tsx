@@ -4,13 +4,20 @@ import { useEffect, useState } from 'react';
 import Card from './Card';
 import { supabase } from '@/utils/supabaseClient';
 
-type CardType = {
+type Skill = {
   id: number;
   name: string;
+  skill_pt: string;
+  img_path: string | null;
+};
+type CardType = {
+  card_id: number;
+  card_name: string;
   charactor_name: string;
   rarity: 'R' | 'SR' | 'SSR';
   type: 'Speed' | 'Stamina' | 'Power' | 'Guts' | 'Wisdom' | 'Friends' | 'Group';
   img_path: string | null;
+  skills: Skill[];
 };
 
 const CardDeck = (): JSX.Element => {
@@ -20,7 +27,7 @@ const CardDeck = (): JSX.Element => {
   useEffect(() => {
     const getCards = async () => {
       try {
-        const { data, error } = await supabase.from('cards').select('*');
+        const { data, error } = await supabase.from('view_cards_and_card_event_skills').select('*');
         setCards(data);
       } catch (error) {
         console.log(error);
@@ -42,7 +49,7 @@ const CardDeck = (): JSX.Element => {
         {cards &&
           cards
             .filter((card) => card.type === 'Speed')
-            .map((card, index) => <Card value={card.name} key={index} />)}
+            .map((card, index) => <Card value={card.card_name} key={index} />)}
       </Grid>
     </Box>
   );
