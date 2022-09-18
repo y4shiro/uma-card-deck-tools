@@ -10,6 +10,12 @@ type Skill = {
   skill_pt: number | null;
   img_path: string | null;
 };
+
+type StatusGain = {
+  id: number;
+  name: string;
+  value: number;
+};
 type CardType = {
   card_id: number;
   card_name: string;
@@ -17,7 +23,8 @@ type CardType = {
   card_rarity: 'R' | 'SR' | 'SSR';
   card_type: 'Speed' | 'Stamina' | 'Power' | 'Guts' | 'Wisdom' | 'Friends' | 'Group';
   card_img_path: string | null;
-  skills: Skill[];
+  skills?: Skill[];
+  status_gain?: StatusGain[];
 };
 
 const CardDeck = (): JSX.Element => {
@@ -28,8 +35,11 @@ const CardDeck = (): JSX.Element => {
     const getCards = async () => {
       try {
         // const { data, error } = await supabase.from('view_cards_and_card_event_skills').select('*');
+        // const { data, error } = await supabase
+        //   .from('view_cards_and_card_training_skills')
+        //   .select('*');
         const { data, error } = await supabase
-          .from('view_cards_and_card_training_skills')
+          .from('view_cards_and_card_training_status_gain')
           .select('*');
         setCards(data);
       } catch (error) {
