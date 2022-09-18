@@ -14,9 +14,9 @@ type CardType = {
   card_id: number;
   card_name: string;
   charactor_name: string;
-  rarity: 'R' | 'SR' | 'SSR';
-  type: 'Speed' | 'Stamina' | 'Power' | 'Guts' | 'Wisdom' | 'Friends' | 'Group';
-  img_path: string | null;
+  card_rarity: 'R' | 'SR' | 'SSR';
+  card_type: 'Speed' | 'Stamina' | 'Power' | 'Guts' | 'Wisdom' | 'Friends' | 'Group';
+  card_img_path: string | null;
   skills: Skill[];
 };
 
@@ -48,7 +48,7 @@ const CardDeck = (): JSX.Element => {
         {/* {cards && cards.map((card, index) => <Card value={card.name} key={index} />)} */}
         {cards &&
           cards
-            .filter((card) => card.type === 'Speed')
+            .filter((card) => card.card_type === 'Speed')
             .map((card, index) => <Card value={card.card_name} key={index} />)}
       </Grid>
     </Box>
