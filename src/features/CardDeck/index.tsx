@@ -7,7 +7,7 @@ import { supabase } from '@/utils/supabaseClient';
 type Skill = {
   id: number;
   name: string;
-  skill_pt: string;
+  skill_pt: number | null;
   img_path: string | null;
 };
 type CardType = {
