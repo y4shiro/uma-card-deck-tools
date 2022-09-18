@@ -27,7 +27,10 @@ const CardDeck = (): JSX.Element => {
   useEffect(() => {
     const getCards = async () => {
       try {
-        const { data, error } = await supabase.from('view_cards_and_card_event_skills').select('*');
+        // const { data, error } = await supabase.from('view_cards_and_card_event_skills').select('*');
+        const { data, error } = await supabase
+          .from('view_cards_and_card_training_skills')
+          .select('*');
         setCards(data);
       } catch (error) {
         console.log(error);
