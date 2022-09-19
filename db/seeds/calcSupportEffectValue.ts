@@ -1,7 +1,6 @@
 // This code depends on Deno
 // deno run --allow-write calcSupportEffectValue.ts
-// import effectTableJSON from './source/effectTable.json' assert { type: 'json' };
-import effectTableJSON from './source/effectTable_sample.json' assert { type: 'json' };
+import effectTableJSON from './source/effectTable.json' assert { type: 'json' };
 
 const EFFECT_LIMITS = [
   'init',
@@ -115,12 +114,17 @@ const slicedContentsToRarity = (effectArr: EffectObject[]): EffectObject[] => {
   return resultArr;
 };
 
-const convetSqlQuery = (arr: (number | string)[][]): string => {
-  let result: string =
-    'insert into card_effects (card_id, effect_id, lv20, lv25, lv30, lv35, lv40, lv45, lv50)\nvalues\n';
+const convertSqlQuery = (slicedArr: EffectObject[]): string => {
+  let result: string = 'insert into card_effects (card_id, effect_id, level, value)\nvalues\n';
 
-  arr.map((singleArr, index, arr) => {
-    const str = `(${singleArr.toString()})`;
+  slicedArr.forEach((effectObj, index, arr) => {
+    let str: string = '';
+
+    effectObj.effects.forEach(({ level, value }, innerIndex, innerArr) => {
+      const innerEol = innerArr.length - 1 === innerIndex ? '' : ',\n'; // 配列の最後以外に , と改行コードを付与
+      str += `(${effectObj.id}, ${effectObj.type}, ${level}, ${value})${innerEol}`;
+    });
+
     const eol = arr.length - 1 === index ? ';' : ',\n'; // 配列の最後の場合のみ ; を付与、それ以外は , と改行コードを付与
 
     result += str + eol;
@@ -131,16 +135,15 @@ const convetSqlQuery = (arr: (number | string)[][]): string => {
 
 const outputSQL = (str: string) => {
   // @ts-ignore
-  Deno.writeTextFile('./insert_card_effects_table.sql', str);
+  Deno.writeTextFile('./insert_card_effects.sql', str);
 };
 
 const main = (tables: effectTableType[]) => {
   const filterKeys: typeof EFFECT_LIMITS[number][] = ['init', 'limitLv5', 'limitLv10', 'limitLv15'];
   const effectArr = calcEffectValues(tables, filterKeys);
   const slicedArr = slicedContentsToRarity(effectArr);
-  // const sqlQueryString = convetSqlQuery(slicedArr);
-  // outputSQL(sqlQueryString);
-  console.log(slicedArr);
+  const sqlQueryString = convertSqlQuery(slicedArr);
+  outputSQL(sqlQueryString);
 };
 
 main(effectTableJSON);
