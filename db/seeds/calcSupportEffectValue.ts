@@ -98,17 +98,18 @@ const calcEffectValues = (table: effectTableType[], filterKeys: typeof EFFECT_LI
   return resultArr;
 };
 
-const changeContentsToRarity = (arr: number[][]): (number | string)[][] => {
-  let resultArr: (number | string)[][] = [];
+const slicedContentsToRarity = (effectArr: EffectObject[]): EffectObject[] => {
+  const resultArr: EffectObject[] = [];
 
-  arr.map((singleArr) => {
-    const rarity = Math.floor(singleArr[0] / 10000);
-    const editedArr: (number | string)[] = [...singleArr];
+  effectArr.forEach((singleArr) => {
+    const rarity = Math.floor(singleArr.id / 10000);
+    const sliceCount = 4 + rarity;
+    const slicedObj: EffectObject = {
+      ...singleArr,
+      effects: singleArr.effects.slice(0, sliceCount),
+    };
 
-    if (rarity <= 2) editedArr[editedArr.length - 1] = 'null';
-    if (rarity === 1) editedArr[editedArr.length - 2] = 'null';
-
-    resultArr.push(editedArr);
+    resultArr.push(slicedObj);
   });
 
   return resultArr;
@@ -136,10 +137,10 @@ const outputSQL = (str: string) => {
 const main = (tables: effectTableType[]) => {
   const filterKeys: typeof EFFECT_LIMITS[number][] = ['init', 'limitLv5', 'limitLv10', 'limitLv15'];
   const effectArr = calcEffectValues(tables, filterKeys);
-  // const cahngeArr = changeContentsToRarity(effectArr);
-  // const sqlQueryString = convetSqlQuery(cahngeArr);
+  const slicedArr = slicedContentsToRarity(effectArr);
+  // const sqlQueryString = convetSqlQuery(slicedArr);
   // outputSQL(sqlQueryString);
-  console.log(effectArr);
+  console.log(slicedArr);
 };
 
 main(effectTableJSON);
