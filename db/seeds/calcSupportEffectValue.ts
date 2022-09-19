@@ -62,21 +62,37 @@ const getValue = (
   }
 };
 
+type EffectObject = {
+  id: number;
+  type: number;
+  effects: EffectRecord[];
+};
+
+type EffectRecord = {
+  level: number;
+  value: number;
+};
+
 const calcEffectValues = (table: effectTableType[], filterKeys: typeof EFFECT_LIMITS[number][]) => {
-  const resultArr: number[][] = [];
+  const resultArr: EffectObject[] = [];
 
-  table.map((effectRecord) => {
-    const tmp = [];
-    tmp.push(effectRecord['id']);
-    tmp.push(effectRecord['type']);
+  table.forEach((effectRecord) => {
+    const effectsAry: EffectRecord[] = [];
 
-    EFFECT_LIMITS.map((effectLimitKey) => {
+    EFFECT_LIMITS.forEach((effectLimitKey) => {
+      if (filterKeys.some((key) => key.includes(effectLimitKey))) return; // filterKeys に該当する場合は処理をスキップ
       const result = getValue(effectRecord, effectLimitKey);
-      if (filterKeys.some((key) => key.includes(result.key))) return; // filterKeys に該当する場合は処理をスキップ
-      tmp.push(result.value);
+      const levelNum = result.key === 'init' ? 1 : Number(result.key.replace('limitLv', ''));
+      effectsAry.push({ level: levelNum, value: result.value });
     });
 
-    resultArr.push(tmp);
+    const tmpObj: EffectObject = {
+      id: effectRecord['id'],
+      type: effectRecord['type'],
+      effects: effectsAry,
+    };
+
+    resultArr.push(tmpObj);
   });
 
   return resultArr;
@@ -120,10 +136,10 @@ const outputSQL = (str: string) => {
 const main = (tables: effectTableType[]) => {
   const filterKeys: typeof EFFECT_LIMITS[number][] = ['init', 'limitLv5', 'limitLv10', 'limitLv15'];
   const effectArr = calcEffectValues(tables, filterKeys);
-  const cahngeArr = changeContentsToRarity(effectArr);
-  const sqlQueryString = convetSqlQuery(cahngeArr);
+  // const cahngeArr = changeContentsToRarity(effectArr);
+  // const sqlQueryString = convetSqlQuery(cahngeArr);
   // outputSQL(sqlQueryString);
-  console.log(sqlQueryString);
+  console.log(effectArr);
 };
 
 main(effectTableJSON);
