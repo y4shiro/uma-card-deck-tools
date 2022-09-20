@@ -4,7 +4,25 @@ import { useEffect, useState } from 'react';
 import Card from './Card';
 import { supabase } from '@/utils/supabaseClient';
 
-type Skill = {
+type Effects = {
+  id: number;
+  name: string;
+  values: EffectValue[];
+};
+
+type EffectValue = {
+  level: number;
+  value: number;
+};
+
+type EventSkill = {
+  id: number;
+  name: string;
+  skill_pt: number | null;
+  img_path: string | null;
+};
+
+type TrainingSkill = {
   id: number;
   name: string;
   skill_pt: number | null;
@@ -17,17 +35,6 @@ type StatusGain = {
   value: number;
 };
 
-type CardEffects = {
-  id: number;
-  name: string;
-  values: CardEffect[];
-};
-
-type CardEffect = {
-  level: number;
-  value: number;
-};
-
 type CardType = {
   card_id: number;
   card_name: string;
@@ -35,9 +42,10 @@ type CardType = {
   card_rarity: 'R' | 'SR' | 'SSR';
   card_type: 'Speed' | 'Stamina' | 'Power' | 'Guts' | 'Wisdom' | 'Friends' | 'Group';
   card_img_path: string | null;
-  skills?: Skill[];
+  effects: Effects[];
+  event_skills?: EventSkill[];
+  training_skills?: TrainingSkill[];
   status_gains?: StatusGain[];
-  card_effects?: CardEffects[];
 };
 
 const CardDeck = (): JSX.Element => {
@@ -47,11 +55,7 @@ const CardDeck = (): JSX.Element => {
   useEffect(() => {
     const getCards = async () => {
       try {
-        // const { data, error } = await supabase.from('view_cards_and_card_event_skills').select('*');
-        // const { data, error } = await supabase
-        //   .from('view_cards_and_card_training_skills')
-        //   .select('*');
-        const { data, error } = await supabase.from('view_cards_and_card_effects').select('*');
+        const { data, error } = await supabase.from('view_cards_json').select('*');
         setCards(data);
       } catch (error) {
         console.log(error);
