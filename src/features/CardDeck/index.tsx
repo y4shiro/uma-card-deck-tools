@@ -16,6 +16,18 @@ type StatusGain = {
   name: string;
   value: number;
 };
+
+type CardEffects = {
+  id: number;
+  name: string;
+  values: CardEffect[];
+};
+
+type CardEffect = {
+  level: number;
+  value: number;
+};
+
 type CardType = {
   card_id: number;
   card_name: string;
@@ -24,7 +36,8 @@ type CardType = {
   card_type: 'Speed' | 'Stamina' | 'Power' | 'Guts' | 'Wisdom' | 'Friends' | 'Group';
   card_img_path: string | null;
   skills?: Skill[];
-  status_gain?: StatusGain[];
+  status_gains?: StatusGain[];
+  card_effects?: CardEffects[];
 };
 
 const CardDeck = (): JSX.Element => {
@@ -38,9 +51,7 @@ const CardDeck = (): JSX.Element => {
         // const { data, error } = await supabase
         //   .from('view_cards_and_card_training_skills')
         //   .select('*');
-        const { data, error } = await supabase
-          .from('view_cards_and_card_training_status_gain')
-          .select('*');
+        const { data, error } = await supabase.from('view_cards_and_card_effects').select('*');
         setCards(data);
       } catch (error) {
         console.log(error);
