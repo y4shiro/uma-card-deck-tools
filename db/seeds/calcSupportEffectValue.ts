@@ -61,48 +61,70 @@ const getValue = (
   }
 };
 
+type EffectObject = {
+  id: number;
+  type: number;
+  effects: EffectRecord[];
+};
+
+type EffectRecord = {
+  level: number;
+  value: number;
+};
+
 const calcEffectValues = (table: effectTableType[], filterKeys: typeof EFFECT_LIMITS[number][]) => {
-  const resultArr: number[][] = [];
+  const resultArr: EffectObject[] = [];
 
-  table.map((effectRecord) => {
-    const tmp = [];
-    tmp.push(effectRecord['id']);
-    tmp.push(effectRecord['type']);
+  table.forEach((effectRecord) => {
+    const effectsAry: EffectRecord[] = [];
 
-    EFFECT_LIMITS.map((effectLimitKey) => {
+    EFFECT_LIMITS.forEach((effectLimitKey) => {
+      if (filterKeys.some((key) => key.includes(effectLimitKey))) return; // filterKeys に該当する場合は処理をスキップ
       const result = getValue(effectRecord, effectLimitKey);
-      if (filterKeys.some((key) => key.includes(result.key))) return; // filterKeys に該当する場合は処理をスキップ
-      tmp.push(result.value);
+      const levelNum = result.key === 'init' ? 1 : Number(result.key.replace('limitLv', ''));
+      effectsAry.push({ level: levelNum, value: result.value });
     });
 
-    resultArr.push(tmp);
+    const tmpObj: EffectObject = {
+      id: effectRecord['id'],
+      type: effectRecord['type'],
+      effects: effectsAry,
+    };
+
+    resultArr.push(tmpObj);
   });
 
   return resultArr;
 };
 
-const changeContentsToRarity = (arr: number[][]): (number | string)[][] => {
-  let resultArr: (number | string)[][] = [];
+const slicedContentsToRarity = (effectArr: EffectObject[]): EffectObject[] => {
+  const resultArr: EffectObject[] = [];
 
-  arr.map((singleArr) => {
-    const rarity = Math.floor(singleArr[0] / 10000);
-    const editedArr: (number | string)[] = [...singleArr];
+  effectArr.forEach((singleArr) => {
+    const rarity = Math.floor(singleArr.id / 10000);
+    const sliceCount = 4 + rarity;
+    const slicedObj: EffectObject = {
+      ...singleArr,
+      effects: singleArr.effects.slice(0, sliceCount),
+    };
 
-    if (rarity <= 2) editedArr[editedArr.length - 1] = 'null';
-    if (rarity === 1) editedArr[editedArr.length - 2] = 'null';
-
-    resultArr.push(editedArr);
+    resultArr.push(slicedObj);
   });
 
   return resultArr;
 };
 
-const convetSqlQuery = (arr: (number | string)[][]): string => {
-  let result: string =
-    'insert into card_effects (card_id, effect_id, lv20, lv25, lv30, lv35, lv40, lv45, lv50)\nvalues\n';
+const convertSqlQuery = (slicedArr: EffectObject[]): string => {
+  let result: string = 'insert into card_effects (card_id, effect_id, level, value)\nvalues\n';
 
-  arr.map((singleArr, index, arr) => {
-    const str = `(${singleArr.toString()})`;
+  slicedArr.forEach((effectObj, index, arr) => {
+    let str: string = '';
+
+    effectObj.effects.forEach(({ level, value }, innerIndex, innerArr) => {
+      const innerEol = innerArr.length - 1 === innerIndex ? '' : ',\n'; // 配列の最後以外に , と改行コードを付与
+      str += `(${effectObj.id}, ${effectObj.type}, ${level}, ${value})${innerEol}`;
+    });
+
     const eol = arr.length - 1 === index ? ';' : ',\n'; // 配列の最後の場合のみ ; を付与、それ以外は , と改行コードを付与
 
     result += str + eol;
@@ -113,14 +135,14 @@ const convetSqlQuery = (arr: (number | string)[][]): string => {
 
 const outputSQL = (str: string) => {
   // @ts-ignore
-  Deno.writeTextFile('./insert_card_effects_table.sql', str);
+  Deno.writeTextFile('./insert_card_effects.sql', str);
 };
 
 const main = (tables: effectTableType[]) => {
   const filterKeys: typeof EFFECT_LIMITS[number][] = ['init', 'limitLv5', 'limitLv10', 'limitLv15'];
   const effectArr = calcEffectValues(tables, filterKeys);
-  const cahngeArr = changeContentsToRarity(effectArr);
-  const sqlQueryString = convetSqlQuery(cahngeArr);
+  const slicedArr = slicedContentsToRarity(effectArr);
+  const sqlQueryString = convertSqlQuery(slicedArr);
   outputSQL(sqlQueryString);
 };
 
