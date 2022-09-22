@@ -34,7 +34,7 @@ const CardDeck = (): JSX.Element => {
         {cards &&
           cards
             .filter((card) => card.card_type === 'Speed')
-            .map((card, index) => <Card value={card.card_name} key={index} />)}
+            .map((card, index) => <Card card={card} key={index} />)}
       </Grid>
     </Box>
   );
