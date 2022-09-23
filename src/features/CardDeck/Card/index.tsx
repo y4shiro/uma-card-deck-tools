@@ -12,7 +12,7 @@ const Card: React.FC<Props> = (props) => {
         <Image
           width={180}
           height={240}
-          src={`https://res.cloudinary.com/y4shiro/uma-support-card/card-images/${props.card.card_img_path}`}
+          src={`uma-support-card/card-images/${props.card.card_img_path}`}
           alt='サポートカードの画像'
         />
       </Center>
