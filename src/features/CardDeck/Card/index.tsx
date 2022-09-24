@@ -37,6 +37,7 @@ const Card: React.FC<Props> = (props) => {
       borderWidth='1px'
       borderColor={outerBorderColor}
       shadow='md'
+      position='relative'
     >
       <Box
         h='full'
@@ -57,6 +58,15 @@ const Card: React.FC<Props> = (props) => {
           alt={`サポートカード "${props.card.card_name}" の画像`}
         />
         {/* <Box w='full' h='full' bgColor='blackAlpha.500'></Box> */}
+      </Box>
+
+      <Box position='absolute' top='0' right='0'>
+        <Image
+          height='44px'
+          width='44px'
+          src={`uma-support-card/card-type-icons/${props.card.card_type}.png`}
+          alt={`サポートカード "${props.card.card_name}" のタイプ画像`}
+        />
       </Box>
     </GridItem>
   );
