@@ -8,17 +8,22 @@ const ChakraNextImage = chakra(Image);
 type Props = { card: CardType; key: number };
 
 const Card: React.FC<Props> = (props) => {
-  let bgColor: string;
+  // 後ほど定数定義のファイルに分割する
+  let bgGradient: string;
+  let outerBorderColor: string;
 
   switch (props.card.card_rarity) {
     case 'R':
-      bgColor = theme.colors.gray[200];
+      bgGradient = 'linear(0deg, #8e9ab0, #fefefe)';
+      outerBorderColor = '#bbb';
       break;
     case 'SR':
-      bgColor = theme.colors.yellow[400];
+      bgGradient = 'linear(0deg, #e2af38, #fff1cd)';
+      outerBorderColor = '#bfa763';
       break;
     case 'SSR':
-      bgColor = theme.colors.purple[400];
+      bgGradient = 'linear(135deg, #fc9edd,#d356f5 30%, #60dbfb 55%,#81f8d3 75%, #dbfe65)';
+      outerBorderColor = '#95829d';
       break;
   }
 
@@ -26,14 +31,22 @@ const Card: React.FC<Props> = (props) => {
     <GridItem
       h='240px'
       w='180px'
-      padding='8px'
-      bgColor={bgColor}
-      borderRadius='16'
+      padding='6px'
+      bgGradient={bgGradient}
+      borderRadius='20'
       borderWidth='1px'
-      borderColor='rgba(64,64,64, 0.2)'
+      borderColor={outerBorderColor}
       shadow='md'
     >
-      <Box h='full' w='full' borderRadius='12' overflow='hidden' position='relative'>
+      <Box
+        h='full'
+        w='full'
+        borderRadius='16'
+        borderWidth='1px'
+        borderColor='#ccc'
+        overflow='hidden'
+        position='relative'
+      >
         <ChakraNextImage
           layout='fill'
           objectFit='cover'
