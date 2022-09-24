@@ -68,6 +68,15 @@ const Card: React.FC<Props> = (props) => {
           alt={`サポートカード "${props.card.card_name}" のタイプ画像`}
         />
       </Box>
+
+      <Box position='absolute' top='0' left='8px'>
+        <Image
+          height='44px'
+          width='48px'
+          src={`uma-support-card/rarity/${props.card.card_rarity}.png`}
+          alt={`サポートカード "${props.card.card_name}" のタイプ画像`}
+        />
+      </Box>
     </GridItem>
   );
 };
