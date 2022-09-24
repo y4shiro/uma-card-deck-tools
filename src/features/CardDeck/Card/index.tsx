@@ -50,10 +50,13 @@ const Card: React.FC<Props> = (props) => {
         <ChakraNextImage
           layout='fill'
           objectFit='cover'
-          priority
+          placeholder='blur'
+          blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOcXg8AAbMBGIpVIK8AAAAASUVORK5CYII='
+          transition={'0.2s'}
           src={`uma-support-card/card-images/${props.card.card_img_path}`}
           alt={`サポートカード "${props.card.card_name}" の画像`}
         />
+        {/* <Box w='full' h='full' bgColor='blackAlpha.500'></Box> */}
       </Box>
     </GridItem>
   );
