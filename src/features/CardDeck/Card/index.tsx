@@ -1,9 +1,7 @@
-import { Box, chakra, GridItem, theme } from '@chakra-ui/react';
+import { Box, GridItem, theme } from '@chakra-ui/react';
 import Image from 'next/image';
 
 import type { CardType } from '@/types/cards';
-
-const ChakraNextImage = chakra(Image);
 
 type Props = { card: CardType; key: number };
 
@@ -29,6 +27,7 @@ const Card: React.FC<Props> = (props) => {
 
   return (
     <GridItem
+      position='relative'
       h='240px'
       w='180px'
       padding='6px'
@@ -37,24 +36,24 @@ const Card: React.FC<Props> = (props) => {
       borderWidth='1px'
       borderColor={outerBorderColor}
       shadow='md'
-      position='relative'
     >
       <Box
+        position='relative'
         h='full'
         w='full'
         borderRadius='16'
         borderWidth='1px'
         borderColor='#ccc'
         overflow='hidden'
-        position='relative'
       >
-        <ChakraNextImage
+        <Image
+          quality={'100'}
           layout='fill'
           objectFit='cover'
           placeholder='blur'
           blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOcXg8AAbMBGIpVIK8AAAAASUVORK5CYII='
-          transition={'0.2s'}
-          src={`uma-support-card/card-images/${props.card.card_img_path}`}
+          style={{ transition: '0.2s' }}
+          src={`w_180,h_240/uma-support-card/card-images/${props.card.card_img_path}`}
           alt={`サポートカード "${props.card.card_name}" の画像`}
         />
         {/* <Box w='full' h='full' bgColor='blackAlpha.500'></Box> */}
@@ -65,7 +64,7 @@ const Card: React.FC<Props> = (props) => {
           height='44px'
           width='44px'
           src={`uma-support-card/card-type-icons/${props.card.card_type}.png`}
-          alt={`サポートカード "${props.card.card_name}" のタイプ画像`}
+          alt={`サポートカード "${props.card.card_name}" のタイプアイコン`}
         />
       </Box>
 
@@ -73,8 +72,9 @@ const Card: React.FC<Props> = (props) => {
         <Image
           height='44px'
           width='48px'
-          src={`uma-support-card/rarity/${props.card.card_rarity}.png`}
-          alt={`サポートカード "${props.card.card_name}" のタイプ画像`}
+          quality={100}
+          src={`uma-support-card/card-rarity-icons/${props.card.card_rarity}.png`}
+          alt={`サポートカード "${props.card.card_name}" のレアリティアイコン`}
         />
       </Box>
     </GridItem>
