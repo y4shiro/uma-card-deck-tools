@@ -1,13 +1,15 @@
-import { Box, Grid } from '@chakra-ui/react';
+import { Box, Button, Grid } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 import Card from './Card';
+import CardSelectModal from './CardSelectModal';
 import type { CardType } from '@/types/cards';
 import { supabase } from '@/utils/supabaseClient';
 
 const CardDeck = (): JSX.Element => {
   const cardDeck = ['1', '2', '3', '4', '5', '6'];
   const [cards, setCards] = useState<CardType[]>();
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     const getCards = async () => {
@@ -31,11 +33,16 @@ const CardDeck = (): JSX.Element => {
           <Card value={value} key={index} />
         ))} */}
         {/* {cards && cards.map((card, index) => <Card value={card.name} key={index} />)} */}
-        {cards &&
+        {/* {cards &&
           cards
             .filter((card) => card.card_type === 'Guts')
-            .map((card, index) => <Card card={card} key={index} />)}
+            .map((card, index) => <Card card={card} key={index} />)} */}
       </Grid>
+
+      <Box width='720px' padding='4' textAlign='center'>
+        <Button onClick={() => setOpenModal(!openModal)}>モーダル開く</Button>
+        {openModal && <CardSelectModal />}
+      </Box>
     </Box>
   );
 };
