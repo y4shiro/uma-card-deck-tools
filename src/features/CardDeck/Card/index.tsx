@@ -5,7 +5,7 @@ import type { CardType } from '@/types/cards';
 
 type Props = { card: CardType; key: number };
 
-const Card: React.FC<Props> = (props) => {
+const Card: React.FC<Props> = ({ card }) => {
   const bgGradients = {
     R: 'linear(0deg, #8e9ab0, #fefefe)',
     SR: 'linear(0deg, #e2af38, #fff1cd)',
@@ -23,10 +23,10 @@ const Card: React.FC<Props> = (props) => {
       h='240px'
       w='180px'
       padding='6px'
-      bgGradient={bgGradients[props.card.card_rarity]}
+      bgGradient={bgGradients[card.card_rarity]}
       borderRadius='20'
       borderWidth='1px'
-      borderColor={outerBorderColors[props.card.card_rarity]}
+      borderColor={outerBorderColors[card.card_rarity]}
       shadow='md'
     >
       <Box
@@ -45,8 +45,8 @@ const Card: React.FC<Props> = (props) => {
           placeholder='blur'
           blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOcXg8AAbMBGIpVIK8AAAAASUVORK5CYII='
           style={{ transition: '0.2s' }}
-          src={`w_180,h_240/uma-support-card/card-images/${props.card.card_img_path}`}
-          alt={`サポートカード "${props.card.card_name}" の画像`}
+          src={`w_180,h_240/uma-support-card/card-images/${card.card_img_path}`}
+          alt={`サポートカード "${card.card_name}" の画像`}
         />
         {/* <Box w='full' h='full' bgColor='blackAlpha.500'></Box> */}
       </Box>
@@ -55,8 +55,8 @@ const Card: React.FC<Props> = (props) => {
         <Image
           height='44px'
           width='44px'
-          src={`uma-support-card/card-type-icons/${props.card.card_type}.png`}
-          alt={`サポートカード "${props.card.card_name}" のタイプアイコン`}
+          src={`uma-support-card/card-type-icons/${card.card_type}.png`}
+          alt={`サポートカード "${card.card_name}" のタイプアイコン`}
         />
       </Box>
 
@@ -65,8 +65,8 @@ const Card: React.FC<Props> = (props) => {
           height='44px'
           width='48px'
           quality={100}
-          src={`uma-support-card/card-rarity-icons/${props.card.card_rarity}.png`}
-          alt={`サポートカード "${props.card.card_name}" のレアリティアイコン`}
+          src={`uma-support-card/card-rarity-icons/${card.card_rarity}.png`}
+          alt={`サポートカード "${card.card_name}" のレアリティアイコン`}
         />
       </Box>
     </GridItem>
