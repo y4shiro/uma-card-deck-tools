@@ -33,8 +33,8 @@ const CardDeck = (): JSX.Element => {
         {/* {cards && cards.map((card, index) => <Card value={card.name} key={index} />)} */}
         {cards &&
           cards
-            .filter((card) => card.card_type === 'Speed')
-            .map((card, index) => <Card value={card.card_name} key={index} />)}
+            .filter((card) => card.card_type === 'Guts')
+            .map((card, index) => <Card card={card} key={index} />)}
       </Grid>
     </Box>
   );

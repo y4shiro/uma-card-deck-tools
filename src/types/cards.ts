@@ -5,6 +5,7 @@ export type CardType = {
   card_rarity: 'R' | 'SR' | 'SSR';
   card_type: 'Speed' | 'Stamina' | 'Power' | 'Guts' | 'Wisdom' | 'Friends' | 'Group';
   card_img_path: string | null;
+  card_icon_path: string | null;
   effects: Effects[];
   event_skills?: EventSkill[];
   training_skills?: TrainingSkill[];
