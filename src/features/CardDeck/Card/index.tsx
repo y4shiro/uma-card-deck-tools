@@ -1,4 +1,4 @@
-import { Box, GridItem, theme } from '@chakra-ui/react';
+import { Box, GridItem } from '@chakra-ui/react';
 import Image from 'next/image';
 
 import type { CardType } from '@/types/cards';
@@ -6,24 +6,16 @@ import type { CardType } from '@/types/cards';
 type Props = { card: CardType; key: number };
 
 const Card: React.FC<Props> = (props) => {
-  // 後ほど定数定義のファイルに分割する
-  let bgGradient: string;
-  let outerBorderColor: string;
-
-  switch (props.card.card_rarity) {
-    case 'R':
-      bgGradient = 'linear(0deg, #8e9ab0, #fefefe)';
-      outerBorderColor = '#bbb';
-      break;
-    case 'SR':
-      bgGradient = 'linear(0deg, #e2af38, #fff1cd)';
-      outerBorderColor = '#bfa763';
-      break;
-    case 'SSR':
-      bgGradient = 'linear(135deg, #fc9edd,#d356f5 30%, #60dbfb 55%,#81f8d3 75%, #dbfe65)';
-      outerBorderColor = '#95829d';
-      break;
-  }
+  const bgGradients = {
+    R: 'linear(0deg, #8e9ab0, #fefefe)',
+    SR: 'linear(0deg, #e2af38, #fff1cd)',
+    SSR: 'linear(135deg, #fc9edd,#d356f5 30%, #60dbfb 55%,#81f8d3 75%, #dbfe65)',
+  };
+  const outerBorderColors = {
+    R: '#bbb',
+    SR: '#bfa763',
+    SSR: '#95829d',
+  };
 
   return (
     <GridItem
@@ -31,10 +23,10 @@ const Card: React.FC<Props> = (props) => {
       h='240px'
       w='180px'
       padding='6px'
-      bgGradient={bgGradient}
+      bgGradient={bgGradients[props.card.card_rarity]}
       borderRadius='20'
       borderWidth='1px'
-      borderColor={outerBorderColor}
+      borderColor={outerBorderColors[props.card.card_rarity]}
       shadow='md'
     >
       <Box
