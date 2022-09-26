@@ -68,7 +68,6 @@ const CardSelectModal: React.FC<Props> = ({ cards }) => {
             {imgArray.map((name, index) => (
               <Image
                 key={index}
-                // layout='fill'
                 width='160px'
                 height='240px'
                 src={`card-sample/${name}`}
@@ -78,11 +77,26 @@ const CardSelectModal: React.FC<Props> = ({ cards }) => {
           </Grid>
         </ModalBody>
 
-        <ModalFooter justifyContent='center' bgColor='#ddd' borderBottomRadius='12'>
-          <Button w='160px' colorScheme='blue' mr={3} onClick={onClose}>
-            Close
+        <ModalFooter justifyContent='center' borderBottomRadius='12'>
+          <Button
+            size='lg'
+            w={{ base: '160px', sm: '200px' }}
+            colorScheme='red'
+            borderRadius='8'
+            boxShadow='lg'
+            mr={6}
+          >
+            選択解除
           </Button>
-          <Button w='160px' onClick={onClose}>
+          <Button
+            size='lg'
+            w={{ base: '160px', sm: '200px' }}
+            variant='ghost'
+            border='2px solid #666'
+            borderRadius='8'
+            boxShadow='lg'
+            onClick={onClose}
+          >
             閉じる
           </Button>
         </ModalFooter>
