@@ -83,7 +83,7 @@ const CardSelectModal: React.FC<Props> = ({ cards }) => {
             w={{ base: '160px', sm: '200px' }}
             colorScheme='red'
             borderRadius='8'
-            boxShadow='lg'
+            shadow='0px 4px 4px rgba(0,0,0,0.3)'
             mr={6}
           >
             選択解除
@@ -94,7 +94,7 @@ const CardSelectModal: React.FC<Props> = ({ cards }) => {
             variant='ghost'
             border='2px solid #666'
             borderRadius='8'
-            boxShadow='lg'
+            shadow='0px 4px 4px rgba(0,0,0,0.3)'
             onClick={onClose}
           >
             閉じる
