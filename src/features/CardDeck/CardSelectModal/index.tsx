@@ -52,7 +52,11 @@ const CardSelectModal: React.FC<Props> = ({ cards }) => {
       <ModalOverlay />
       <ModalContent borderRadius='12'>
         <ModalHeader bgColor='#89c53d' borderTopRadius='12' textAlign='center'>
-          <Text color='white' fontSize={{ base: '1.25rem', sm: '1.5rem' }}>
+          <Text
+            color='white'
+            fontSize={{ base: '1.25rem', sm: '1.5rem', lg: '1.75rem' }}
+            fontWeight='bold'
+          >
             サポートカード選択
           </Text>
         </ModalHeader>
