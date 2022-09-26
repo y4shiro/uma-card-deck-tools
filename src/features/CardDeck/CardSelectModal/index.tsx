@@ -56,7 +56,6 @@ const CardSelectModal: React.FC<Props> = ({ cards }) => {
             サポートカード選択
           </Text>
         </ModalHeader>
-        <ModalCloseButton textAlign='center' />
         <ModalBody>
           <Grid
             gap={{ base: '1', sm: '2' }}
