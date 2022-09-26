@@ -44,13 +44,13 @@ const CardSelectModal: React.FC<Props> = ({ cards }) => {
 
   return (
     <Modal
-      size={{ base: 'full', sm: '2xl', md: '4xl', xl: '6xl' }}
+      size={{ base: 'md', sm: 'xl', md: '3xl', lg: '4xl', xl: '6xl' }}
       isOpen={isOpen}
       onClose={onClose}
       scrollBehavior='inside'
     >
       <ModalOverlay />
-      <ModalContent h='840px' borderRadius='12'>
+      <ModalContent borderRadius='12'>
         <ModalHeader bgColor='#89c53d' borderTopRadius='12' textAlign='center'>
           <Text color='white'>サポートカード選択</Text>
         </ModalHeader>
