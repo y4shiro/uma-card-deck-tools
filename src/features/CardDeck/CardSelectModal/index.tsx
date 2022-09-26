@@ -42,26 +42,34 @@ const CardSelectModal: React.FC<Props> = ({ cards }) => {
   }, []);
 
   return (
-    <Modal size='4xl' isOpen={isOpen} onClose={onClose} scrollBehavior='inside'>
+    <Modal
+      size={{ base: 'full', sm: '2xl', md: '4xl', xl: '6xl' }}
+      isOpen={isOpen}
+      onClose={onClose}
+      scrollBehavior='inside'
+    >
       <ModalOverlay />
-      <ModalContent h='640px' borderRadius='12'>
+      <ModalContent h='840px' borderRadius='12'>
         <ModalHeader color='white' bgColor='#89c53d' borderTopRadius='12'>
           サポートカード選択
         </ModalHeader>
         <ModalCloseButton textAlign='center' />
         <ModalBody>
-          {/* <Grid p='4' gap='1' templateColumns='repeat(6, 1fr)'> */}
-
-          {imgArray.map((name, index) => (
-            <Image
-              key={index}
-              width='160px'
-              height='240px'
-              src={`card-sample/${name}`}
-              alt='sample'
-            ></Image>
-          ))}
-          {/* </Grid> */}
+          <Grid
+            gap={{ base: '1', sm: '2' }}
+            templateColumns={{ base: 'repeat(5, 1fr)', sm: 'repeat(6, 1fr)', xl: 'repeat(7, 1fr)' }}
+          >
+            {imgArray.map((name, index) => (
+              <Image
+                key={index}
+                // layout='fill'
+                width='160px'
+                height='240px'
+                src={`card-sample/${name}`}
+                alt='sample'
+              ></Image>
+            ))}
+          </Grid>
         </ModalBody>
 
         <ModalFooter justifyContent='center' bgColor='#ddd' borderBottomRadius='12'>
