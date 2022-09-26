@@ -9,22 +9,21 @@ import { supabase } from '@/utils/supabaseClient';
 const CardDeck = (): JSX.Element => {
   const cardDeck = ['1', '2', '3', '4', '5', '6'];
   const [cards, setCards] = useState<CardType[]>();
-  const [openModal, setOpenModal] = useState(false);
 
-  useEffect(() => {
-    const getCards = async () => {
-      try {
-        const { data, error } = await supabase.from('view_cards_json').select('*');
-        setCards(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  // useEffect(() => {
+  //   const getCards = async () => {
+  //     try {
+  //       const { data, error } = await supabase.from('view_cards_json').select('*');
+  //       setCards(data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
 
-    getCards();
-  }, []);
+  //   getCards();
+  // }, []);
 
-  console.log(cards);
+  // console.log(cards);
 
   return (
     <Box bgColor='blue.100'>
@@ -40,8 +39,8 @@ const CardDeck = (): JSX.Element => {
       </Grid>
 
       <Box width='720px' padding='4' textAlign='center'>
-        <Button onClick={() => setOpenModal(!openModal)}>モーダル開く</Button>
-        {openModal && <CardSelectModal />}
+        {/* <Button onClick={() => setOpenModal(!openModal)}>モーダル開く</Button> */}
+        <CardSelectModal />
       </Box>
     </Box>
   );
