@@ -60,7 +60,7 @@ const CardSelectModal: React.FC<Props> = ({ cards }) => {
             サポートカード選択
           </Text>
         </ModalHeader>
-        <ModalBody>
+        <ModalBody bgColor='#eee'>
           <Grid
             gap={{ base: '1', sm: '2' }}
             templateColumns={{ base: 'repeat(5, 1fr)', sm: 'repeat(6, 1fr)', xl: 'repeat(7, 1fr)' }}
