@@ -9,7 +9,6 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
-  useDisclosure,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -17,9 +16,9 @@ import { useEffect, useState } from 'react';
 import Card from '../Card';
 import type { CardType } from '@/types/cards';
 
-type Props = { cards?: CardType[] };
+type Props = { cards?: CardType[]; isOpen: boolean; onClose: () => void };
 
-const CardSelectModal: React.FC<Props> = ({ cards }) => {
+const CardSelectModal: React.FC<Props> = ({ cards, isOpen, onClose }) => {
   const sampleImages = [
     'trading_card01_blue.png',
     'trading_card02_red.png',
@@ -35,11 +34,6 @@ const CardSelectModal: React.FC<Props> = ({ cards }) => {
     'trading_card12_back_purple.png',
   ];
   const imgArray = [...sampleImages, ...sampleImages, ...sampleImages];
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  useEffect(() => {
-    onOpen();
-  }, []);
 
   return (
     <Modal

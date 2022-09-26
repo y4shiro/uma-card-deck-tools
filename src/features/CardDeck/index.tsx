@@ -1,4 +1,4 @@
-import { Box, Button, Grid } from '@chakra-ui/react';
+import { Box, Button, Grid, useDisclosure } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 import Card from './Card';
@@ -7,6 +7,7 @@ import type { CardType } from '@/types/cards';
 import { supabase } from '@/utils/supabaseClient';
 
 const CardDeck = (): JSX.Element => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const cardDeck = ['1', '2', '3', '4', '5', '6'];
   const [cards, setCards] = useState<CardType[]>();
 
@@ -27,7 +28,9 @@ const CardDeck = (): JSX.Element => {
     <Box bgColor='blue.100'>
       <Grid w='100%' h='100%' p='4' gap='4' templateColumns='repeat(3, 1fr)'>
         {cardDeck.map((value, index) => (
-          <Button key={index}>Open Modal</Button>
+          <Button key={index} onClick={onOpen}>
+            Open Modal
+          </Button>
         ))}
         {/* {cards &&
           cards
@@ -35,7 +38,7 @@ const CardDeck = (): JSX.Element => {
             .map((card, index) => <Card card={card} key={index} />)} */}
       </Grid>
 
-      <CardSelectModal cards={cards} />
+      <CardSelectModal cards={cards} isOpen={isOpen} onClose={onClose} />
     </Box>
   );
 };
