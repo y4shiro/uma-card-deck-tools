@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Grid,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -16,7 +17,9 @@ import Card from '../Card';
 import type { CardType } from '@/types/cards';
 import { supabase } from '@/utils/supabaseClient';
 
-const CardSelectModal = (): JSX.Element => {
+type Props = { cards: CardType[] };
+
+const CardSelectModal: React.FC<Props> = ({ cards }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
@@ -24,21 +27,29 @@ const CardSelectModal = (): JSX.Element => {
   }, []);
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal size='3xl' isOpen={isOpen} onClose={onClose} scrollBehavior='inside'>
       <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Modal Title</ModalHeader>
-        <ModalCloseButton />
+      <ModalContent h='640px' borderRadius='12'>
+        <ModalHeader color='white' bgColor='#89c53d' borderTopRadius='12'>
+          サポートカード選択
+        </ModalHeader>
+        {/* <ModalCloseButton textAlign='center' /> */}
         <ModalBody>
-          text text text text text text text text text text text text text text text text text text
-          text text text text text text text text
+          <Grid w='100%' h='100%' p='4' gap='4' templateColumns='repeat(3, 1fr)'>
+            {cards &&
+              cards
+                .filter((card) => card.card_type === 'Guts')
+                .map((card, index) => <Card card={card} key={index} />)}
+          </Grid>
         </ModalBody>
 
-        <ModalFooter>
-          <Button colorScheme='blue' mr={3} onClick={onClose}>
+        <ModalFooter justifyContent='center' bgColor='#ddd' borderBottomRadius='12'>
+          <Button w='160px' colorScheme='blue' mr={3} onClick={onClose}>
             Close
           </Button>
-          <Button variant='ghost'>Secondary Action</Button>
+          <Button w='160px' onClick={onClose}>
+            閉じる
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
