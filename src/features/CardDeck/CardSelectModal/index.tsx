@@ -1,10 +1,9 @@
 import {
-  Box,
   Button,
   Grid,
+  GridItem,
   Modal,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -66,13 +65,14 @@ const CardSelectModal: React.FC<Props> = ({ cards }) => {
             templateColumns={{ base: 'repeat(5, 1fr)', sm: 'repeat(6, 1fr)', xl: 'repeat(7, 1fr)' }}
           >
             {imgArray.map((name, index) => (
-              <Image
-                key={index}
-                width='160px'
-                height='240px'
-                src={`card-sample/${name}`}
-                alt='sample'
-              ></Image>
+              <GridItem key={index}>
+                <Image
+                  width='160px'
+                  height='240px'
+                  src={`card-sample/${name}`}
+                  alt='sample'
+                ></Image>
+              </GridItem>
             ))}
           </Grid>
         </ModalBody>
