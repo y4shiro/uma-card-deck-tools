@@ -9,6 +9,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Text,
   useDisclosure,
 } from '@chakra-ui/react';
 import Image from 'next/image';
@@ -50,8 +51,8 @@ const CardSelectModal: React.FC<Props> = ({ cards }) => {
     >
       <ModalOverlay />
       <ModalContent h='840px' borderRadius='12'>
-        <ModalHeader color='white' bgColor='#89c53d' borderTopRadius='12'>
-          サポートカード選択
+        <ModalHeader bgColor='#89c53d' borderTopRadius='12' textAlign='center'>
+          <Text color='white'>サポートカード選択</Text>
         </ModalHeader>
         <ModalCloseButton textAlign='center' />
         <ModalBody>
