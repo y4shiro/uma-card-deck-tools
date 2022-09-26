@@ -10,18 +10,18 @@ const CardDeck = (): JSX.Element => {
   const cardDeck = ['1', '2', '3', '4', '5', '6'];
   const [cards, setCards] = useState<CardType[]>();
 
-  useEffect(() => {
-    const getCards = async () => {
-      try {
-        const { data, error } = await supabase.from('view_cards_json').select('*');
-        setCards(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  // useEffect(() => {
+  //   const getCards = async () => {
+  //     try {
+  //       const { data, error } = await supabase.from('view_cards_json').select('*');
+  //       setCards(data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
 
-    getCards();
-  }, []);
+  //   getCards();
+  // }, []);
 
   return (
     <Box bgColor='blue.100'>
@@ -35,7 +35,7 @@ const CardDeck = (): JSX.Element => {
             .map((card, index) => <Card card={card} key={index} />)} */}
       </Grid>
 
-      <CardSelectModal cards={cards!} />
+      <CardSelectModal cards={cards} />
     </Box>
   );
 };

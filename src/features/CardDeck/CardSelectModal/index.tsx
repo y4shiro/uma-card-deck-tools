@@ -11,15 +11,30 @@ import {
   ModalOverlay,
   useDisclosure,
 } from '@chakra-ui/react';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 import Card from '../Card';
 import type { CardType } from '@/types/cards';
-import { supabase } from '@/utils/supabaseClient';
 
-type Props = { cards: CardType[] };
+type Props = { cards?: CardType[] };
 
 const CardSelectModal: React.FC<Props> = ({ cards }) => {
+  const sampleImages = [
+    'trading_card01_blue.png',
+    'trading_card02_red.png',
+    'trading_card03_yellow.png',
+    'trading_card04_green.png',
+    'trading_card05_orange.png',
+    'trading_card06_purple.png',
+    'trading_card07_back_blue.png',
+    'trading_card08_back_red.png',
+    'trading_card09_back_yellow.png',
+    'trading_card10_back_green.png',
+    'trading_card11_back_orange.png',
+    'trading_card12_back_purple.png',
+  ];
+  const imgArray = [...sampleImages, ...sampleImages, ...sampleImages];
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
@@ -27,20 +42,26 @@ const CardSelectModal: React.FC<Props> = ({ cards }) => {
   }, []);
 
   return (
-    <Modal size='3xl' isOpen={isOpen} onClose={onClose} scrollBehavior='inside'>
+    <Modal size='4xl' isOpen={isOpen} onClose={onClose} scrollBehavior='inside'>
       <ModalOverlay />
       <ModalContent h='640px' borderRadius='12'>
         <ModalHeader color='white' bgColor='#89c53d' borderTopRadius='12'>
           サポートカード選択
         </ModalHeader>
-        {/* <ModalCloseButton textAlign='center' /> */}
+        <ModalCloseButton textAlign='center' />
         <ModalBody>
-          <Grid w='100%' h='100%' p='4' gap='4' templateColumns='repeat(3, 1fr)'>
-            {cards &&
-              cards
-                .filter((card) => card.card_type === 'Guts')
-                .map((card, index) => <Card card={card} key={index} />)}
-          </Grid>
+          {/* <Grid p='4' gap='1' templateColumns='repeat(6, 1fr)'> */}
+
+          {imgArray.map((name, index) => (
+            <Image
+              key={index}
+              width='160px'
+              height='240px'
+              src={`card-sample/${name}`}
+              alt='sample'
+            ></Image>
+          ))}
+          {/* </Grid> */}
         </ModalBody>
 
         <ModalFooter justifyContent='center' bgColor='#ddd' borderBottomRadius='12'>
