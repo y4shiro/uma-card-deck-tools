@@ -61,13 +61,7 @@ const CardSelectModal: React.FC<Props> = ({ cards, isOpen, onClose }) => {
             {cards &&
               cards.map((card, index) => (
                 <GridItem key={index}>
-                  {/* <Image
-                  width='160px'
-                  height='240px'
-                  src={`card-sample/${name}`}
-                  alt='sample'
-                ></Image> */}
-                  <Card card={card} />
+                  <Card card={card} key={index} />
                 </GridItem>
               ))}
           </Grid>
