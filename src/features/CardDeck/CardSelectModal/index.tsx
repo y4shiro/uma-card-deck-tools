@@ -58,16 +58,18 @@ const CardSelectModal: React.FC<Props> = ({ cards, isOpen, onClose }) => {
             gap={{ base: '1', sm: '2' }}
             templateColumns={{ base: 'repeat(5, 1fr)', sm: 'repeat(6, 1fr)', xl: 'repeat(7, 1fr)' }}
           >
-            {imgArray.map((name, index) => (
-              <GridItem key={index}>
-                <Image
+            {cards &&
+              cards.map((card, index) => (
+                <GridItem key={index}>
+                  {/* <Image
                   width='160px'
                   height='240px'
                   src={`card-sample/${name}`}
                   alt='sample'
-                ></Image>
-              </GridItem>
-            ))}
+                ></Image> */}
+                  <Card card={card} />
+                </GridItem>
+              ))}
           </Grid>
         </ModalBody>
 

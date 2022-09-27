@@ -1,9 +1,9 @@
-import { Box, GridItem } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import Image from 'next/image';
 
 import type { CardType } from '@/types/cards';
 
-type Props = { card: CardType; key: number };
+type Props = { card: CardType; key?: number };
 
 const Card: React.FC<Props> = ({ card }) => {
   const bgGradients = {
@@ -18,7 +18,7 @@ const Card: React.FC<Props> = ({ card }) => {
   };
 
   return (
-    <GridItem
+    <Box
       position='relative'
       h='240px'
       w='180px'
@@ -69,7 +69,7 @@ const Card: React.FC<Props> = ({ card }) => {
           alt={`サポートカード "${card.card_name}" のレアリティアイコン`}
         />
       </Box>
-    </GridItem>
+    </Box>
   );
 };
 
