@@ -20,6 +20,7 @@ const Card: React.FC<Props> = ({ card }) => {
   return (
     <Box
       bgColor='blue.100'
+      position='relative'
       sx={{
         '>span': { position: 'unset !important' },
         '.image': {
