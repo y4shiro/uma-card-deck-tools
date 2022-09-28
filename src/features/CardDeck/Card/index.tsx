@@ -37,7 +37,7 @@ const Card: React.FC<Props> = ({ card }) => {
         // placeholder='blur'
         // blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOcXg8AAbMBGIpVIK8AAAAASUVORK5CYII='
         // style={{ transition: '0.2s' }}
-        src={`w_120,h_180/uma-support-card/card-images/${card.card_img_path}`}
+        src={`w_120,h_160/uma-support-card/card-images/${card.card_img_path}`}
         alt={`サポートカード "${card.card_name}" の画像`}
       />
     </Box>
