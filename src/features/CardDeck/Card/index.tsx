@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { AspectRatio } from '@chakra-ui/react';
 import Image from 'next/image';
 
 import type { CardType } from '@/types/cards';
@@ -18,31 +18,24 @@ const Card: React.FC<Props> = ({ card }) => {
   };
 
   return (
-    <Box
+    <AspectRatio
       position='relative'
       overflow='hidden'
-      borderRadius={16}
+      borderRadius={{ base: 8, sm: 12 }}
       bgColor='blue.100'
-      sx={{
-        '>span': { position: 'unset !important' },
-        '.image': {
-          position: 'relative !important',
-          width: '100% !important',
-          height: 'unset !important',
-        },
-      }}
+      ratio={3 / 4}
     >
       <Image
         className='image'
         layout='fill'
         objectFit='contain'
-        // placeholder='blur'
-        // blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOcXg8AAbMBGIpVIK8AAAAASUVORK5CYII='
+        placeholder='blur'
+        blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOcXg8AAbMBGIpVIK8AAAAASUVORK5CYII='
         // style={{ transition: '0.2s' }}
         src={`w_120,h_160/uma-support-card/card-images/${card.card_img_path}`}
         alt={`サポートカード "${card.card_name}" の画像`}
       />
-    </Box>
+    </AspectRatio>
   );
 };
 
