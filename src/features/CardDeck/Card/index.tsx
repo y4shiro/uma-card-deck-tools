@@ -19,8 +19,10 @@ const Card: React.FC<Props> = ({ card }) => {
 
   return (
     <Box
-      bgColor='blue.100'
       position='relative'
+      overflow='hidden'
+      borderRadius={16}
+      bgColor='blue.100'
       sx={{
         '>span': { position: 'unset !important' },
         '.image': {
