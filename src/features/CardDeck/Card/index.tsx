@@ -1,4 +1,4 @@
-import { AspectRatio } from '@chakra-ui/react';
+import { AspectRatio, Box } from '@chakra-ui/react';
 import Image from 'next/image';
 
 import type { CardType } from '@/types/cards';
@@ -18,24 +18,27 @@ const Card: React.FC<Props> = ({ card }) => {
   };
 
   return (
-    <AspectRatio
+    <Box
       position='relative'
-      overflow='hidden'
-      borderRadius={{ base: 8, sm: 12 }}
-      bgColor='blue.100'
-      ratio={3 / 4}
+      p={{ base: '2px', md: '4px' }}
+      bgGradient={bgGradients[card.card_rarity]}
+      borderRadius={{ base: 8, md: 12 }}
+      borderWidth='1px'
+      borderColor={outerBorderColors[card.card_rarity]}
+      shadow='md'
     >
-      <Image
-        className='image'
-        layout='fill'
-        objectFit='contain'
-        placeholder='blur'
-        blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOcXg8AAbMBGIpVIK8AAAAASUVORK5CYII='
-        // style={{ transition: '0.2s' }}
-        src={`w_120,h_160/uma-support-card/card-images/${card.card_img_path}`}
-        alt={`サポートカード "${card.card_name}" の画像`}
-      />
-    </AspectRatio>
+      <AspectRatio overflow='hidden' borderRadius={{ base: 6, md: 10 }} ratio={3 / 4}>
+        <Image
+          layout='fill'
+          objectFit='contain'
+          placeholder='blur'
+          blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOcXg8AAbMBGIpVIK8AAAAASUVORK5CYII='
+          // style={{ transition: '0.2s' }}
+          src={`w_120,h_160/uma-support-card/card-images/${card.card_img_path}`}
+          alt={`サポートカード "${card.card_name}" の画像`}
+        />
+      </AspectRatio>
+    </Box>
   );
 };
 
