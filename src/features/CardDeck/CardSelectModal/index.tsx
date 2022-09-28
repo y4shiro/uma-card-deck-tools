@@ -9,6 +9,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -19,21 +20,10 @@ import type { CardType } from '@/types/cards';
 type Props = { cards?: CardType[]; isOpen: boolean; onClose: () => void };
 
 const CardSelectModal: React.FC<Props> = ({ cards, isOpen, onClose }) => {
-  const sampleImages = [
-    'trading_card01_blue.png',
-    'trading_card02_red.png',
-    'trading_card03_yellow.png',
-    'trading_card04_green.png',
-    'trading_card05_orange.png',
-    'trading_card06_purple.png',
-    'trading_card07_back_blue.png',
-    'trading_card08_back_red.png',
-    'trading_card09_back_yellow.png',
-    'trading_card10_back_green.png',
-    'trading_card11_back_orange.png',
-    'trading_card12_back_purple.png',
-  ];
-  const imgArray = [...sampleImages, ...sampleImages, ...sampleImages];
+  const imgSize = useBreakpointValue({
+    base: { width: 120, height: 160 },
+    md: { width: 180, height: 240 },
+  });
 
   return (
     <Modal
@@ -60,11 +50,13 @@ const CardSelectModal: React.FC<Props> = ({ cards, isOpen, onClose }) => {
             justifyContent='center'
           >
             {cards &&
-              cards.map((card, index) => (
-                <GridItem key={index}>
-                  <Card card={card} key={index} />
-                </GridItem>
-              ))}
+              cards
+                .filter((card) => card.card_type === 'Guts')
+                .map((card, index) => (
+                  <GridItem key={index}>
+                    <Card card={card} imgSize={imgSize} key={index} />
+                  </GridItem>
+                ))}
           </Grid>
         </ModalBody>
 

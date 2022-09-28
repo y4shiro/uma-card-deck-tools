@@ -3,9 +3,13 @@ import Image from 'next/image';
 
 import type { CardType } from '@/types/cards';
 
-type Props = { card: CardType; key?: number };
+type Props = {
+  card: CardType;
+  imgSize: { width: number; height: number } | undefined;
+  key?: number;
+};
 
-const Card: React.FC<Props> = ({ card }) => {
+const Card: React.FC<Props> = ({ card, imgSize }) => {
   const bgGradients = {
     R: 'linear(0deg, #8e9ab0, #fefefe)',
     SR: 'linear(0deg, #e2af38, #fff1cd)',
@@ -34,7 +38,9 @@ const Card: React.FC<Props> = ({ card }) => {
           placeholder='blur'
           blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOcXg8AAbMBGIpVIK8AAAAASUVORK5CYII='
           // style={{ transition: '0.2s' }}
-          src={`w_120,h_160/uma-support-card/card-images/${card.card_img_path}`}
+          src={`w_${imgSize!.width},h_${imgSize!.height}/uma-support-card/card-images/${
+            card.card_img_path
+          }`}
           alt={`サポートカード "${card.card_name}" の画像`}
         />
       </AspectRatio>
