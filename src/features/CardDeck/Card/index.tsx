@@ -5,7 +5,7 @@ import type { CardType } from '@/types/cards';
 
 type Props = {
   card: CardType;
-  imgSize: { width: number; height: number } | undefined;
+  imgSize: { card: { width: number; height: number }; type: number } | undefined;
   key?: number;
 };
 
@@ -38,12 +38,20 @@ const Card: React.FC<Props> = ({ card, imgSize }) => {
           placeholder='blur'
           blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOcXg8AAbMBGIpVIK8AAAAASUVORK5CYII='
           // style={{ transition: '0.2s' }}
-          src={`w_${imgSize!.width},h_${imgSize!.height}/uma-support-card/card-images/${
+          src={`w_${imgSize!.card.width},h_${imgSize!.card.height}/uma-support-card/card-images/${
             card.card_img_path
           }`}
           alt={`サポートカード "${card.card_name}" の画像`}
         />
       </AspectRatio>
+      <Box position='absolute' top={{ base: '-2px', sm: '0px' }} right='0px'>
+        <Image
+          height={imgSize!.type}
+          width={imgSize!.type}
+          src={`uma-support-card/card-type-icons/${card.card_type}.png`}
+          alt={`サポートカード "${card.card_name}" のタイプアイコン`}
+        />
+      </Box>
     </Box>
   );
 };
