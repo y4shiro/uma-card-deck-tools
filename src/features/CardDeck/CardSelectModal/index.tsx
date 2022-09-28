@@ -57,6 +57,7 @@ const CardSelectModal: React.FC<Props> = ({ cards, isOpen, onClose }) => {
           <Grid
             gap={{ base: '1', sm: '2' }}
             templateColumns={{ base: 'repeat(5, 1fr)', sm: 'repeat(6, 1fr)', xl: 'repeat(7, 1fr)' }}
+            justifyContent='center'
           >
             {cards &&
               cards.map((card, index) => (
