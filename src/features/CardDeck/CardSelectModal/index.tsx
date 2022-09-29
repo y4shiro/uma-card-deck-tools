@@ -48,9 +48,11 @@ const CardSelectModal: React.FC<Props> = ({ cards, isOpen, onClose }) => {
             サポートカード選択
           </Text>
         </ModalHeader>
-        <ModalBody bgColor='#eee' w='full' minH='360px' textAlign='center'>
+        <ModalBody p='0' w='full' minH='360px' textAlign='center'>
           {cards ? (
             <Grid
+              p='4'
+              bgColor='#f3f3f3'
               gap={{ base: '1', sm: '2' }}
               templateColumns={{
                 base: 'repeat(5, 1fr)',
