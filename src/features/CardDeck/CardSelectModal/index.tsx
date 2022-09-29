@@ -83,7 +83,7 @@ const CardSelectModal: React.FC<Props> = ({ cards, isOpen, onClose }) => {
         <ModalFooter justifyContent='center' borderBottomRadius='12'>
           <Button
             size='lg'
-            w={{ base: '160px', sm: '200px' }}
+            w={{ base: '120px', sm: '200px' }}
             colorScheme='red'
             borderRadius='8'
             shadow='0px 4px 4px rgba(0,0,0,0.3)'
@@ -93,9 +93,9 @@ const CardSelectModal: React.FC<Props> = ({ cards, isOpen, onClose }) => {
           </Button>
           <Button
             size='lg'
-            w={{ base: '160px', sm: '200px' }}
+            w={{ base: '120px', sm: '200px' }}
             variant='ghost'
-            border='2px solid #666'
+            border='2px solid #bbb'
             borderRadius='8'
             shadow='0px 4px 4px rgba(0,0,0,0.3)'
             onClick={onClose}
