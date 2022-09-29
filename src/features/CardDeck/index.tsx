@@ -1,10 +1,12 @@
 import { Box, Button, Grid, useDisclosure } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
-import Card from './Card';
 import CardSelectModal from './CardSelectModal';
+import Card from '@/components/Card';
 import type { CardType } from '@/types/cards';
 import { supabase } from '@/utils/supabaseClient';
+
+type CardDeckState = { index: number; card_id: number; limitLv: number; cullentLimitLv: number }[];
 
 const CardDeck = (): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
