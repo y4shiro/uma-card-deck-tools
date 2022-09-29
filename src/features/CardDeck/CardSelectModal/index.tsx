@@ -20,11 +20,14 @@ import type { CardType } from '@/types/cards';
 type Props = { cards?: CardType[]; isOpen: boolean; onClose: () => void };
 
 const CardSelectModal: React.FC<Props> = ({ cards, isOpen, onClose }) => {
-  const imgSize = useBreakpointValue({
-    base: { card: { width: 120, height: 160 }, type: 16 },
-    md: { card: { width: 180, height: 240 }, type: 28 },
-    lg: { card: { width: 180, height: 240 }, type: 40 },
-  });
+  const imgSize = useBreakpointValue(
+    {
+      base: { card: { width: 120, height: 160 }, type: 16 },
+      md: { card: { width: 180, height: 240 }, type: 28 },
+      lg: { card: { width: 180, height: 240 }, type: 40 },
+    },
+    'base',
+  );
 
   return (
     <Modal
