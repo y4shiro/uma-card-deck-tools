@@ -39,8 +39,8 @@ const Card: React.FC<Props> = ({ card, imgSize }) => {
           blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOcXg8AAbMBGIpVIK8AAAAASUVORK5CYII='
           // style={{ transition: '0.2s' }}
           src={`w_${imgSize!.card.width},h_${imgSize!.card.height}/uma-support-card/card-images/${
-            card.card_img_path
-          }`}
+            card.card_id
+          }.png`}
           alt={`サポートカード "${card.card_name}" の画像`}
         />
       </AspectRatio>
