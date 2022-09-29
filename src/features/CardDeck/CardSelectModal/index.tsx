@@ -21,7 +21,7 @@ type Props = { cards?: CardType[]; isOpen: boolean; onClose: () => void };
 
 const CardSelectModal: React.FC<Props> = ({ cards, isOpen, onClose }) => {
   const imgSize = useBreakpointValue({
-    base: { card: { width: 60, height: 80 }, type: 16 },
+    base: { card: { width: 90, height: 120 }, type: 16 },
     md: { card: { width: 120, height: 160 }, type: 28 },
     lg: { card: { width: 180, height: 240 }, type: 40 },
   });
