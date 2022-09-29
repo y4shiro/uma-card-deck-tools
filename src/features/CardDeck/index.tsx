@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 import CardSelectModal from './CardSelectModal';
 import Card from '@/components/Card';
+import SelectedCard from '@/components/SelectedCard';
 import type { CardType } from '@/types/cards';
 import { supabase } from '@/utils/supabaseClient';
 
@@ -34,10 +35,9 @@ const CardDeck = (): JSX.Element => {
             Open Modal
           </Button>
         ))}
-        {/* {cards &&
-          cards
-            .filter((card) => card.card_type === 'Guts')
-            .map((card, index) => <Card card={card} key={index} />)} */}
+        {cardDeck.map((value, key) => (
+          <SelectedCard key={key} />
+        ))}
       </Grid>
 
       <CardSelectModal cards={cards} isOpen={isOpen} onClose={onClose} />
