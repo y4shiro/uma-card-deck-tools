@@ -8,6 +8,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Spinner,
   Text,
   useBreakpointValue,
 } from '@chakra-ui/react';
@@ -47,21 +48,36 @@ const CardSelectModal: React.FC<Props> = ({ cards, isOpen, onClose }) => {
             サポートカード選択
           </Text>
         </ModalHeader>
-        <ModalBody bgColor='#eee'>
-          <Grid
-            gap={{ base: '1', sm: '2' }}
-            templateColumns={{ base: 'repeat(5, 1fr)', sm: 'repeat(6, 1fr)', xl: 'repeat(7, 1fr)' }}
-            justifyContent='center'
-          >
-            {cards &&
-              cards
-                .filter((card) => card.card_type === 'Guts')
-                .map((card, index) => (
-                  <GridItem key={index}>
-                    <Card card={card} imgSize={imgSize} key={index} />
-                  </GridItem>
-                ))}
-          </Grid>
+        <ModalBody bgColor='#eee' w='full' minH='360px' textAlign='center'>
+          {cards ? (
+            <Grid
+              gap={{ base: '1', sm: '2' }}
+              templateColumns={{
+                base: 'repeat(5, 1fr)',
+                sm: 'repeat(6, 1fr)',
+                xl: 'repeat(7, 1fr)',
+              }}
+              justifyContent='center'
+            >
+              {cards &&
+                cards
+                  .filter((card) => card.card_type === 'Guts')
+                  .map((card, index) => (
+                    <GridItem key={index}>
+                      <Card card={card} imgSize={imgSize} key={index} />
+                    </GridItem>
+                  ))}
+            </Grid>
+          ) : (
+            <Spinner
+              mt={'16px'}
+              thickness='4px'
+              speed='0.65s'
+              emptyColor='gray.300'
+              color='blue.500'
+              size='xl'
+            />
+          )}
         </ModalBody>
 
         <ModalFooter justifyContent='center' borderBottomRadius='12'>
