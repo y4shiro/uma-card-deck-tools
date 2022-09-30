@@ -24,7 +24,10 @@ export type ActionType =
 const reducer: Reducer<CardSlotStoreType[], ActionType> = (state, action) => {
   switch (action.type) {
     case 'addCard':
-      return [...state, { slotId: action.payload.slotId, cardId: action.payload.cardId }];
+      return state.map((cardSlot) => {
+        if (cardSlot.slotId === action.payload.slotId) cardSlot.cardId = action.payload.cardId;
+        return cardSlot;
+      });
     case 'removeCard':
       return state.map((cardSlot) => {
         if (cardSlot.slotId === action.payload.slotId) cardSlot.cardId = null;

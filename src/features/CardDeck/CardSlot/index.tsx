@@ -1,7 +1,7 @@
-import { AspectRatio, Box, Button, Text } from '@chakra-ui/react';
+import { AspectRatio, Box, Button, FormControl, FormLabel, Input, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
-import { Dispatch } from 'react';
+import { Dispatch, useState } from 'react';
 import { ActionType, SlotIdType } from '@/features/CardDeck';
 import type { CardType } from '@/types/cards';
 
@@ -15,6 +15,8 @@ type Props = {
 };
 
 const CardSlot: React.FC<Props> = ({ slotId, cardId, dispatch }) => {
+  const [input, setInput] = useState(0);
+
   if (cardId !== null)
     return (
       <Box w='180px' h='240px' bgColor='red.100'>
@@ -32,6 +34,14 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId, dispatch }) => {
     <Box w='180px' h='240px' bgColor='white'>
       <Text>スロットID: {slotId}</Text>
       <Text>カードなし</Text>
+      <FormControl>
+        <FormLabel>追加したいカード ID</FormLabel>
+        <Input type='number' value={input} onChange={(e) => setInput(Number(e.target.value))} />
+      </FormControl>
+
+      <Button onClick={() => dispatch({ type: 'addCard', payload: { slotId, cardId: input } })}>
+        カード追加
+      </Button>
     </Box>
   );
 };
