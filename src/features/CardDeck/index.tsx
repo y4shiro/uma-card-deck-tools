@@ -6,8 +6,8 @@ import CardSlot from './CardSlot';
 import type { CardType } from '@/types/cards';
 import { supabase } from '@/utils/supabaseClient';
 
-type CardDeckState = { slotId: 0 | 1 | 2 | 3 | 4 | 5; cardId: number | null };
-const initCardDeck: CardDeckState[] = [
+type CardSlotType = { slotId: 0 | 1 | 2 | 3 | 4 | 5; cardId: number | null };
+const initCardDeck: CardSlotType[] = [
   { slotId: 0, cardId: 30001 },
   { slotId: 1, cardId: 30002 },
   { slotId: 2, cardId: 30003 },
@@ -19,8 +19,7 @@ const initCardDeck: CardDeckState[] = [
 const CardDeck = (): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [cards, setCards] = useState<CardType[]>();
-
-  const [deck, setDeck] = useState<CardDeckState[]>(initCardDeck);
+  const [deck, setDeck] = useState<CardSlotType[]>(initCardDeck);
 
   useEffect(() => {
     const getCards = async () => {
