@@ -2,17 +2,25 @@ import { Box, Button, Grid, useDisclosure } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 import CardSelectModal from './CardSelectModal';
-import Card from '@/components/Card';
-import SelectedCard from '@/components/SelectedCard';
+import CardSlot from './CardSlot';
 import type { CardType } from '@/types/cards';
 import { supabase } from '@/utils/supabaseClient';
 
-type CardDeckState = { index: number; card_id: number; limitLv: number; cullentLimitLv: number }[];
+type CardDeckState = { slotId: 0 | 1 | 2 | 3 | 4 | 5; cardId: number };
+const initCardDeck: CardDeckState[] = [
+  { slotId: 0, cardId: 30001 },
+  { slotId: 1, cardId: 30002 },
+  { slotId: 2, cardId: 30003 },
+  { slotId: 3, cardId: 30004 },
+  { slotId: 4, cardId: 30005 },
+  { slotId: 5, cardId: 30006 },
+];
 
 const CardDeck = (): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const cardDeck = ['1', '2', '3', '4', '5', '6'];
   const [cards, setCards] = useState<CardType[]>();
+
+  const [deck, setDeck] = useState<CardDeckState[]>(initCardDeck);
 
   useEffect(() => {
     const getCards = async () => {
@@ -29,14 +37,11 @@ const CardDeck = (): JSX.Element => {
 
   return (
     <Box bgColor='blue.100'>
+      <Button onClick={onOpen}>Open Modal</Button>
+
       <Grid w='100%' h='100%' p='4' gap='4' templateColumns='repeat(3, 1fr)'>
-        {cardDeck.map((value, index) => (
-          <Button key={index} onClick={onOpen}>
-            Open Modal
-          </Button>
-        ))}
-        {cardDeck.map((value, key) => (
-          <SelectedCard key={key} />
+        {deck.map((value, key) => (
+          <CardSlot slotId={value.slotId} cardId={value.cardId} key={key} />
         ))}
       </Grid>
 
