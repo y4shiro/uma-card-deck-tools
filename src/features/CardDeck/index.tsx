@@ -6,14 +6,14 @@ import CardSlot from './CardSlot';
 import type { CardType } from '@/types/cards';
 import { supabase } from '@/utils/supabaseClient';
 
-type CardDeckState = { slotId: 0 | 1 | 2 | 3 | 4 | 5; cardId: number };
+type CardDeckState = { slotId: 0 | 1 | 2 | 3 | 4 | 5; cardId: number | null };
 const initCardDeck: CardDeckState[] = [
   { slotId: 0, cardId: 30001 },
   { slotId: 1, cardId: 30002 },
   { slotId: 2, cardId: 30003 },
   { slotId: 3, cardId: 30004 },
   { slotId: 4, cardId: 30005 },
-  { slotId: 5, cardId: 30006 },
+  { slotId: 5, cardId: null },
 ];
 
 const CardDeck = (): JSX.Element => {

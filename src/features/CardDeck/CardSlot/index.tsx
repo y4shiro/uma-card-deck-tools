@@ -7,12 +7,12 @@ type Props = {
   // card?: CardType;
   // imgSize?: { card: { width: number; height: number }; type: number } | undefined;
   slotId: number;
-  cardId?: number;
+  cardId?: number | null;
   key?: number;
 };
 
 const CardSlot: React.FC<Props> = ({ slotId, cardId }) => {
-  if (cardId)
+  if (cardId !== null)
     return (
       <Box w='180px' h='240px' bgColor='red.100'>
         <Text>スロットID: {slotId}</Text>
@@ -22,7 +22,7 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId }) => {
     );
 
   return (
-    <Box>
+    <Box w='180px' h='240px' bgColor='white'>
       <Text>スロットID: {slotId}</Text>
       <Text>カードなし</Text>
     </Box>
