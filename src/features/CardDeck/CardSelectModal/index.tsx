@@ -17,6 +17,7 @@ import { Dispatch, useEffect, useState, SetStateAction } from 'react';
 
 import type { SlotIdType } from '..';
 import Card from '@/components/Card';
+import SelectableCard from '@/features/SelectableCard';
 import type { CardType } from '@/types/cards';
 
 type Props = {
@@ -78,7 +79,7 @@ const CardSelectModal: React.FC<Props> = ({
                   .filter((card) => card.card_type === 'Guts')
                   .map((card, index) => (
                     <GridItem key={index}>
-                      <Card card={card} imgSize={imgSize} key={index} />
+                      <SelectableCard card={card} imgSize={imgSize} />
                     </GridItem>
                   ))}
             </Grid>

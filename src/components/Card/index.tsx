@@ -6,7 +6,6 @@ import type { CardType } from '@/types/cards';
 type Props = {
   card: CardType;
   imgSize: { card: { width: number; height: number }; type: number } | undefined;
-  key?: number;
 };
 
 const Card: React.FC<Props> = ({ card, imgSize }) => {
