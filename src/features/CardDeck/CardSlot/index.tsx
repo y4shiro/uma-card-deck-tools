@@ -12,9 +12,10 @@ type Props = {
   cardId?: number | null;
   key?: number;
   dispatch: Dispatch<ActionType>;
+  onOpen: () => void;
 };
 
-const CardSlot: React.FC<Props> = ({ slotId, cardId, dispatch }) => {
+const CardSlot: React.FC<Props> = ({ slotId, cardId, dispatch, onOpen }) => {
   const [input, setInput] = useState(0);
 
   if (cardId !== null)
@@ -27,6 +28,7 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId, dispatch }) => {
         <Button onClick={() => dispatch({ type: 'removeCard', payload: { slotId } })}>
           カード削除
         </Button>
+        <Button onClick={() => onOpen()}>モーダル開く　</Button>
       </Box>
     );
 
@@ -42,6 +44,7 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId, dispatch }) => {
       <Button onClick={() => dispatch({ type: 'addCard', payload: { slotId, cardId: input } })}>
         カード追加
       </Button>
+      <Button onClick={() => onOpen()}>モーダル開く　</Button>
     </Box>
   );
 };

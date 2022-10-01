@@ -60,7 +60,13 @@ const CardDeck = (): JSX.Element => {
     <Box bgColor='blue.100'>
       <Grid w='100%' h='100%' p='4' gap='4' templateColumns='repeat(3, 1fr)'>
         {deck.map((value, key) => (
-          <CardSlot slotId={value.slotId} cardId={value.cardId} dispatch={dispatch} key={key} />
+          <CardSlot
+            slotId={value.slotId}
+            cardId={value.cardId}
+            dispatch={dispatch}
+            onOpen={onOpen}
+            key={key}
+          />
         ))}
       </Grid>
 
