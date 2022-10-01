@@ -1,7 +1,7 @@
 import { AspectRatio, Box, Button, FormControl, FormLabel, Input, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
-import { Dispatch, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { ActionType, SlotIdType } from '@/features/CardDeck';
 import type { CardType } from '@/types/cards';
 
@@ -13,10 +13,16 @@ type Props = {
   key?: number;
   dispatch: Dispatch<ActionType>;
   onOpen: () => void;
+  setOpenSlotId: Dispatch<SetStateAction<SlotIdType | null>>;
 };
 
-const CardSlot: React.FC<Props> = ({ slotId, cardId, dispatch, onOpen }) => {
+const CardSlot: React.FC<Props> = ({ slotId, cardId, dispatch, onOpen, setOpenSlotId }) => {
   const [input, setInput] = useState(0);
+
+  const openModal = () => {
+    setOpenSlotId(slotId);
+    onOpen();
+  };
 
   if (cardId !== null)
     return (
@@ -28,7 +34,7 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId, dispatch, onOpen }) => {
         <Button onClick={() => dispatch({ type: 'removeCard', payload: { slotId } })}>
           カード削除
         </Button>
-        <Button onClick={() => onOpen()}>モーダル開く　</Button>
+        <Button onClick={() => openModal()}>モーダル開く</Button>
       </Box>
     );
 
@@ -44,7 +50,7 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId, dispatch, onOpen }) => {
       <Button onClick={() => dispatch({ type: 'addCard', payload: { slotId, cardId: input } })}>
         カード追加
       </Button>
-      <Button onClick={() => onOpen()}>モーダル開く　</Button>
+      <Button onClick={() => openModal()}>モーダル開く</Button>
     </Box>
   );
 };

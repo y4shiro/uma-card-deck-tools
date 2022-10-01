@@ -42,6 +42,7 @@ const CardDeck = (): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [cards, setCards] = useState<CardType[]>();
   const [deck, dispatch] = useReducer(reducer, initCardDeckState);
+  const [openSlotId, setOpenSlotId] = useState<SlotIdType | null>(null);
 
   useEffect(() => {
     const getCards = async () => {
@@ -65,12 +66,19 @@ const CardDeck = (): JSX.Element => {
             cardId={value.cardId}
             dispatch={dispatch}
             onOpen={onOpen}
+            setOpenSlotId={setOpenSlotId}
             key={key}
           />
         ))}
       </Grid>
 
-      <CardSelectModal cards={cards} isOpen={isOpen} onClose={onClose} />
+      <CardSelectModal
+        cards={cards}
+        isOpen={isOpen}
+        onClose={onClose}
+        openSlotId={openSlotId}
+        setOpenSlotId={setOpenSlotId}
+      />
     </Box>
   );
 };

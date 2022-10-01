@@ -13,14 +13,27 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { Dispatch, useEffect, useState, SetStateAction } from 'react';
 
+import type { SlotIdType } from '..';
 import Card from '@/components/Card';
 import type { CardType } from '@/types/cards';
 
-type Props = { cards?: CardType[]; isOpen: boolean; onClose: () => void };
+type Props = {
+  cards?: CardType[];
+  isOpen: boolean;
+  onClose: () => void;
+  openSlotId: SlotIdType | null;
+  setOpenSlotId: Dispatch<SetStateAction<SlotIdType | null>>;
+};
 
-const CardSelectModal: React.FC<Props> = ({ cards, isOpen, onClose }) => {
+const CardSelectModal: React.FC<Props> = ({
+  cards,
+  isOpen,
+  onClose,
+  openSlotId,
+  setOpenSlotId,
+}) => {
   const imgSize = useBreakpointValue(
     {
       base: { card: { width: 120, height: 160 }, type: 16 },
@@ -35,6 +48,7 @@ const CardSelectModal: React.FC<Props> = ({ cards, isOpen, onClose }) => {
       size={{ base: 'md', sm: 'xl', md: '3xl', lg: '4xl', xl: '6xl' }}
       isOpen={isOpen}
       onClose={onClose}
+      onCloseComplete={() => setOpenSlotId(null)}
       scrollBehavior='inside'
     >
       <ModalOverlay />
@@ -45,7 +59,7 @@ const CardSelectModal: React.FC<Props> = ({ cards, isOpen, onClose }) => {
             fontSize={{ base: '1.25rem', sm: '1.5rem', lg: '1.75rem' }}
             fontWeight='bold'
           >
-            サポートカード選択
+            サポートカード選択: slotId:{openSlotId}
           </Text>
         </ModalHeader>
         <ModalBody bgColor='#eee' w='full' minH='360px' textAlign='center'>
