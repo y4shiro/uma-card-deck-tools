@@ -5,6 +5,7 @@ import Head from 'next/head';
 import CardDeck from '@/features/CardDeck';
 import Skills from '@/features/Skills';
 import Status from '@/features/Status';
+import Test from '@/features/Test';
 import { Layout } from '@/layouts/Layout';
 
 const Home: NextPageWithLayout = () => (
@@ -21,6 +22,7 @@ const Home: NextPageWithLayout = () => (
         <Status />
         <Skills />
         <Text>hello</Text>
+        <Test />
       </VStack>
     </Container>
   </div>
