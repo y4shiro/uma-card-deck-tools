@@ -17,7 +17,7 @@ import { Dispatch, useEffect, useState, SetStateAction } from 'react';
 
 import type { SlotIdType } from '..';
 import Card from '@/components/Card';
-import SelectableCard from '@/features/CardDeck/CardSelectModal/SelectableCard';
+import SelectableCard from '@/features/Support/CardDeck/CardSelectModal/SelectableCard';
 import type { CardType } from '@/types/cards';
 
 type Props = {

@@ -2,7 +2,7 @@ import { AspectRatio, Box, Button, FormControl, FormLabel, Input, Text } from '@
 import Image from 'next/image';
 
 import { Dispatch, SetStateAction, useState } from 'react';
-import { ActionType, SlotIdType } from '@/features/CardDeck';
+import { ActionType, SlotIdType } from '@/features/Support/CardDeck';
 import type { CardType } from '@/types/cards';
 
 type Props = {
