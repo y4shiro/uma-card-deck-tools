@@ -1,27 +1,27 @@
 import { AspectRatio, Box, Button, FormControl, FormLabel, Input, Text } from '@chakra-ui/react';
 import Image from 'next/image';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { Dispatch, SetStateAction, useState } from 'react';
-import { ActionType, SlotIdType } from '@/features/Support/CardDeck';
-import type { CardType } from '@/types/cards';
+import { changeCard, removeCard, SlotId } from '../cardDeckSlice';
 
 type Props = {
   // card?: CardType;
   // imgSize?: { card: { width: number; height: number }; type: number } | undefined;
-  slotId: SlotIdType;
+  slotId: SlotId;
   cardId?: number | null;
-  key?: number;
-  dispatch: Dispatch<ActionType>;
-  onOpen: () => void;
-  setOpenSlotId: Dispatch<SetStateAction<SlotIdType | null>>;
 };
 
-const CardSlot: React.FC<Props> = ({ slotId, cardId, dispatch, onOpen, setOpenSlotId }) => {
+const CardSlot: React.FC<Props> = ({ slotId, cardId }) => {
   const [input, setInput] = useState(0);
+  const dispatch = useDispatch();
 
-  const openModal = () => {
-    setOpenSlotId(slotId);
-    onOpen();
+  const changeHandler = (slotId: SlotId, cardId: number) => {
+    dispatch(changeCard({ slotId, cardId }));
+  };
+
+  const removeHandler = (slotId: SlotId) => {
+    dispatch(removeCard({ slotId }));
   };
 
   if (cardId !== null)
@@ -31,10 +31,7 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId, dispatch, onOpen, setOpenSl
         <Text>カードID: {cardId}</Text>
         <Text>カードあり</Text>
 
-        <Button onClick={() => dispatch({ type: 'removeCard', payload: { slotId } })}>
-          カード削除
-        </Button>
-        <Button onClick={() => openModal()}>モーダル開く</Button>
+        <Button onClick={() => removeHandler(slotId)}>カード削除</Button>
       </Box>
     );
 
@@ -47,10 +44,7 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId, dispatch, onOpen, setOpenSl
         <Input type='number' value={input} onChange={(e) => setInput(Number(e.target.value))} />
       </FormControl>
 
-      <Button onClick={() => dispatch({ type: 'addCard', payload: { slotId, cardId: input } })}>
-        カード追加
-      </Button>
-      <Button onClick={() => openModal()}>モーダル開く</Button>
+      <Button onClick={() => changeHandler(slotId, input)}>カード追加</Button>
     </Box>
   );
 };

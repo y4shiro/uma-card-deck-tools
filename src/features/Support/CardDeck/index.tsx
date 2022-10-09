@@ -1,30 +1,18 @@
-import { Box, Button, Grid, Text } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Box, Grid } from '@chakra-ui/react';
+import { useSelector } from 'react-redux';
 
-import { changeCard, removeCard, SlotId } from './cardDeckSlice';
+import CardSlot from './CardSlot';
 import { RootState } from '@/app/store';
 
 const CardDeck = (): JSX.Element => {
   const deck = useSelector((state: RootState) => state.cardDeck);
-  const dispatch = useDispatch();
-
-  const changeHandler = (slotId: SlotId, cardId?: number) => {
-    console.log('clicked change');
-    dispatch(changeCard({ slotId, cardId: 99999 }));
-  };
-
-  const removeHandler = (slotId: SlotId) => {
-    dispatch(removeCard({ slotId }));
-  };
 
   return (
     <Box bgColor='blue.100'>
       <Grid w='100%' h='100%' p='4' gap='4' templateColumns='repeat(3, 1fr)'>
         {deck.map((d, index) => (
           <Box w='100%' h='100%' key={index}>
-            <Text>cardId: {d.cardId}</Text>
-            <Button onClick={() => changeHandler(d.slotId)}>changeCard</Button>
-            <Button onClick={() => removeHandler(d.slotId)}>removeCard</Button>
+            <CardSlot slotId={d.slotId} cardId={d.cardId} />
           </Box>
         ))}
       </Grid>
