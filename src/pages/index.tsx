@@ -3,7 +3,6 @@ import type { NextPageWithLayout } from 'next';
 import Head from 'next/head';
 
 import Support from '@/features/Support';
-import Test from '@/features/Test';
 import { Layout } from '@/layouts/Layout';
 
 const Home: NextPageWithLayout = () => (
@@ -17,7 +16,6 @@ const Home: NextPageWithLayout = () => (
     <Container as='main' maxW='container.lg' bgColor='gray.100'>
       <VStack p='4'>
         <Support />
-        <Test />
       </VStack>
     </Container>
   </div>
