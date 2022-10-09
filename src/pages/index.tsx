@@ -1,4 +1,4 @@
-import { Container, VStack } from '@chakra-ui/react';
+import { Container } from '@chakra-ui/react';
 import type { NextPageWithLayout } from 'next';
 import Head from 'next/head';
 
@@ -14,9 +14,7 @@ const Home: NextPageWithLayout = () => (
     </Head>
 
     <Container as='main' maxW='container.lg' bgColor='gray.100'>
-      <VStack p='4'>
-        <Support />
-      </VStack>
+      <Support />
     </Container>
   </div>
 );
