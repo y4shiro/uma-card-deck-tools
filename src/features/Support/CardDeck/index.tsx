@@ -1,12 +1,17 @@
 import { Box, Button, Grid, Text } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { removeCard, SlotId } from './cardDeckSlice';
+import { changeCard, removeCard, SlotId } from './cardDeckSlice';
 import { RootState } from '@/app/store';
 
 const CardDeck = (): JSX.Element => {
   const deck = useSelector((state: RootState) => state.cardDeck);
   const dispatch = useDispatch();
+
+  const changeHandler = (slotId: SlotId, cardId?: number) => {
+    console.log('clicked change');
+    dispatch(changeCard({ slotId, cardId: 99999 }));
+  };
 
   const removeHandler = (slotId: SlotId) => {
     dispatch(removeCard({ slotId }));
@@ -18,7 +23,8 @@ const CardDeck = (): JSX.Element => {
         {deck.map((d, index) => (
           <Box w='100%' h='100%' key={index}>
             <Text>cardId: {d.cardId}</Text>
-            <Button onClick={() => removeHandler(d.slotId)}>increment:{index}</Button>
+            <Button onClick={() => changeHandler(d.slotId)}>changeCard</Button>
+            <Button onClick={() => removeHandler(d.slotId)}>removeCard</Button>
           </Box>
         ))}
       </Grid>

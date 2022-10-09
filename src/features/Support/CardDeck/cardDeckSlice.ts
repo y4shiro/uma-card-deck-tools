@@ -17,12 +17,17 @@ export const cardDeckSlice = createSlice({
   name: 'cardDeck',
   initialState,
   reducers: {
+    changeCard: (state, action: PayloadAction<cardSlotType>) => {
+      const { slotId, cardId } = action.payload;
+      state[slotId] = { slotId, cardId };
+    },
     removeCard: (state, action: PayloadAction<{ slotId: SlotId }>) => {
-      state[action.payload.slotId] = { slotId: action.payload.slotId, cardId: null };
+      const { slotId } = action.payload;
+      state[slotId] = { slotId, cardId: null };
     },
   },
 });
 
-export const { removeCard } = cardDeckSlice.actions;
+export const { changeCard, removeCard } = cardDeckSlice.actions;
 // export const selectDeck = (state: RootState) => state.cardDeck;
 export default cardDeckSlice.reducer;
