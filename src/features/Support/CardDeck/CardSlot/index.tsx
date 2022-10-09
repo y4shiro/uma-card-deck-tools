@@ -1,6 +1,5 @@
-import { AspectRatio, Box, Button, FormControl, FormLabel, Input, Text } from '@chakra-ui/react';
+import { AspectRatio, Box, Button, Text } from '@chakra-ui/react';
 import Image from 'next/image';
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { changeCard, removeCard, SlotId } from '../cardDeckSlice';
@@ -13,10 +12,9 @@ type Props = {
 };
 
 const CardSlot: React.FC<Props> = ({ slotId, cardId }) => {
-  const [input, setInput] = useState(0);
   const dispatch = useDispatch();
 
-  const changeHandler = (slotId: SlotId, cardId: number) => {
+  const changeHandler = (slotId: SlotId, cardId: number = 99999) => {
     dispatch(changeCard({ slotId, cardId }));
   };
 
@@ -24,27 +22,19 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId }) => {
     dispatch(removeCard({ slotId }));
   };
 
-  if (cardId !== null)
-    return (
-      <Box w='180px' h='240px' bgColor='red.100'>
-        <Text>スロットID: {slotId}</Text>
-        <Text>カードID: {cardId}</Text>
-        <Text>カードあり</Text>
-
-        <Button onClick={() => removeHandler(slotId)}>カード削除</Button>
-      </Box>
-    );
+  const openModalHandler = () => {
+    console.log('Open Modal');
+  };
 
   return (
-    <Box w='180px' h='240px' bgColor='white'>
+    <Box w='180px' h='240px' bgColor={cardId ? 'red.100' : 'white'}>
       <Text>スロットID: {slotId}</Text>
-      <Text>カードなし</Text>
-      <FormControl>
-        <FormLabel>追加したいカード ID</FormLabel>
-        <Input type='number' value={input} onChange={(e) => setInput(Number(e.target.value))} />
-      </FormControl>
+      <Text>カードID: {cardId}</Text>
+      <Text>カードあり</Text>
 
-      <Button onClick={() => changeHandler(slotId, input)}>カード追加</Button>
+      <Button onClick={() => removeHandler(slotId)}>カード削除</Button>
+      <Button onClick={() => changeHandler(slotId)}>カード追加</Button>
+      <Button onClick={() => openModalHandler()}>モーダルを開く</Button>
     </Box>
   );
 };
