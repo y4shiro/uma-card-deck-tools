@@ -7,11 +7,11 @@ import type { SlotId } from '@/types/cardSlot';
 type cardSlotType = { slotId: SlotId; cardId: number | null };
 
 const initialState: cardSlotType[] = [
-  { slotId: 0, cardId: 30000 },
-  { slotId: 1, cardId: 30001 },
-  { slotId: 2, cardId: 30002 },
-  { slotId: 3, cardId: 30003 },
-  { slotId: 4, cardId: 30004 },
+  { slotId: 0, cardId: null },
+  { slotId: 1, cardId: null },
+  { slotId: 2, cardId: null },
+  { slotId: 3, cardId: null },
+  { slotId: 4, cardId: null },
   { slotId: 5, cardId: null },
 ];
 export const cardDeckSlice = createSlice({
