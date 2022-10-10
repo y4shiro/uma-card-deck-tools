@@ -16,10 +16,6 @@ type Props = {
 const CardSlot: React.FC<Props> = ({ slotId, cardId }) => {
   const dispatch = useDispatch();
 
-  const changeHandler = (slotId: SlotId, cardId: number = 99999) => {
-    dispatch(changeCard({ slotId, cardId }));
-  };
-
   const openModalHandler = (slotId: SlotId) => {
     dispatch(openModal(slotId));
   };
@@ -30,7 +26,6 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId }) => {
       <Text>カードID: {cardId}</Text>
       <Text>カードあり</Text>
 
-      <Button onClick={() => changeHandler(slotId)}>カード追加</Button>
       <Button onClick={() => openModalHandler(slotId)}>モーダルを開く</Button>
     </Box>
   );
