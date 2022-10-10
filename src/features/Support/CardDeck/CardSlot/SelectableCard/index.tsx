@@ -15,7 +15,7 @@ type Props = {
 const SelectableCard: React.FC<Props> = ({ card, imgSize, slotId }) => {
   const dispatch = useDispatch();
 
-  const changeHandler = ({ slotId, cardId = 99999 }: { slotId: SlotId; cardId: number }) => {
+  const changeHandler = ({ slotId, cardId }: { slotId: SlotId; cardId: number }) => {
     dispatch(changeCard({ slotId, cardId }));
   };
 
