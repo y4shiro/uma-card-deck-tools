@@ -9,6 +9,9 @@ import {
   Text,
   useBreakpointValue,
 } from '@chakra-ui/react';
+
+import { useGetCardsQuery } from '@/services/card';
+
 type Props = {
   isOpen: boolean;
   onClose: () => void;
@@ -23,6 +26,9 @@ const CardModal: React.FC<Props> = ({ isOpen, onClose }) => {
     },
     'base',
   );
+
+  const { data, error, isLoading } = useGetCardsQuery();
+  // console.log(data);
 
   return (
     <Modal
