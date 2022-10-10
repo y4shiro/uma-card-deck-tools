@@ -16,8 +16,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import SelectableCard from '../CardSlot/SelectableCard';
 
+import { removeCard } from '../cardDeckSlice';
 import { closeModal, selectModal } from '../modalSlice';
 import { useGetCardsQuery } from '@/services/card';
+import { SlotId } from '@/types/cardSlot';
 
 const CardModal: React.FC = () => {
   const imgSize = useBreakpointValue(
@@ -36,6 +38,10 @@ const CardModal: React.FC = () => {
 
   const onCloseHandler = () => {
     dispatch(closeModal());
+  };
+
+  const removeHandler = (slotId: SlotId) => {
+    dispatch(removeCard({ slotId }));
   };
 
   return (
@@ -95,6 +101,7 @@ const CardModal: React.FC = () => {
             borderRadius='8'
             shadow='0px 4px 4px rgba(0,0,0,0.3)'
             mr={6}
+            onClick={() => removeHandler(slotId!)}
           >
             選択解除
           </Button>
