@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '@/app/store';
 
-export type SlotId = 0 | 1 | 2 | 3 | 4 | 5;
+import { RootState } from '@/app/store';
+import type { SlotId } from '@/types/cardSlot';
+
 type cardSlotType = { slotId: SlotId; cardId: number | null };
 
 const initialState: cardSlotType[] = [

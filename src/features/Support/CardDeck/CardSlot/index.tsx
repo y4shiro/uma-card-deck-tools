@@ -3,7 +3,8 @@ import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 
 import CardModal from '../CardModal';
-import { changeCard, removeCard, SlotId } from '../cardDeckSlice';
+import { changeCard, removeCard } from '../cardDeckSlice';
+import { SlotId } from '@/types/cardSlot';
 
 type Props = {
   // card?: CardType;
