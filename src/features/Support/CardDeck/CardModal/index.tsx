@@ -11,13 +11,15 @@ import {
 } from '@chakra-ui/react';
 
 import { useGetCardsQuery } from '@/services/card';
+import type { SlotId } from '@/types/cardSlot';
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
+  slotId: SlotId;
 };
 
-const CardModal: React.FC<Props> = ({ isOpen, onClose }) => {
+const CardModal: React.FC<Props> = ({ isOpen, onClose, slotId }) => {
   const imgSize = useBreakpointValue(
     {
       base: { card: { width: 120, height: 160 }, type: 16 },
@@ -45,7 +47,7 @@ const CardModal: React.FC<Props> = ({ isOpen, onClose }) => {
             fontSize={{ base: '1.25rem', sm: '1.5rem', lg: '1.75rem' }}
             fontWeight='bold'
           >
-            サポートカード選択
+            サポートカード選択 SlotId:{slotId ?? 'null'}
           </Text>
         </ModalHeader>
         <ModalBody bgColor='#eee' w='full' minH='360px' textAlign='center'>

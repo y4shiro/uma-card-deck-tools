@@ -39,7 +39,7 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId }) => {
       <Button onClick={() => changeHandler(slotId)}>カード追加</Button>
       <Button onClick={() => openModalHandler()}>モーダルを開く</Button>
 
-      <CardModal isOpen={isOpen} onClose={onClose} />
+      <CardModal isOpen={isOpen} onClose={onClose} slotId={slotId} />
     </Box>
   );
 };
