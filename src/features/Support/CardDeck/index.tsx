@@ -1,6 +1,7 @@
 import { Box, Grid } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 
+import CardModal from './CardModal';
 import CardSlot from './CardSlot';
 import { RootState } from '@/app/store';
 
@@ -16,6 +17,7 @@ const CardDeck = (): JSX.Element => {
           </Box>
         ))}
       </Grid>
+      <CardModal />
     </Box>
   );
 };

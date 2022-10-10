@@ -12,19 +12,14 @@ import {
   Text,
   useBreakpointValue,
 } from '@chakra-ui/react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import SelectableCard from '../CardSlot/SelectableCard';
 
+import { closeModal, selectModal } from '../modalSlice';
 import { useGetCardsQuery } from '@/services/card';
-import type { SlotId } from '@/types/cardSlot';
 
-type Props = {
-  isOpen: boolean;
-  onClose: () => void;
-  slotId: SlotId;
-};
-
-const CardModal: React.FC<Props> = ({ isOpen, onClose, slotId }) => {
+const CardModal: React.FC = () => {
   const imgSize = useBreakpointValue(
     {
       base: { card: { width: 120, height: 160 }, type: 16 },
@@ -35,13 +30,19 @@ const CardModal: React.FC<Props> = ({ isOpen, onClose, slotId }) => {
   );
 
   const { data: cards, error, isLoading } = useGetCardsQuery();
-  // console.log(data);
+
+  const dispatch = useDispatch();
+  const { isOpen, slotId } = useSelector(selectModal);
+
+  const onCloseHandler = () => {
+    dispatch(closeModal());
+  };
 
   return (
     <Modal
       size={{ base: 'md', sm: 'xl', md: '3xl', lg: '4xl', xl: '6xl' }}
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={onCloseHandler}
       scrollBehavior='inside'
     >
       <ModalOverlay />
@@ -70,7 +71,7 @@ const CardModal: React.FC<Props> = ({ isOpen, onClose, slotId }) => {
                 .filter((card) => card.card_type === 'Guts')
                 .map((card, index) => (
                   <GridItem key={index}>
-                    <SelectableCard card={card} imgSize={imgSize} slotId={slotId} />
+                    <SelectableCard card={card} imgSize={imgSize} slotId={slotId!} />
                   </GridItem>
                 ))}
             </Grid>
@@ -104,7 +105,7 @@ const CardModal: React.FC<Props> = ({ isOpen, onClose, slotId }) => {
             border='2px solid #bbb'
             borderRadius='8'
             shadow='0px 4px 4px rgba(0,0,0,0.3)'
-            onClick={onClose}
+            onClick={onCloseHandler}
           >
             閉じる
           </Button>

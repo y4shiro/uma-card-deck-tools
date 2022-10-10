@@ -1,9 +1,9 @@
-import { AspectRatio, Box, Button, Text, useDisclosure } from '@chakra-ui/react';
+import { AspectRatio, Box, Button, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 
-import CardModal from '../CardModal';
 import { changeCard, removeCard } from '../cardDeckSlice';
+import { openModal } from '../modalSlice';
 import { SlotId } from '@/types/cardSlot';
 
 type Props = {
@@ -14,7 +14,6 @@ type Props = {
 };
 
 const CardSlot: React.FC<Props> = ({ slotId, cardId }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
 
   const changeHandler = (slotId: SlotId, cardId: number = 99999) => {
@@ -25,8 +24,8 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId }) => {
     dispatch(removeCard({ slotId }));
   };
 
-  const openModalHandler = () => {
-    onOpen();
+  const openModalHandler = (slotId: SlotId) => {
+    dispatch(openModal(slotId));
   };
 
   return (
@@ -37,9 +36,7 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId }) => {
 
       <Button onClick={() => removeHandler(slotId)}>カード削除</Button>
       <Button onClick={() => changeHandler(slotId)}>カード追加</Button>
-      <Button onClick={() => openModalHandler()}>モーダルを開く</Button>
-
-      <CardModal isOpen={isOpen} onClose={onClose} slotId={slotId} />
+      <Button onClick={() => openModalHandler(slotId)}>モーダルを開く</Button>
     </Box>
   );
 };
