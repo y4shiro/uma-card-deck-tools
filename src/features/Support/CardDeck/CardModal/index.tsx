@@ -33,8 +33,8 @@ const CardModal: React.FC = () => {
 
   const { data: cards, error, isLoading } = useGetCardsQuery();
 
-  const dispatch = useDispatch();
   const { isOpen, slotId } = useSelector(selectModal);
+  const dispatch = useDispatch();
 
   const onCloseHandler = () => {
     dispatch(closeModal());
@@ -77,7 +77,7 @@ const CardModal: React.FC = () => {
                 .filter((card) => card.card_type === 'Guts')
                 .map((card, index) => (
                   <GridItem key={index}>
-                    <SelectableCard card={card} imgSize={imgSize} slotId={slotId!} />
+                    <SelectableCard card={card} imgSize={imgSize} />
                   </GridItem>
                 ))}
             </Grid>
