@@ -70,7 +70,7 @@ const CardModal: React.FC<Props> = ({ isOpen, onClose, slotId }) => {
                 .filter((card) => card.card_type === 'Guts')
                 .map((card, index) => (
                   <GridItem key={index}>
-                    <SelectableCard card={card} imgSize={imgSize} />
+                    <SelectableCard card={card} imgSize={imgSize} slotId={slotId} />
                   </GridItem>
                 ))}
             </Grid>
