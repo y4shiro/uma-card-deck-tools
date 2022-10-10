@@ -1,14 +1,19 @@
 import {
   Button,
+  Grid,
+  GridItem,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Spinner,
   Text,
   useBreakpointValue,
 } from '@chakra-ui/react';
+
+import SelectableCard from '../CardSlot/SelectableCard';
 
 import { useGetCardsQuery } from '@/services/card';
 import type { SlotId } from '@/types/cardSlot';
@@ -29,7 +34,7 @@ const CardModal: React.FC<Props> = ({ isOpen, onClose, slotId }) => {
     'base',
   );
 
-  const { data, error, isLoading } = useGetCardsQuery();
+  const { data: cards, error, isLoading } = useGetCardsQuery();
   // console.log(data);
 
   return (
@@ -51,7 +56,34 @@ const CardModal: React.FC<Props> = ({ isOpen, onClose, slotId }) => {
           </Text>
         </ModalHeader>
         <ModalBody bgColor='#eee' w='full' minH='360px' textAlign='center'>
-          Modal Body
+          {cards ? (
+            <Grid
+              gap={{ base: '1', sm: '2' }}
+              templateColumns={{
+                base: 'repeat(5, 1fr)',
+                sm: 'repeat(6, 1fr)',
+                xl: 'repeat(7, 1fr)',
+              }}
+              justifyContent='center'
+            >
+              {cards
+                .filter((card) => card.card_type === 'Guts')
+                .map((card, index) => (
+                  <GridItem key={index}>
+                    <SelectableCard card={card} imgSize={imgSize} />
+                  </GridItem>
+                ))}
+            </Grid>
+          ) : (
+            <Spinner
+              mt={'16px'}
+              thickness='4px'
+              speed='0.65s'
+              emptyColor='gray.300'
+              color='blue.500'
+              size='xl'
+            />
+          )}
         </ModalBody>
 
         <ModalFooter justifyContent='center' borderBottomRadius='12'>
