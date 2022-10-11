@@ -10,9 +10,9 @@ const CardDeck: React.FC = () => {
 
   const imgSize = useBreakpointValue(
     {
-      base: { card: { width: 120, height: 160 }, type: 16 },
-      md: { card: { width: 180, height: 240 }, type: 28 },
-      lg: { card: { width: 180, height: 240 }, type: 40 },
+      base: { card: { width: 120, height: 160 }, type: 24 },
+      sm: { card: { width: 120, height: 160 }, type: 28 },
+      md: { card: { width: 180, height: 240 }, type: 36 },
     },
     'base',
   );
