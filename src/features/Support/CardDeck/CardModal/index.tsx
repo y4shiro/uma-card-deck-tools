@@ -10,7 +10,6 @@ import {
   ModalOverlay,
   Spinner,
   Text,
-  useBreakpointValue,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -21,18 +20,12 @@ import { closeModal, selectModal } from '../modalSlice';
 import { useGetCardsQuery } from '@/services/card';
 import { SlotId } from '@/types/cardSlot';
 
-const CardModal: React.FC = () => {
-  const imgSize = useBreakpointValue(
-    {
-      base: { card: { width: 120, height: 160 }, type: 16 },
-      md: { card: { width: 180, height: 240 }, type: 28 },
-      lg: { card: { width: 180, height: 240 }, type: 40 },
-    },
-    'base',
-  );
+type Props = {
+  imgSize: { card: { width: number; height: number }; type: number } | undefined;
+};
 
+const CardModal: React.FC<Props> = ({ imgSize }) => {
   const { data: cards, error, isLoading } = useGetCardsQuery();
-
   const { isOpen, slotId } = useSelector(selectModal);
   const dispatch = useDispatch();
 

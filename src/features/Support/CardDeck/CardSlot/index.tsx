@@ -1,5 +1,4 @@
-import { AspectRatio, Box, useBreakpointValue, Icon } from '@chakra-ui/react';
-import { FcPlus } from 'react-icons/fc';
+import { AspectRatio, Box, Icon } from '@chakra-ui/react';
 import { ImPlus } from 'react-icons/im';
 import { useDispatch } from 'react-redux';
 
@@ -11,21 +10,12 @@ import { useGetCardsQuery } from '@/services/card';
 import { SlotId } from '@/types/cardSlot';
 
 type Props = {
-  // imgSize?: { card: { width: number; height: number }; type: number } | undefined;
   slotId: SlotId;
   cardId?: number | null;
+  imgSize: { card: { width: number; height: number }; type: number } | undefined;
 };
 
-const CardSlot: React.FC<Props> = ({ slotId, cardId }) => {
-  const imgSize = useBreakpointValue(
-    {
-      base: { card: { width: 120, height: 160 }, type: 16 },
-      md: { card: { width: 180, height: 240 }, type: 28 },
-      lg: { card: { width: 180, height: 240 }, type: 40 },
-    },
-    'base',
-  );
-
+const CardSlot: React.FC<Props> = ({ slotId, cardId, imgSize }) => {
   const { data: cards, error, isLoading } = useGetCardsQuery();
   const card = cards?.find((c) => c.card_id === cardId);
   const dispatch = useDispatch();
