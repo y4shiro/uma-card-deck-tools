@@ -46,9 +46,8 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId }) => {
     );
 
   return (
-    <Box
-      w='180px'
-      h='240px'
+    <AspectRatio
+      ratio={3 / 4}
       p='4'
       bgColor='white'
       borderRadius={{ base: 8, md: 12 }}
@@ -56,10 +55,8 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId }) => {
       cursor='pointer'
       onClick={() => openModalHandler(slotId)}
     >
-      <Text>スロットID: {slotId}</Text>
-      <Text>カードID: {cardId}</Text>
-      <Text>カードあり</Text>
-    </Box>
+      <div>+</div>
+    </AspectRatio>
   );
 };
 
