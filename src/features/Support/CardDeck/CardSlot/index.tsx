@@ -8,11 +8,12 @@ import Card from '@/components/Card';
 
 import { useGetCardsQuery } from '@/services/card';
 import { SlotId } from '@/types/cardSlot';
+import { ImgSize } from '@/types/cards';
 
 type Props = {
   slotId: SlotId;
   cardId?: number | null;
-  imgSize: { card: { width: number; height: number }; type: number } | undefined;
+  imgSize: ImgSize;
 };
 
 const CardSlot: React.FC<Props> = ({ slotId, cardId, imgSize }) => {

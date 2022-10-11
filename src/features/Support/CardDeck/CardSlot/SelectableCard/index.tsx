@@ -6,11 +6,11 @@ import Card from '@/components/Card';
 import { changeCard } from '@/features/Support/CardDeck/cardDeckSlice';
 import { closeModal, selectModal } from '@/features/Support/CardDeck/modalSlice';
 import type { SlotId } from '@/types/cardSlot';
-import type { CardType } from '@/types/cards';
+import type { CardType, ImgSize } from '@/types/cards';
 
 type Props = {
   card: CardType;
-  imgSize: { card: { width: number; height: number }; type: number } | undefined;
+  imgSize: ImgSize;
 };
 
 const SelectableCard: React.FC<Props> = ({ card, imgSize }) => {

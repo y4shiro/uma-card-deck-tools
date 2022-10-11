@@ -1,11 +1,11 @@
 import { AspectRatio, Box } from '@chakra-ui/react';
 import Image from 'next/image';
 
-import type { CardType } from '@/types/cards';
+import type { CardType, ImgSize } from '@/types/cards';
 
 type Props = {
   card: CardType;
-  imgSize: { card: { width: number; height: number }; type: number } | undefined;
+  imgSize: ImgSize;
 };
 
 const Card: React.FC<Props> = ({ card, imgSize }) => {

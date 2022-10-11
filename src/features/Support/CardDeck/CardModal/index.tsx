@@ -19,9 +19,10 @@ import { removeCard } from '../cardDeckSlice';
 import { closeModal, selectModal } from '../modalSlice';
 import { useGetCardsQuery } from '@/services/card';
 import { SlotId } from '@/types/cardSlot';
+import { ImgSize } from '@/types/cards';
 
 type Props = {
-  imgSize: { card: { width: number; height: number }; type: number } | undefined;
+  imgSize: ImgSize;
 };
 
 const CardModal: React.FC<Props> = ({ imgSize }) => {
