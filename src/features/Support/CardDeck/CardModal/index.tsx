@@ -36,6 +36,7 @@ const CardModal: React.FC<Props> = ({ imgSize }) => {
 
   const removeHandler = (slotId: SlotId) => {
     dispatch(removeCard({ slotId }));
+    dispatch(closeModal());
   };
 
   return (
