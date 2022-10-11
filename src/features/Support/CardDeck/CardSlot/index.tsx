@@ -37,7 +37,7 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId }) => {
     return (
       <Box
         cursor='pointer'
-        _hover={{ opacity: 0.5 }}
+        _hover={{ opacity: 0.75 }}
         transition='0.25s'
         onClick={() => openModalHandler(slotId)}
       >
@@ -49,9 +49,11 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId }) => {
     <AspectRatio
       ratio={3 / 4}
       p='4'
-      bgColor='white'
+      bgColor='#f6f6f6'
       borderRadius={{ base: 8, md: 12 }}
-      boxShadow='5px 5px 8px 3px #ccc inset'
+      boxShadow='3px 3px 8px 4px #ccc inset'
+      _hover={{ bgColor: '#ddd' }}
+      transition='0.25s'
       cursor='pointer'
       onClick={() => openModalHandler(slotId)}
     >
