@@ -1,5 +1,6 @@
-import { AspectRatio, Box, Button, Text, useBreakpointValue } from '@chakra-ui/react';
-import Image from 'next/image';
+import { AspectRatio, Box, useBreakpointValue, Icon } from '@chakra-ui/react';
+import { FcPlus } from 'react-icons/fc';
+import { ImPlus } from 'react-icons/im';
 import { useDispatch } from 'react-redux';
 
 import { openModal } from '../modalSlice';
@@ -57,7 +58,9 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId }) => {
       cursor='pointer'
       onClick={() => openModalHandler(slotId)}
     >
-      <div>+</div>
+      <Box>
+        <Icon as={ImPlus} boxSize={{ base: 6, sm: 8, md: 10 }} color='#89C950' />
+      </Box>
     </AspectRatio>
   );
 };
