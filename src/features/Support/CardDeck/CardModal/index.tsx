@@ -53,7 +53,7 @@ const CardModal: React.FC<Props> = ({ imgSize }) => {
             fontSize={{ base: '1.25rem', sm: '1.5rem', lg: '1.75rem' }}
             fontWeight='bold'
           >
-            サポートカード選択 SlotId:{slotId ?? 'null'}
+            サポートカード選択
           </Text>
         </ModalHeader>
         <ModalBody bgColor='#eee' w='full' minH='360px' textAlign='center'>
