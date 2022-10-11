@@ -7,7 +7,7 @@ import Status from './Status';
 
 const Support = () => {
   return (
-    <VStack w='100%' gap='4'>
+    <VStack w='100%' gap={{ base: 2, sm: 4 }}>
       <CardDeck />
       <Skills />
       <Status />

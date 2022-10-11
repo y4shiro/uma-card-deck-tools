@@ -11,7 +11,7 @@ const CardDeck = (): JSX.Element => {
   return (
     <Box w={{ base: '100%', md: '640px' }} h='100%' bgColor='blue.100'>
       {/* sm: 30em(480px), md: 40em(768px), lg: 62em(992px), xl: 80em(1280px) */}
-      <Grid p='4' gap='4' templateColumns='repeat(3, 1fr)'>
+      <Grid p='4' gap={{ base: 2, sm: 4 }} templateColumns='repeat(3, 1fr)'>
         {deck.map((d, index) => (
           <CardSlot slotId={d.slotId} cardId={d.cardId} key={d.slotId} />
         ))}
