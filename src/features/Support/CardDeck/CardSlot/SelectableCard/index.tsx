@@ -1,4 +1,4 @@
-import { AspectRatio, Box } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Card from '@/components/Card';
