@@ -46,12 +46,19 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId }) => {
     );
 
   return (
-    <Box w='180px' h='240px' bgColor={cardId ? 'red.100' : 'white'}>
+    <Box
+      w='180px'
+      h='240px'
+      p='4'
+      bgColor='white'
+      borderRadius={{ base: 8, md: 12 }}
+      boxShadow='5px 5px 8px 3px #ccc inset'
+      cursor='pointer'
+      onClick={() => openModalHandler(slotId)}
+    >
       <Text>スロットID: {slotId}</Text>
       <Text>カードID: {cardId}</Text>
       <Text>カードあり</Text>
-
-      <Button onClick={() => openModalHandler(slotId)}>モーダルを開く</Button>
     </Box>
   );
 };
