@@ -5,7 +5,7 @@ import CardModal from './CardModal';
 import CardSlot from './CardSlot';
 import { RootState } from '@/app/store';
 
-const CardDeck = (): JSX.Element => {
+const CardDeck: React.FC = () => {
   const deck = useSelector((state: RootState) => state.cardDeck);
 
   const imgSize = useBreakpointValue(
