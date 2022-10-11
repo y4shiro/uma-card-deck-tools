@@ -23,7 +23,7 @@ const Card: React.FC<Props> = ({ card, imgSize }) => {
   return (
     <Box
       position='relative'
-      p={{ base: '2px', md: '4px' }}
+      p={{ base: '2px', md: '6px' }}
       bgGradient={bgGradients[card.card_rarity]}
       borderRadius={{ base: 8, md: 12 }}
       borderWidth='1px'
