@@ -42,3 +42,5 @@ export type StatusGain = {
   name: string;
   value: number;
 };
+
+export type ImgSize = { card: { width: number; height: number }; type: number } | undefined;

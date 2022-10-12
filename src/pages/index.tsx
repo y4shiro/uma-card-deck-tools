@@ -1,10 +1,8 @@
-import { Container, Text, VStack } from '@chakra-ui/react';
+import { Container } from '@chakra-ui/react';
 import type { NextPageWithLayout } from 'next';
 import Head from 'next/head';
 
-import CardDeck from '@/features/CardDeck';
-import Skills from '@/features/Skills';
-import Status from '@/features/Status';
+import Support from '@/features/Support';
 import { Layout } from '@/layouts/Layout';
 
 const Home: NextPageWithLayout = () => (
@@ -15,13 +13,9 @@ const Home: NextPageWithLayout = () => (
       <link rel='icon' href='/favicon.ico' />
     </Head>
 
-    <Container as='main' maxW='container.lg' bgColor='gray.100'>
-      <VStack p='4'>
-        <CardDeck />
-        <Status />
-        <Skills />
-        <Text>hello</Text>
-      </VStack>
+    {/* sm: 30em(480px), md: 40em(768px), lg: 62em(992px), xl: 80em(1280px) */}
+    <Container as='main' w='100%' maxW='container.lg' px={{ base: 0, sm: 4 }} bgColor='gray.100'>
+      <Support />
     </Container>
   </div>
 );
