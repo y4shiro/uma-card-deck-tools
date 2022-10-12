@@ -17,7 +17,9 @@ import SelectableCard from '../CardSlot/SelectableCard';
 
 import { removeCard } from '../cardDeckSlice';
 import { closeModal, selectModal } from '../modalSlice';
+import { RootState } from '@/app/store';
 import { useGetCardsQuery } from '@/services/card';
+
 import { SlotId } from '@/types/cardSlot';
 import { ImgSize } from '@/types/cards';
 
@@ -26,6 +28,10 @@ type Props = {
 };
 
 const CardModal: React.FC<Props> = ({ imgSize }) => {
+  const selectedCards = useSelector((state: RootState) => state.cardDeck)
+    .map((card) => card.cardId)
+    .filter((cardId) => cardId !== null);
+
   const { data: cards, error, isLoading } = useGetCardsQuery();
   const { isOpen, slotId } = useSelector(selectModal);
   const dispatch = useDispatch();
