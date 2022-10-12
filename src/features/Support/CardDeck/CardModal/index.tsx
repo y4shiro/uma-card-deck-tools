@@ -78,7 +78,7 @@ const CardModal: React.FC<Props> = ({ imgSize }) => {
                 .filter((card) => card.card_type === 'Guts')
                 .map((card, index) => (
                   <GridItem key={index}>
-                    <SelectableCard card={card} imgSize={imgSize} />
+                    <SelectableCard card={card} selectedCards={selectedCards} imgSize={imgSize} />
                   </GridItem>
                 ))}
             </Grid>
