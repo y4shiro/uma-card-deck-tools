@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Card from '@/components/Card';
@@ -26,8 +26,25 @@ const SelectableCard: React.FC<Props> = ({ card, imgSize, selectedCards }) => {
 
   if (alreadySelectedCard)
     return (
-      <Box filter='auto' brightness='50%'>
-        <Card card={card} imgSize={imgSize} />
+      <Box position='relative'>
+        <Box filter='auto' brightness='40%'>
+          <Card card={card} imgSize={imgSize} />
+        </Box>
+        <Box
+          position='absolute'
+          top='-2%'
+          right='12%'
+          left='12%'
+          margin='auto'
+          px='16px'
+          borderRadius='12px'
+          textColor='white'
+          background='#E4436B'
+        >
+          <Text fontSize='20px' fontWeight='bold'>
+            設定中
+          </Text>
+        </Box>
       </Box>
     );
 
