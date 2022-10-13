@@ -14,14 +14,22 @@ type Props = {
   imgSize: ImgSize;
 };
 
-const SelectableCard: React.FC<Props> = ({ card, imgSize }) => {
+const SelectableCard: React.FC<Props> = ({ card, imgSize, selectedCards }) => {
   const dispatch = useDispatch();
   const { slotId } = useSelector(selectModal);
+  const alreadySelectedCard = selectedCards.includes(card.card_id);
 
   const changeHandler = ({ slotId, cardId }: { slotId: SlotId; cardId: number }) => {
     dispatch(changeCard({ slotId, cardId }));
     dispatch(closeModal());
   };
+
+  if (alreadySelectedCard)
+    return (
+      <Box filter='auto' brightness='50%'>
+        <Card card={card} imgSize={imgSize} />
+      </Box>
+    );
 
   return (
     <Box
