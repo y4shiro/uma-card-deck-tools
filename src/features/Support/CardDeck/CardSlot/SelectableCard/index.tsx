@@ -36,12 +36,12 @@ const SelectableCard: React.FC<Props> = ({ card, imgSize, selectedCards }) => {
           right='12%'
           left='12%'
           margin='auto'
-          px='16px'
+          px={{ base: '2px', md: '6px', lg: '12px' }}
           borderRadius='12px'
           textColor='white'
           background='#E4436B'
         >
-          <Text fontSize='20px' fontWeight='bold'>
+          <Text fontSize={{ base: '12px', sm: '14px', md: '16px', lg: '20px' }} fontWeight='bold'>
             設定中
           </Text>
         </Box>
