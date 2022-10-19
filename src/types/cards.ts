@@ -2,6 +2,8 @@ export type CardType = {
   card_id: number;
   card_name: string;
   charactor_name: string;
+  charactor_id: number;
+  belong_charactor_ids: number[];
   card_rarity: 'R' | 'SR' | 'SSR';
   card_type: 'Speed' | 'Stamina' | 'Power' | 'Guts' | 'Wisdom' | 'Friends' | 'Group';
   card_img_path: string | null;
