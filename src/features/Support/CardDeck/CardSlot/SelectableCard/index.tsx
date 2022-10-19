@@ -11,6 +11,7 @@ import type { CardType, ImgSize } from '@/types/cards';
 type Props = {
   card: CardType;
   selectedCards: (number | null)[];
+  belongCharaIds: Set<number>;
   imgSize: ImgSize;
 };
 

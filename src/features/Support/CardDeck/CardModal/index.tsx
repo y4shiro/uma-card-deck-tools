@@ -83,7 +83,12 @@ const CardModal: React.FC<Props> = ({ imgSize }) => {
             >
               {cards.map((card, index) => (
                 <GridItem key={index}>
-                  <SelectableCard card={card} selectedCards={selectedCards} imgSize={imgSize} />
+                  <SelectableCard
+                    card={card}
+                    selectedCards={selectedCards}
+                    belongCharaIds={belongCharaIds}
+                    imgSize={imgSize}
+                  />
                 </GridItem>
               ))}
             </Grid>
