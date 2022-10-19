@@ -15,17 +15,21 @@ type Props = {
   imgSize: ImgSize;
 };
 
-const SelectableCard: React.FC<Props> = ({ card, imgSize, selectedCards }) => {
+const SelectableCard: React.FC<Props> = ({ card, imgSize, selectedCards, belongCharaIds }) => {
   const dispatch = useDispatch();
   const { slotId } = useSelector(selectModal);
   const alreadySelectedCard = selectedCards.includes(card.card_id);
+  const alreadyDuplicateCard = belongCharaIds.has(card.charactor_id);
 
   const changeHandler = ({ slotId, cardId }: { slotId: SlotId; cardId: number }) => {
     dispatch(changeCard({ slotId, cardId }));
     dispatch(closeModal());
   };
 
-  if (alreadySelectedCard) return <AlreadySelectedCard card={card} imgSize={imgSize} />;
+  if (alreadySelectedCard)
+    return <AlreadySelectedCard card={card} imgSize={imgSize} type={'selected'} />;
+  else if (alreadyDuplicateCard)
+    return <AlreadySelectedCard card={card} imgSize={imgSize} type={'duplicate'} />;
 
   return (
     <Box
@@ -39,7 +43,9 @@ const SelectableCard: React.FC<Props> = ({ card, imgSize, selectedCards }) => {
   );
 };
 
-const AlreadySelectedCard: React.FC<Pick<Props, 'card' | 'imgSize'>> = ({ card, imgSize }) => {
+const AlreadySelectedCard: React.FC<
+  Pick<Props, 'card' | 'imgSize'> & { type: 'selected' | 'duplicate' }
+> = ({ card, imgSize, type }) => {
   return (
     <Box position='relative'>
       <Box filter='auto' brightness='40%'>
@@ -48,17 +54,23 @@ const AlreadySelectedCard: React.FC<Pick<Props, 'card' | 'imgSize'>> = ({ card, 
       <Box
         position='absolute'
         top='-2%'
-        right='12%'
-        left='12%'
+        right='0%'
+        left='0%'
         margin='auto'
-        px={{ base: '2px', md: '6px', lg: '12px' }}
+        px={{ base: '2px', md: '6px', lg: '8x' }}
         borderRadius='12px'
         textColor='white'
-        background='#E4436B'
+        background={type === 'selected' ? '#E4436B' : '#E6553E'}
       >
-        <Text fontSize={{ base: '12px', sm: '14px', md: '16px', lg: '20px' }} fontWeight='bold'>
-          設定中
-        </Text>
+        {type === 'selected' ? (
+          <Text fontSize={{ base: '12px', sm: '14px', md: '16px', lg: '20px' }} fontWeight='bold'>
+            設定中
+          </Text>
+        ) : (
+          <Text fontSize={{ base: '8px', sm: '12px', md: '16px', lg: '20px' }} fontWeight='bold'>
+            !サポ重複
+          </Text>
+        )}
       </Box>
     </Box>
   );
