@@ -2,11 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '@/app/store';
-import type { SlotId } from '@/types/cardSlot';
+import type { CardSlotType, SlotId } from '@/types/cardSlot';
 
-type cardSlotType = { slotId: SlotId; cardId: number | null; belongCharaIds: number[] };
-
-const initialState: cardSlotType[] = [
+const initialState: CardSlotType[] = [
   { slotId: 0, cardId: null, belongCharaIds: [] },
   { slotId: 1, cardId: null, belongCharaIds: [] },
   { slotId: 2, cardId: null, belongCharaIds: [] },
@@ -18,7 +16,7 @@ export const cardDeckSlice = createSlice({
   name: 'cardDeck',
   initialState,
   reducers: {
-    changeCard: (state, action: PayloadAction<cardSlotType>) => {
+    changeCard: (state, action: PayloadAction<CardSlotType>) => {
       const { slotId, cardId, belongCharaIds } = action.payload;
       state[slotId] = { slotId, cardId, belongCharaIds };
     },

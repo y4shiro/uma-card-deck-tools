@@ -5,7 +5,7 @@ import Card from '@/components/Card';
 
 import { changeCard } from '@/features/Support/CardDeck/cardDeckSlice';
 import { closeModal, selectModal } from '@/features/Support/CardDeck/modalSlice';
-import type { SlotId } from '@/types/cardSlot';
+import type { CardSlotType, SlotId } from '@/types/cardSlot';
 import type { CardType, ImgSize } from '@/types/cards';
 
 type Props = {
@@ -21,15 +21,7 @@ const SelectableCard: React.FC<Props> = ({ card, imgSize, selectedCards, belongC
   const alreadySelectedCard = selectedCards.includes(card.card_id);
   const alreadyDuplicateCard = belongCharaIds.has(card.charactor_id);
 
-  const changeHandler = ({
-    slotId,
-    cardId,
-    belongCharaIds,
-  }: {
-    slotId: SlotId;
-    cardId: number;
-    belongCharaIds: number[];
-  }) => {
+  const changeHandler = ({ slotId, cardId, belongCharaIds }: CardSlotType) => {
     dispatch(changeCard({ slotId, cardId, belongCharaIds }));
     dispatch(closeModal());
   };
