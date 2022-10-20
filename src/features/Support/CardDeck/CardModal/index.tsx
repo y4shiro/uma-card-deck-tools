@@ -29,7 +29,7 @@ type Props = {
 
 const CardModal: React.FC<Props> = ({ imgSize }) => {
   const { data: cards, error, isLoading } = useGetCardsQuery();
-  const { isOpen, slotId } = useSelector(selectModal);
+  const { isOpen, openSlotId } = useSelector(selectModal);
   const dispatch = useDispatch();
 
   const selectedCards = useSelector((state: RootState) => state.cardDeck)
@@ -112,7 +112,7 @@ const CardModal: React.FC<Props> = ({ imgSize }) => {
             borderRadius='8'
             shadow='0px 4px 4px rgba(0,0,0,0.3)'
             mr={6}
-            onClick={() => removeHandler(slotId!)}
+            onClick={() => removeHandler(openSlotId!)}
           >
             選択解除
           </Button>

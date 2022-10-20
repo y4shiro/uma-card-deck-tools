@@ -17,7 +17,7 @@ type Props = {
 
 const SelectableCard: React.FC<Props> = ({ card, imgSize, selectedCards, belongCharaIds }) => {
   const dispatch = useDispatch();
-  const { slotId } = useSelector(selectModal);
+  const { openSlotId } = useSelector(selectModal);
   const alreadySelectedCard = selectedCards.includes(card.card_id);
   const alreadyDuplicateCard = belongCharaIds.has(card.charactor_id);
 
@@ -36,7 +36,7 @@ const SelectableCard: React.FC<Props> = ({ card, imgSize, selectedCards, belongC
       cursor='pointer'
       _hover={{ opacity: 0.5 }}
       transition='0.25s'
-      onClick={() => changeHandler({ slotId: slotId!, cardId: card.card_id })}
+      onClick={() => changeHandler({ slotId: openSlotId!, cardId: card.card_id })}
     >
       <Card card={card} imgSize={imgSize} />
     </Box>
