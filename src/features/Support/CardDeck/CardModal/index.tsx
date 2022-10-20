@@ -28,13 +28,20 @@ type Props = {
 };
 
 const CardModal: React.FC<Props> = ({ imgSize }) => {
+  const { data: cards, error, isLoading } = useGetCardsQuery();
+  const { isOpen, openSlotId } = useSelector(selectModal);
+  const dispatch = useDispatch();
+
   const selectedCards = useSelector((state: RootState) => state.cardDeck)
     .map((card) => card.cardId)
     .filter((cardId) => cardId !== null);
 
-  const { data: cards, error, isLoading } = useGetCardsQuery();
-  const { isOpen, slotId } = useSelector(selectModal);
-  const dispatch = useDispatch();
+  const belongCharaIds = new Set(
+    cards
+      ?.filter((card) => selectedCards.includes(card.card_id)) // デッキ編成済みカードのデータのみを filter で取得
+      .flatMap((card) => card.belong_charactor_ids) // カードに所属する charactor_id のリストを作成
+      .sort(),
+  );
 
   const onCloseHandler = () => {
     dispatch(closeModal());
@@ -74,13 +81,16 @@ const CardModal: React.FC<Props> = ({ imgSize }) => {
               }}
               justifyContent='center'
             >
-              {cards
-                .filter((card) => card.card_type === 'Guts')
-                .map((card, index) => (
-                  <GridItem key={index}>
-                    <SelectableCard card={card} selectedCards={selectedCards} imgSize={imgSize} />
-                  </GridItem>
-                ))}
+              {cards.map((card, index) => (
+                <GridItem key={index}>
+                  <SelectableCard
+                    card={card}
+                    selectedCards={selectedCards}
+                    belongCharaIds={belongCharaIds}
+                    imgSize={imgSize}
+                  />
+                </GridItem>
+              ))}
             </Grid>
           ) : (
             <Spinner
@@ -102,7 +112,7 @@ const CardModal: React.FC<Props> = ({ imgSize }) => {
             borderRadius='8'
             shadow='0px 4px 4px rgba(0,0,0,0.3)'
             mr={6}
-            onClick={() => removeHandler(slotId!)}
+            onClick={() => removeHandler(openSlotId!)}
           >
             選択解除
           </Button>

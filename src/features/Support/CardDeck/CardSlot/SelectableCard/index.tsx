@@ -1,61 +1,89 @@
 import { Box, Text } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { RootState } from '@/app/store';
 import Card from '@/components/Card';
 
 import { changeCard } from '@/features/Support/CardDeck/cardDeckSlice';
 import { closeModal, selectModal } from '@/features/Support/CardDeck/modalSlice';
-import type { SlotId } from '@/types/cardSlot';
+import type { CardSlotType, SlotId } from '@/types/cardSlot';
 import type { CardType, ImgSize } from '@/types/cards';
 
 type Props = {
   card: CardType;
   selectedCards: (number | null)[];
+  belongCharaIds: Set<number>;
   imgSize: ImgSize;
 };
 
-const SelectableCard: React.FC<Props> = ({ card, imgSize, selectedCards }) => {
+const SelectableCard: React.FC<Props> = ({ card, imgSize, selectedCards, belongCharaIds }) => {
   const dispatch = useDispatch();
-  const { slotId } = useSelector(selectModal);
-  const alreadySelectedCard = selectedCards.includes(card.card_id);
+  const { openSlotId } = useSelector(selectModal);
+  const deck = useSelector((state: RootState) => state.cardDeck);
+  const currentCardSlotCharaIds = deck[openSlotId!]?.belongCharaIds;
 
-  const changeHandler = ({ slotId, cardId }: { slotId: SlotId; cardId: number }) => {
-    dispatch(changeCard({ slotId, cardId }));
+  const alreadySelectedCard = selectedCards.includes(card.card_id);
+  const alreadyDuplicateCard =
+    !card.belong_charactor_ids.some((charaId) => currentCardSlotCharaIds?.includes(charaId)) && // 同じ Slot にセット済みカードと同じキャラ id なら選択可能
+    card.belong_charactor_ids.some((charaId) => belongCharaIds.has(charaId)); // 他 Slot でセット済みのキャラ id は選択不可能にする
+
+  const changeHandler = ({ slotId, cardId, belongCharaIds }: CardSlotType) => {
+    dispatch(changeCard({ slotId, cardId, belongCharaIds }));
     dispatch(closeModal());
   };
 
   if (alreadySelectedCard)
-    return (
-      <Box position='relative'>
-        <Box filter='auto' brightness='40%'>
-          <Card card={card} imgSize={imgSize} />
-        </Box>
-        <Box
-          position='absolute'
-          top='-2%'
-          right='12%'
-          left='12%'
-          margin='auto'
-          px={{ base: '2px', md: '6px', lg: '12px' }}
-          borderRadius='12px'
-          textColor='white'
-          background='#E4436B'
-        >
-          <Text fontSize={{ base: '12px', sm: '14px', md: '16px', lg: '20px' }} fontWeight='bold'>
-            設定中
-          </Text>
-        </Box>
-      </Box>
-    );
+    return <AlreadySelectedCard card={card} imgSize={imgSize} type={'selected'} />;
+  else if (alreadyDuplicateCard)
+    return <AlreadySelectedCard card={card} imgSize={imgSize} type={'duplicate'} />;
 
   return (
     <Box
       cursor='pointer'
       _hover={{ opacity: 0.5 }}
       transition='0.25s'
-      onClick={() => changeHandler({ slotId: slotId!, cardId: card.card_id })}
+      onClick={() =>
+        changeHandler({
+          slotId: openSlotId!,
+          cardId: card.card_id,
+          belongCharaIds: card.belong_charactor_ids,
+        })
+      }
     >
       <Card card={card} imgSize={imgSize} />
+    </Box>
+  );
+};
+
+const AlreadySelectedCard: React.FC<
+  Pick<Props, 'card' | 'imgSize'> & { type: 'selected' | 'duplicate' }
+> = ({ card, imgSize, type }) => {
+  return (
+    <Box position='relative'>
+      <Box filter='auto' brightness='40%'>
+        <Card card={card} imgSize={imgSize} />
+      </Box>
+      <Box
+        position='absolute'
+        top='-2%'
+        right='0%'
+        left='0%'
+        margin='auto'
+        px={{ base: '2px', md: '6px', lg: '8x' }}
+        borderRadius='12px'
+        textColor='white'
+        background={type === 'selected' ? '#E4436B' : '#E6553E'}
+      >
+        {type === 'selected' ? (
+          <Text fontSize={{ base: '12px', sm: '14px', md: '16px', lg: '20px' }} fontWeight='bold'>
+            設定中
+          </Text>
+        ) : (
+          <Text fontSize={{ base: '8px', sm: '12px', md: '16px', lg: '20px' }} fontWeight='bold'>
+            !サポ重複
+          </Text>
+        )}
+      </Box>
     </Box>
   );
 };
