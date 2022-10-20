@@ -1,6 +1,7 @@
 import { Box, Text } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { RootState } from '@/app/store';
 import Card from '@/components/Card';
 
 import { changeCard } from '@/features/Support/CardDeck/cardDeckSlice';
@@ -18,8 +19,13 @@ type Props = {
 const SelectableCard: React.FC<Props> = ({ card, imgSize, selectedCards, belongCharaIds }) => {
   const dispatch = useDispatch();
   const { openSlotId } = useSelector(selectModal);
+  const deck = useSelector((state: RootState) => state.cardDeck);
+  const currentCardSlotCharaIds = deck[openSlotId!]?.belongCharaIds;
+
   const alreadySelectedCard = selectedCards.includes(card.card_id);
-  const alreadyDuplicateCard = belongCharaIds.has(card.charactor_id);
+  const alreadyDuplicateCard =
+    !currentCardSlotCharaIds?.some((charaId) => charaId === card.charactor_id) && // 同じ Slot にセット済みカードと同じキャラ id なら選択可能
+    belongCharaIds.has(card.charactor_id); // 他 Slot でセット済みのキャラ id は選択不可能にする
 
   const changeHandler = ({ slotId, cardId, belongCharaIds }: CardSlotType) => {
     dispatch(changeCard({ slotId, cardId, belongCharaIds }));
