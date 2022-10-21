@@ -1,30 +1,33 @@
 import { Checkbox, CheckboxGroup, HStack } from '@chakra-ui/react';
-import React from 'react';
 
 const CardFilter: React.FC = () => {
   return (
     <HStack w='100%' my={4} p={4} bgColor='white' borderRadius='16px'>
       <CheckboxGroup>
         <HStack bgColor='red.100'>
-          <Checkbox>スピード</Checkbox>
-          <Checkbox>パワー</Checkbox>
-          <Checkbox>スタミナ</Checkbox>
-          <Checkbox>根性</Checkbox>
-          <Checkbox>賢さ</Checkbox>
-          <Checkbox>友人</Checkbox>
-          <Checkbox>グループ</Checkbox>
+          <CustomCheckbox label={'スピード'} />
+          <CustomCheckbox label={'パワー'} />
+          <CustomCheckbox label={'スタミナ'} />
+          <CustomCheckbox label={'根性'} />
+          <CustomCheckbox label={'賢さ'} />
+          <CustomCheckbox label={'友人'} />
+          <CustomCheckbox label={'グループ'} />
         </HStack>
       </CheckboxGroup>
 
       <CheckboxGroup>
         <HStack bgColor='blue.100'>
-          <Checkbox>SSR</Checkbox>
-          <Checkbox>SR</Checkbox>
-          <Checkbox>R</Checkbox>
+          <CustomCheckbox label={'SSR'} />
+          <CustomCheckbox label={'SR'} />
+          <CustomCheckbox label={'R'} />
         </HStack>
       </CheckboxGroup>
     </HStack>
   );
+};
+
+const CustomCheckbox: React.FC<{ label: string }> = ({ label: title }) => {
+  return <Checkbox>{title}</Checkbox>;
 };
 
 export default CardFilter;
