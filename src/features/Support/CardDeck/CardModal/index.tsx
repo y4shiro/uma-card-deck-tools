@@ -13,10 +13,10 @@ import {
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import SelectableCard from '../CardSlot/SelectableCard';
-
 import { removeCard } from '../cardDeckSlice';
 import { closeModal, selectModal } from '../modalSlice';
+
+import SelectableCard from './SelectableCard';
 import { RootState } from '@/app/store';
 import { useGetCardsQuery } from '@/services/card';
 
