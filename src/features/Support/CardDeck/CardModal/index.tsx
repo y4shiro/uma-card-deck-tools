@@ -16,7 +16,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeCard } from '../cardDeckSlice';
 import { closeModal, selectModal } from '../modalSlice';
 
+import CardFilter from './CardFilter';
 import SelectableCard from './SelectableCard';
+
 import { RootState } from '@/app/store';
 import { useGetCardsQuery } from '@/services/card';
 
@@ -71,6 +73,7 @@ const CardModal: React.FC<Props> = ({ imgSize }) => {
           </Text>
         </ModalHeader>
         <ModalBody bgColor='#eee' w='full' minH='360px' textAlign='center'>
+          <CardFilter />
           {cards ? (
             <Grid
               gap={{ base: '1', sm: '2' }}
