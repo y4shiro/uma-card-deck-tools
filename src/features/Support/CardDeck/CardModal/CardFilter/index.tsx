@@ -1,58 +1,17 @@
 import { Checkbox, CheckboxGroup, HStack } from '@chakra-ui/react';
-import { Dispatch, useReducer } from 'react';
-
-const filterKeys = [
-  'Speed',
-  'Stamina',
-  'Power',
-  'Guts',
-  'Wisdom',
-  'Friends',
-  'Group',
-  'SSR',
-  'SR',
-  'R',
-] as const;
-type FilterKey = typeof filterKeys[number];
-type FilterState = {
-  [K in FilterKey]: boolean;
-};
-
-type Actions = { type: 'toggleState'; payload: { targetName: FilterKey } };
-
-const reducer = (state: FilterState, action: Actions) => {
-  switch (action.type) {
-    case 'toggleState':
-      const targetName = action.payload.targetName;
-      const newState = { [targetName]: !state[targetName] };
-      return { ...state, ...newState };
-    default:
-      return state;
-  }
-};
-const initState: FilterState = {
-  Speed: false,
-  Stamina: false,
-  Power: false,
-  Guts: false,
-  Wisdom: false,
-  Friends: false,
-  Group: false,
-  SSR: false,
-  SR: false,
-  R: false,
-};
+import { useDispatch, useSelector } from 'react-redux';
+import type { FilterKeysType } from '../filterSlice';
+import { selectFilter, filterKeys, toggleFilter } from '../filterSlice';
 
 const CardFilter: React.FC = () => {
-  const [state, dispatch] = useReducer(reducer, initState);
-  console.log(state);
+  const filterState = useSelector(selectFilter);
 
   return (
     <HStack w='100%' my={4} p={4} bgColor='white' borderRadius='16px'>
       <CheckboxGroup>
         <HStack bgColor='red.100'>
           {filterKeys.map((key) => (
-            <CustomCheckbox type={key} dispatch={dispatch} key={key} />
+            <CustomCheckbox key={key} filterKey={key} filterValue={filterState[key]} />
           ))}
         </HStack>
       </CheckboxGroup>
@@ -60,14 +19,21 @@ const CardFilter: React.FC = () => {
   );
 };
 
-const CustomCheckbox: React.FC<{ type: FilterKey; dispatch: Dispatch<Actions> }> = ({
-  type,
-  dispatch,
+const CustomCheckbox: React.FC<{ filterKey: FilterKeysType; filterValue: boolean }> = ({
+  filterKey,
+  filterValue,
 }) => {
-  const onClickHandler = () => {
-    dispatch({ type: 'toggleState', payload: { targetName: type } });
+  const dispatch = useDispatch();
+
+  const onClickHandler = (targetKey: FilterKeysType) => {
+    dispatch(toggleFilter(targetKey));
   };
-  return <Checkbox onChange={() => onClickHandler()}>{type}</Checkbox>;
+
+  return (
+    <Checkbox isChecked={filterValue} onChange={() => onClickHandler(filterKey)}>
+      {filterKey}
+    </Checkbox>
+  );
 };
 
 export default CardFilter;
