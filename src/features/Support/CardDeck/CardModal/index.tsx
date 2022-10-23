@@ -18,6 +18,8 @@ import { closeModal, selectModal } from '../modalSlice';
 
 import CardFilter from './CardFilter';
 import SelectableCard from './SelectableCard';
+import { selectFilter, filterKeys } from './filterSlice';
+import { filterdCardLists } from './outputFilterdCardLists';
 
 import { RootState } from '@/app/store';
 import { useGetCardsQuery } from '@/services/card';
@@ -30,9 +32,13 @@ type Props = {
 };
 
 const CardModal: React.FC<Props> = ({ imgSize }) => {
-  const { data: cards, error, isLoading } = useGetCardsQuery();
+  const { data, error, isLoading } = useGetCardsQuery();
   const { isOpen, openSlotId } = useSelector(selectModal);
+  const filterState = useSelector(selectFilter);
   const dispatch = useDispatch();
+
+  const filterLists = filterKeys.filter((key) => filterState[key] === true);
+  const cards = filterdCardLists(data!, filterLists);
 
   const selectedCards = useSelector((state: RootState) => state.cardDeck)
     .map((card) => card.cardId)
