@@ -38,8 +38,8 @@ const CustomCheckbox: React.FC<{ filterKey: FilterKeysType; filterValue: boolean
       aria-label='Filter Button'
       icon={
         <Image
-          height={48}
-          width={48}
+          height={40}
+          width={40}
           src={`uma-support-card/icons/${filterKey}.png`}
           alt={`サポートカードの "${filterKey}" アイコン`}
         />
