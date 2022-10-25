@@ -41,6 +41,7 @@ const CustomCheckbox: React.FC<{ filterKey: FilterKeysType; filterValue: boolean
       size={{ base: '16', sm: '32' }}
       filter={!filterValue ? 'grayscale(100%)' : ''}
       onClick={() => onClickHandler(filterKey)}
+      _focus={{ boxShadow: 'none' }}
       aria-label='Filter Button'
       icon={
         <Image
