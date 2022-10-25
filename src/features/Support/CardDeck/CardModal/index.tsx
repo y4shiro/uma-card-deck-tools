@@ -78,7 +78,7 @@ const CardModal: React.FC<Props> = ({ imgSize }) => {
             サポートカード選択
           </Text>
         </ModalHeader>
-        <ModalBody bgColor='#eee' w='full' minH='360px' textAlign='center'>
+        <ModalBody bgColor='#eee' w='full' minH='360px' pt='0' textAlign='center'>
           <CardFilter />
           {cards ? (
             <Grid

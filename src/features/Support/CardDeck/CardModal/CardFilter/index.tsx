@@ -9,14 +9,15 @@ const CardFilter: React.FC = () => {
   const filterState = useSelector(selectFilter);
 
   return (
-    <HStack
-      w='100%'
-      my={{ base: 2, sm: 4 }}
-      p={{ base: 3, sm: 4 }}
-      bgColor='white'
-      borderRadius='16px'
-    >
-      <HStack gap={{ base: 0, sm: 2, md: 4 }}>
+    <HStack position='sticky' top={0} zIndex='sticky' py={{ base: 2, sm: 4 }} bgColor='#eee'>
+      <HStack
+        w='100%'
+        py={{ base: 2, sm: 4 }}
+        px={{ base: 2, sm: 6 }}
+        gap={{ base: 0, sm: 2, md: 4 }}
+        borderRadius={{ base: 8, sm: 16 }}
+        bgColor='white'
+      >
         {filterKeys.map((key) => (
           <CustomCheckbox key={key} filterKey={key} filterValue={filterState[key]} />
         ))}
