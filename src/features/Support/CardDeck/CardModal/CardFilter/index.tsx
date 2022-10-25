@@ -48,6 +48,8 @@ const CustomCheckbox: React.FC<{ filterKey: FilterKeysType; filterValue: boolean
         <Image
           height={40}
           width={40}
+          placeholder='blur'
+          blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOcXg8AAbMBGIpVIK8AAAAASUVORK5CYII='
           src={`uma-support-card/icons/${filterKey}.png`}
           alt={`サポートカードの "${filterKey}" アイコン`}
         />
