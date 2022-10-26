@@ -11,7 +11,6 @@ const CardFilter: React.FC = () => {
   const filterState = useSelector(selectFilter);
 
   const resetHandler = () => {
-    console.log('reset button');
     dispatch(resetFilter());
   };
 
@@ -21,7 +20,7 @@ const CardFilter: React.FC = () => {
         w='100%'
         py={{ base: 2, sm: 4 }}
         px={{ base: 2, sm: 6 }}
-        gap={{ base: 0, sm: 2, md: 4 }}
+        gap={{ base: 0, sm: 1, md: 2 }}
         borderRadius={{ base: 8, sm: 16 }}
         bgColor='white'
       >
@@ -57,6 +56,7 @@ const CustomCheckbox: React.FC<{ filterKey: FilterKeysType; filterValue: boolean
       colorScheme='whiteAlpha'
       size={{ base: '16', sm: '32' }}
       filter={!filterValue ? 'grayscale(100%)' : ''}
+      opacity={!filterValue ? '60%' : '100%'}
       onClick={() => onClickHandler(filterKey)}
       _focus={{ boxShadow: 'none' }}
       aria-label='Filter Button'
