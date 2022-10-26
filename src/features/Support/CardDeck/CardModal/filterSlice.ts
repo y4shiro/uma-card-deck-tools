@@ -41,9 +41,12 @@ export const filterSlice = createSlice({
       const { payload } = action;
       state[payload] = !state[payload];
     },
+    resetFilter: () => {
+      return initialState;
+    },
   },
 });
 
-export const { toggleFilter } = filterSlice.actions;
+export const { toggleFilter, resetFilter } = filterSlice.actions;
 export const selectFilter = (state: RootState) => state.filter;
 export default filterSlice.reducer;

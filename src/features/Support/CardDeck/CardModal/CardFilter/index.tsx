@@ -1,17 +1,18 @@
 import { RepeatIcon } from '@chakra-ui/icons';
 import { HStack, IconButton } from '@chakra-ui/react';
 import Image from 'next/image';
-import { FcCancel } from 'react-icons/fc';
 import { useDispatch, useSelector } from 'react-redux';
 
 import type { FilterKeysType } from '../filterSlice';
-import { selectFilter, filterKeys, toggleFilter } from '../filterSlice';
+import { selectFilter, filterKeys, toggleFilter, resetFilter } from '../filterSlice';
 
 const CardFilter: React.FC = () => {
+  const dispatch = useDispatch();
   const filterState = useSelector(selectFilter);
 
   const resetHandler = () => {
     console.log('reset button');
+    dispatch(resetFilter());
   };
 
   return (
