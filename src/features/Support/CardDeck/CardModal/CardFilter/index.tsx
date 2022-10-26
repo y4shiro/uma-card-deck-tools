@@ -1,5 +1,7 @@
+import { RepeatIcon } from '@chakra-ui/icons';
 import { HStack, IconButton } from '@chakra-ui/react';
 import Image from 'next/image';
+import { FcCancel } from 'react-icons/fc';
 import { useDispatch, useSelector } from 'react-redux';
 
 import type { FilterKeysType } from '../filterSlice';
@@ -7,6 +9,10 @@ import { selectFilter, filterKeys, toggleFilter } from '../filterSlice';
 
 const CardFilter: React.FC = () => {
   const filterState = useSelector(selectFilter);
+
+  const resetHandler = () => {
+    console.log('reset button');
+  };
 
   return (
     <HStack position='sticky' top={0} zIndex='sticky' py={{ base: 2, sm: 4 }} bgColor='#eee'>
@@ -21,6 +27,15 @@ const CardFilter: React.FC = () => {
         {filterKeys.map((key) => (
           <CustomCheckbox key={key} filterKey={key} filterValue={filterState[key]} />
         ))}
+        <IconButton
+          variant='solid'
+          colorScheme='red'
+          boxSize={{ base: '6', sm: '8', md: '10' }}
+          fontSize={{ base: '16', sm: '20', md: '24' }}
+          onClick={resetHandler}
+          icon={<RepeatIcon />}
+          aria-label={'Filter Clear Icon'}
+        />
       </HStack>
     </HStack>
   );
