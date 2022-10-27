@@ -13,10 +13,14 @@ import {
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import SelectableCard from '../CardSlot/SelectableCard';
-
 import { removeCard } from '../cardDeckSlice';
 import { closeModal, selectModal } from '../modalSlice';
+
+import CardFilter from './CardFilter';
+import SelectableCard from './SelectableCard';
+import { selectFilter, filterKeys } from './filterSlice';
+import { filterdCardLists } from './outputFilterdCardLists';
+
 import { RootState } from '@/app/store';
 import { useGetCardsQuery } from '@/services/card';
 
@@ -28,9 +32,13 @@ type Props = {
 };
 
 const CardModal: React.FC<Props> = ({ imgSize }) => {
-  const { data: cards, error, isLoading } = useGetCardsQuery();
+  const { data, error, isLoading } = useGetCardsQuery();
   const { isOpen, openSlotId } = useSelector(selectModal);
+  const filterState = useSelector(selectFilter);
   const dispatch = useDispatch();
+
+  const filterLists = filterKeys.filter((key) => filterState[key] === true);
+  const cards = filterdCardLists(data!, filterLists);
 
   const selectedCards = useSelector((state: RootState) => state.cardDeck)
     .map((card) => card.cardId)
@@ -70,7 +78,8 @@ const CardModal: React.FC<Props> = ({ imgSize }) => {
             サポートカード選択
           </Text>
         </ModalHeader>
-        <ModalBody bgColor='#eee' w='full' minH='360px' textAlign='center'>
+        <ModalBody bgColor='#eee' w='full' minH='360px' pt='0' textAlign='center'>
+          <CardFilter />
           {cards ? (
             <Grid
               gap={{ base: '1', sm: '2' }}

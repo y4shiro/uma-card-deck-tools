@@ -47,7 +47,7 @@ const Card: React.FC<Props> = ({ card, imgSize }) => {
         <Image
           height={imgSize!.type}
           width={imgSize!.type}
-          src={`uma-support-card/card-type-icons/${card.card_type}.png`}
+          src={`uma-support-card/icons/${card.card_type}.png`}
           alt={`サポートカード "${card.card_name}" のタイプアイコン`}
         />
       </Box>
