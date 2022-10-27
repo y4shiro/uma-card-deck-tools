@@ -1,6 +1,8 @@
 import { Box, Grid, Text, VStack } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 
+import SkillItem from './SkillItem';
+
 import { RootState } from '@/app/store';
 import { useGetCardsQuery } from '@/services/card';
 
@@ -27,9 +29,7 @@ const Skills = (): JSX.Element => {
         <Text fontSize='2xl'>イベント取得スキル</Text>
         {deckCardSkillsLists?.map((card) =>
           card.event_skills?.map((skill) => (
-            <Text key={skill.name}>
-              {card.card_name}:{skill.name}
-            </Text>
+            <SkillItem key={skill.name} skillName={skill.name} cardName={card.card_name} />
           )),
         )}
       </VStack>
@@ -38,9 +38,7 @@ const Skills = (): JSX.Element => {
         <Text fontSize='2xl'>トレーニング取得スキル</Text>
         {deckCardSkillsLists?.map((card) =>
           card.training_skills?.map((skill) => (
-            <Text key={skill.name}>
-              {card.card_name}:{skill.name}
-            </Text>
+            <SkillItem key={skill.name} skillName={skill.name} cardName={card.card_name} />
           )),
         )}
       </VStack>
