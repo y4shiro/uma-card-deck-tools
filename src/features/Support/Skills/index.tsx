@@ -16,19 +16,34 @@ const Skills = (): JSX.Element => {
         card_id: card.card_id,
         card_name: card.card_name,
         event_skills: card.event_skills,
+        training_skills: card.training_skills,
       };
     });
 
   return (
-    <VStack w='100%' bgColor='blue.100'>
-      <Text>Skills</Text>
-      {deckCardSkillsLists?.map((card) =>
-        card.event_skills?.map((skill) => (
-          <Text key={skill.name}>
-            {card.card_name}:{skill.name}
-          </Text>
-        )),
-      )}
+    <VStack w='100%' gap='4' bgColor='blue.100'>
+      <Text fontSize='4xl'>Skills</Text>
+      <VStack>
+        <Text fontSize='2xl'>イベント取得スキル</Text>
+        {deckCardSkillsLists?.map((card) =>
+          card.event_skills?.map((skill) => (
+            <Text key={skill.name}>
+              {card.card_name}:{skill.name}
+            </Text>
+          )),
+        )}
+      </VStack>
+
+      <VStack>
+        <Text fontSize='2xl'>トレーニング取得スキル</Text>
+        {deckCardSkillsLists?.map((card) =>
+          card.training_skills?.map((skill) => (
+            <Text key={skill.name}>
+              {card.card_name}:{skill.name}
+            </Text>
+          )),
+        )}
+      </VStack>
     </VStack>
   );
 };
