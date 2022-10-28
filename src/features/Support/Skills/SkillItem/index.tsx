@@ -9,7 +9,15 @@ type Props = {
 
 const SkillItem: React.FC<Props> = ({ skillName, skillPt, cardName }) => {
   return (
-    <HStack w='480px' p='4' gap='4' borderRadius='8' bgColor='white'>
+    <HStack
+      w='100%'
+      px='4'
+      py='2'
+      gap={{ base: '2', md: '4' }}
+      borderRadius='8'
+      bgColor='white'
+      shadow='md'
+    >
       <Box boxSize='48px' bgColor='gray.200'>
         icon
       </Box>
