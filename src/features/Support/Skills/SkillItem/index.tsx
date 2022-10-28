@@ -1,4 +1,4 @@
-import { Box, HStack, Text, VStack } from '@chakra-ui/react';
+import { Box, Divider, HStack, Spacer, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 
 type Props = {
@@ -9,18 +9,19 @@ type Props = {
 
 const SkillItem: React.FC<Props> = ({ skillName, skillPt, cardName }) => {
   return (
-    <HStack w='480px' p='4' borderRadius='8' bgColor='white'>
+    <HStack w='480px' p='4' gap='4' borderRadius='8' bgColor='white'>
       <Box boxSize='48px' bgColor='gray.200'>
         icon
       </Box>
 
-      <VStack w='100%' alignContent='start'>
-        <Text>{cardName}</Text>
-
-        <HStack>
+      <VStack w='100%' alignContent='start' divider={<Divider />}>
+        <HStack w='100%'>
           <Text>{skillName}</Text>
-          {skillPt && <Text>SkillPoint:{skillPt}</Text>}
+          <Spacer />
+          {skillPt && <Text>{skillPt}Pt</Text>}
         </HStack>
+
+        <Text w='100%'>{cardName}</Text>
       </VStack>
     </HStack>
   );
