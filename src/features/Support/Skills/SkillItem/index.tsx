@@ -14,7 +14,7 @@ const SkillItem: React.FC<Props> = ({ skillName, skillPt, cardName }) => {
         icon
       </Box>
 
-      <VStack w='100%' alignContent='start' divider={<Divider />}>
+      <VStack w='100%' divider={<Divider />}>
         <HStack w='100%'>
           <Text>{skillName}</Text>
           <Spacer />
