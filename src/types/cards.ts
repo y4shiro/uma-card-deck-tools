@@ -9,9 +9,9 @@ export type CardType = {
   card_img_path: string | null;
   card_icon_path: string | null;
   effects: Effects[];
-  event_skills?: EventSkill[];
-  training_skills?: TrainingSkill[];
-  status_gains?: StatusGain[];
+  event_skills: EventSkill[];
+  training_skills: TrainingSkill[];
+  status_gains: StatusGain[];
 };
 
 export type Effects = {
