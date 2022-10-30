@@ -3,11 +3,12 @@ import React from 'react';
 
 type Props = {
   skillName: string;
+  rarity: 1 | 2 | 3 | 4 | 5;
   skillPt: number | null;
   cardName: string;
 };
 
-const SkillItem: React.FC<Props> = ({ skillName, skillPt, cardName }) => {
+const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, cardName }) => {
   return (
     <HStack
       w='100%'
