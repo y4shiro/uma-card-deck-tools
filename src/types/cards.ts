@@ -28,15 +28,17 @@ export type EffectValue = {
 export type EventSkill = {
   id: number;
   name: string;
+  rarity: 1 | 2 | 3 | 4 | 5;
   skill_pt: number | null;
-  img_path: string | null;
+  img_path: string;
 };
 
 export type TrainingSkill = {
   id: number;
   name: string;
+  rarity: 1 | 2 | 3 | 4 | 5;
   skill_pt: number | null;
-  img_path: string | null;
+  img_path: string;
 };
 
 export type StatusGain = {
