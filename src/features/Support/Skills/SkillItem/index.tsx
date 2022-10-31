@@ -9,6 +9,21 @@ type Props = {
 };
 
 const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, cardName }) => {
+  const bgColors = {
+    1: 'linear(90deg, #FCF3F2, #D9D7EB 50%, #C8C6DE 75%,#AAA9BE)', // 白
+    2: 'linear(90deg, #FFFEEE, #F7D883 50%, #F2BA53)', // 金
+    3: 'linear(90deg, #FCF3F2, #D9D7EB 50%, #C8C6DE 75%,#AAA9BE)', // 白
+    4: 'linear(90deg, #E0FDD7, #BDF2F8 25%, #B4CEF7 50%, #E4B7ED 75%, #EFABE7)', // 虹
+    5: 'linear(90deg, #E0FDD7, #BDF2F8 25%, #B4CEF7 50%, #E4B7ED 75%, #EFABE7)', // 虹
+  };
+  const borderColors = {
+    1: '#9290B2',
+    2: '#EEA348',
+    3: '#9290B2',
+    4: '#E45DAD',
+    5: '#E45DAD',
+  };
+
   return (
     <HStack
       w='100%'
@@ -16,10 +31,12 @@ const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, cardName }) =>
       py='2'
       gap={{ base: '2', md: '4' }}
       borderRadius='8'
-      bgColor='white'
+      border='1px'
+      borderColor={borderColors[rarity]}
+      bgGradient={bgColors[rarity]}
       shadow='md'
     >
-      <Box boxSize='48px' bgColor='gray.200'>
+      <Box boxSize='48px' bgColor='gray.300'>
         icon
       </Box>
 
