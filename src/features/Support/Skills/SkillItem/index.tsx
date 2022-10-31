@@ -9,6 +9,7 @@ type Props = {
 };
 
 const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, cardName }) => {
+  const fontColor = '#653B21';
   const bgColors = {
     1: 'linear(90deg, #FCF3F2, #D9D7EB 50%, #C8C6DE 75%,#AAA9BE)', // 白
     2: 'linear(90deg, #FFFEEE, #F7D883 50%, #F2BA53)', // 金
@@ -34,13 +35,16 @@ const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, cardName }) =>
       border='1px'
       borderColor={borderColors[rarity]}
       bgGradient={bgColors[rarity]}
+      fontWeight='bold'
+      textColor={fontColor}
+      textShadow='0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff'
       shadow='md'
     >
       <Box boxSize='48px' bgColor='gray.300'>
         icon
       </Box>
 
-      <VStack w='100%' divider={<Divider />}>
+      <VStack w='100%' divider={<Divider borderColor={fontColor} />}>
         <HStack w='100%'>
           <Text>{skillName}</Text>
           <Spacer />
