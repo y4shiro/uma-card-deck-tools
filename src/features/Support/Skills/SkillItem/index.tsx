@@ -1,14 +1,16 @@
-import { Box, Divider, HStack, Spacer, Text, VStack } from '@chakra-ui/react';
+import { Box, Center, Divider, HStack, Spacer, Text, VStack } from '@chakra-ui/react';
+import Image from 'next/image';
 import React from 'react';
 
 type Props = {
   skillName: string;
   rarity: 1 | 2 | 3 | 4 | 5;
   skillPt: number | null;
+  iconPath: string;
   cardName: string;
 };
 
-const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, cardName }) => {
+const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, iconPath, cardName }) => {
   const fontColor = '#653B21';
   const bgColors = {
     1: 'linear-gradient(90deg, #FCF3F2, #D9D7EB 50%, #C8C6DE 75%,#AAA9BE)', // 白
@@ -28,20 +30,26 @@ const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, cardName }) =>
   return (
     <HStack
       w='100%'
-      px='4'
+      px={{ base: '2', md: '4' }}
       py='2'
-      gap={{ base: '2', md: '4' }}
+      gap={{ base: '0', md: '2' }}
       borderRadius='16'
       background={`${bgColors[rarity]} padding-box, ${borderColors[rarity]} border-box`}
       border='2px solid transparent'
       fontWeight='bold'
+      fontSize={{ base: '12px', md: '16px' }}
       textColor={fontColor}
       textShadow='0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff'
       shadow='md'
     >
-      <Box boxSize='48px' bgColor='gray.300'>
-        icon
-      </Box>
+      <Center boxSize={{ base: '48px', md: '64px' }}>
+        <Image
+          width='64px'
+          height='64px'
+          src={`/uma-support-card/skill-icons/${iconPath}.png`}
+          alt='スキルのアイコン'
+        />
+      </Center>
 
       <VStack w='100%' divider={<Divider borderColor={fontColor} />}>
         <HStack w='100%'>
@@ -50,7 +58,9 @@ const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, cardName }) =>
           {skillPt && <Text>{skillPt}Pt</Text>}
         </HStack>
 
-        <Text w='100%'>{cardName}</Text>
+        <Text w='100%' noOfLines={[1]}>
+          {cardName}
+        </Text>
       </VStack>
     </HStack>
   );

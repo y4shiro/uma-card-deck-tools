@@ -31,6 +31,7 @@ const SkillList: React.FC<Props> = ({ heading, skillLists }) => {
               skillName={skill.name}
               rarity={skill.rarity}
               skillPt={skill.skill_pt}
+              iconPath={skill.img_path}
               cardName={card.card_name}
             />
           )),
