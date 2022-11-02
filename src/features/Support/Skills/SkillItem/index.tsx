@@ -57,7 +57,7 @@ const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, iconPath, card
           {skillPt && <Text>{skillPt}Pt</Text>}
         </HStack>
 
-        <Text w='100%' noOfLines={1}>
+        <Text w='100%' noOfLines={[2, 1]}>
           {cardName}
         </Text>
       </VStack>
