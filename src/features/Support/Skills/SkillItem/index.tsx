@@ -11,18 +11,18 @@ type Props = {
 const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, cardName }) => {
   const fontColor = '#653B21';
   const bgColors = {
-    1: 'linear(90deg, #FCF3F2, #D9D7EB 50%, #C8C6DE 75%,#AAA9BE)', // 白
-    2: 'linear(90deg, #FFFEEE, #F7D883 50%, #F2BA53)', // 金
-    3: 'linear(90deg, #FCF3F2, #D9D7EB 50%, #C8C6DE 75%,#AAA9BE)', // 白
-    4: 'linear(90deg, #E0FDD7, #BDF2F8 25%, #B4CEF7 50%, #E4B7ED 75%, #EFABE7)', // 虹
-    5: 'linear(90deg, #E0FDD7, #BDF2F8 25%, #B4CEF7 50%, #E4B7ED 75%, #EFABE7)', // 虹
+    1: 'linear-gradient(90deg, #FCF3F2, #D9D7EB 50%, #C8C6DE 75%,#AAA9BE)', // 白
+    2: 'linear-gradient(90deg, #FFFEEE, #F7D883 50%, #F2BA53)', // 金
+    3: 'linear-gradient(90deg, #FCF3F2, #D9D7EB 50%, #C8C6DE 75%,#AAA9BE)', // 白
+    4: 'linear-gradient(90deg, #E0FDD7, #BDF2F8 25%, #B4CEF7 50%, #E4B7ED 75%, #EFABE7)', // 虹
+    5: 'linear-gradient(90deg, #E0FDD7, #BDF2F8 25%, #B4CEF7 50%, #E4B7ED 75%, #EFABE7)', // 虹
   };
   const borderColors = {
-    1: '#9290B2',
-    2: '#EEA348',
-    3: '#9290B2',
-    4: '#E45DAD',
-    5: '#E45DAD',
+    1: 'linear-gradient(90deg, #d1c6dc, #8d8aae)',
+    2: 'linear-gradient(90deg, #F7DB81, #EEA146)',
+    3: 'linear-gradient(90deg, #d1c6dc, #8d8aae)',
+    4: 'linear-gradient(90deg, #88F180, #A2CDE1 25%, #969FF2 50%, #B68BEC 75%, #EA88CE)',
+    5: 'linear-gradient(90deg, #88F180, #A2CDE1 25%, #969FF2 50%, #B68BEC 75%, #EA88CE)',
   };
 
   return (
@@ -31,10 +31,9 @@ const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, cardName }) =>
       px='4'
       py='2'
       gap={{ base: '2', md: '4' }}
-      borderRadius='8'
-      border='1px'
-      borderColor={borderColors[rarity]}
-      bgGradient={bgColors[rarity]}
+      borderRadius='16'
+      background={`${bgColors[rarity]} padding-box, ${borderColors[rarity]} border-box`}
+      border='2px solid transparent'
       fontWeight='bold'
       textColor={fontColor}
       textShadow='0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff'
