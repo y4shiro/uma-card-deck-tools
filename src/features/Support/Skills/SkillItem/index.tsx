@@ -30,18 +30,19 @@ const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, iconPath, card
   return (
     <HStack
       w='100%'
-      px='4'
+      px={{ base: '2', md: '4' }}
       py='2'
-      gap='2'
+      gap={{ base: '0', md: '2' }}
       borderRadius='16'
       background={`${bgColors[rarity]} padding-box, ${borderColors[rarity]} border-box`}
       border='2px solid transparent'
       fontWeight='bold'
+      fontSize={{ base: '12px', md: '16px' }}
       textColor={fontColor}
       textShadow='0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff'
       shadow='md'
     >
-      <Center boxSize='64px'>
+      <Center boxSize={{ base: '48px', md: '64px' }}>
         <Image
           width='64px'
           height='64px'
@@ -57,7 +58,7 @@ const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, iconPath, card
           {skillPt && <Text>{skillPt}Pt</Text>}
         </HStack>
 
-        <Text w='100%' noOfLines={[2, 1]}>
+        <Text w='100%' noOfLines={[1]}>
           {cardName}
         </Text>
       </VStack>
