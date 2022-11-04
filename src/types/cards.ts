@@ -17,6 +17,8 @@ export type CardType = {
 export type Effects = {
   id: number;
   name: string;
+  category: 'supportEffects' | 'initStatusUp';
+  unit: 'integer' | 'percent' | 'level' | null;
   values: EffectValue[];
 };
 
