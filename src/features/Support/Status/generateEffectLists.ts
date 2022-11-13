@@ -1,5 +1,5 @@
+import { CardSlotType } from './../../../types/cardSlot';
 import { EffectListType } from '.';
-import { CardType } from '@/types/cards';
 
 const initEffects: EffectListType[] = [
   {
@@ -221,14 +221,14 @@ const initEffects: EffectListType[] = [
   },
 ];
 
-const generateEffectLists = (cards: CardType[] | undefined, deckCardidLists: (number | null)[]) => {
+const generateEffectLists = (deck: CardSlotType[]) => {
   let array = [...initEffects];
 
-  const deckCards = cards?.filter((card) => deckCardidLists.includes(card.card_id));
+  const deckCards = deck.map((deck) => deck.cardData);
 
   array.map((effect) =>
     deckCards?.map((card) =>
-      card.effects.map((card_effect) => {
+      card?.effects.map((card_effect) => {
         if (effect.id === card_effect.id) {
           const tmpEffect = {
             card_id: card.card_id,
