@@ -222,9 +222,16 @@ const initEffects: EffectListType[] = [
 ];
 
 const generateEffectLists = (deck: CardSlotType[]) => {
-  let array = [...initEffects];
-
   const deckCards = deck.map((deck) => deck.cardData);
+  const array = [...initEffects];
+
+  array.map((effect) =>
+    deckCards?.map((card) =>
+      card?.effects.map((_card_effect) => {
+        effect.values.clear();
+      }),
+    ),
+  );
 
   array.map((effect) =>
     deckCards?.map((card) =>
@@ -242,9 +249,7 @@ const generateEffectLists = (deck: CardSlotType[]) => {
     ),
   );
 
-  array = array.filter((effect) => effect.values.size !== 0);
-
-  return array;
+  return array.filter((effect) => effect.values.size !== 0);
 };
 
 export { generateEffectLists };
