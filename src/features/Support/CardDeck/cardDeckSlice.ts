@@ -20,7 +20,7 @@ export const cardDeckSlice = createSlice({
   reducers: {
     changeCard: (state, action: PayloadAction<CardSlotType>) => {
       const { slotId, cardId, cardData, belongCharaIds } = action.payload;
-      state[slotId] = { slotId, cardId, cardData, limitBreakStep: 4, belongCharaIds };
+      state[slotId] = { slotId, cardId, cardData, limitBreakStep: 0, belongCharaIds };
     },
     removeCard: (state, action: PayloadAction<{ slotId: SlotId }>) => {
       const { slotId } = action.payload;
@@ -32,9 +32,18 @@ export const cardDeckSlice = createSlice({
         belongCharaIds: [],
       };
     },
+    incrementLimitBreak: (state, action: PayloadAction<SlotId>) => {
+      const slotId = action.payload;
+      if (state[slotId].limitBreakStep < 4) state[slotId].limitBreakStep++;
+    },
+    decrementLimitBreak: (state, action: PayloadAction<SlotId>) => {
+      const slotId = action.payload;
+      if (state[slotId].limitBreakStep > 0) state[slotId].limitBreakStep--;
+    },
   },
 });
 
-export const { changeCard, removeCard } = cardDeckSlice.actions;
+export const { changeCard, removeCard, incrementLimitBreak, decrementLimitBreak } =
+  cardDeckSlice.actions;
 // export const selectDeck = (state: RootState) => state.cardDeck;
 export default cardDeckSlice.reducer;

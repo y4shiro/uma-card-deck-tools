@@ -1,18 +1,24 @@
 import { Button, HStack, VStack, Text } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
 
-import { LimitBreakSteps } from '@/types/cardSlot';
+import { decrementLimitBreak, incrementLimitBreak } from '../../cardDeckSlice';
+
+import { LimitBreakSteps, SlotId } from '@/types/cardSlot';
 
 type Props = {
+  slotId: SlotId;
   limitBreakSteps: LimitBreakSteps;
 };
 
-const LimitBreak: React.FC<Props> = ({ limitBreakSteps }) => {
-  const incrementBreakLimit = () => {
-    console.log('increment');
+const LimitBreak: React.FC<Props> = ({ slotId, limitBreakSteps }) => {
+  const dispatch = useDispatch();
+
+  const incrementBreakLimit = (slotId: SlotId) => {
+    dispatch(incrementLimitBreak(slotId));
   };
 
   const decrementBreakLimit = () => {
-    console.log('decrement');
+    dispatch(decrementLimitBreak(slotId));
   };
 
   return (
@@ -30,7 +36,7 @@ const LimitBreak: React.FC<Props> = ({ limitBreakSteps }) => {
           -
         </Button>
         <Text fontSize='xl'>◆◆◆◇</Text>
-        <Button size='xs' colorScheme='blue' onClick={() => incrementBreakLimit()}>
+        <Button size='xs' colorScheme='blue' onClick={() => incrementBreakLimit(slotId)}>
           +
         </Button>
       </HStack>

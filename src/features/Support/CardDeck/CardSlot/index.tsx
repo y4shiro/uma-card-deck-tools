@@ -39,7 +39,7 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId, limitBreakSteps, imgSize })
           <Card card={card!} imgSize={imgSize} />
         </Box>
 
-        <LimitBreak limitBreakSteps={limitBreakSteps} />
+        <LimitBreak slotId={slotId} limitBreakSteps={limitBreakSteps} />
       </Box>
     );
 
