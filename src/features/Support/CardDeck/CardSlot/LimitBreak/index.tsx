@@ -1,7 +1,12 @@
 import { Button, HStack, VStack, Text } from '@chakra-ui/react';
-import React from 'react';
 
-const LimitBreak = () => {
+import { LimitBreakSteps } from '@/types/cardSlot';
+
+type Props = {
+  limitBreakSteps: LimitBreakSteps;
+};
+
+const LimitBreak: React.FC<Props> = ({ limitBreakSteps }) => {
   const incrementBreakLimit = () => {
     console.log('increment');
   };
@@ -29,7 +34,7 @@ const LimitBreak = () => {
           +
         </Button>
       </HStack>
-      <Text>Lv40</Text>
+      <Text>凸数:{limitBreakSteps}</Text>
     </VStack>
   );
 };

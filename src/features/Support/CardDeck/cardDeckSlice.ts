@@ -20,7 +20,7 @@ export const cardDeckSlice = createSlice({
   reducers: {
     changeCard: (state, action: PayloadAction<CardSlotType>) => {
       const { slotId, cardId, cardData, belongCharaIds } = action.payload;
-      state[slotId] = { slotId, cardId, cardData, limitBreakStep: 0, belongCharaIds };
+      state[slotId] = { slotId, cardId, cardData, limitBreakStep: 4, belongCharaIds };
     },
     removeCard: (state, action: PayloadAction<{ slotId: SlotId }>) => {
       const { slotId } = action.payload;
