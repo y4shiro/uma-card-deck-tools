@@ -1,9 +1,10 @@
-import { AspectRatio, Box, Button, HStack, Icon, Text, VStack } from '@chakra-ui/react';
+import { AspectRatio, Box, Icon } from '@chakra-ui/react';
 import { ImPlus } from 'react-icons/im';
 import { useDispatch } from 'react-redux';
 
 import { openModal } from '../modalSlice';
 
+import LimitBreak from './LimitBreak';
 import Card from '@/components/Card';
 
 import { useGetCardsQuery } from '@/services/card';
@@ -25,14 +26,6 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId, imgSize }) => {
     dispatch(openModal(slotId));
   };
 
-  const incrementBreakLimit = () => {
-    console.log('increment');
-  };
-
-  const decrementBreakLimit = () => {
-    console.log('decrement');
-  };
-
   if (cardId)
     return (
       <Box position='relative'>
@@ -44,26 +37,8 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId, imgSize }) => {
         >
           <Card card={card!} imgSize={imgSize} />
         </Box>
-        <VStack
-          position='absolute'
-          w='100%'
-          top='70%'
-          bottom='0'
-          padding='2'
-          bgColor='whiteAlpha.800'
-          borderBottomRadius={{ base: 8, md: 12 }}
-        >
-          <HStack justifyContent='space-around'>
-            <Button size='xs' colorScheme='red' onClick={() => decrementBreakLimit()}>
-              -
-            </Button>
-            <Text fontSize='xl'>◆◆◆◇</Text>
-            <Button size='xs' colorScheme='blue' onClick={() => incrementBreakLimit()}>
-              +
-            </Button>
-          </HStack>
-          <Text>Lv40</Text>
-        </VStack>
+
+        <LimitBreak />
       </Box>
     );
 
