@@ -24,7 +24,7 @@ const EffectList: React.FC<Props> = ({ effectList }) => {
                 key={`${effect.name},${v.card_id}`}
               >
                 <Text>{effect.name}</Text>
-                <Text>{v.effect_value}</Text>
+                <Text>{v.effect_values[0].value}</Text>
                 <Center boxSize={{ base: '16px', md: '36px' }}>
                   <Image
                     width='64px'

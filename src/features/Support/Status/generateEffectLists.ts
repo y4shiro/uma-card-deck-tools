@@ -240,7 +240,7 @@ const generateEffectLists = (deck: CardSlotType[]) => {
           const tmpEffect = {
             card_id: card.card_id,
             card_name: card.card_name,
-            effect_value: card_effect.values[0].value,
+            effect_values: card_effect.values,
           };
 
           effect.values.set(card.card_id, tmpEffect);

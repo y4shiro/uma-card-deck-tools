@@ -5,13 +5,14 @@ import EffectList from './EffectList';
 import { generateEffectLists } from './generateEffectLists';
 
 import { RootState } from '@/app/store';
+import { EffectValue } from '@/types/cards';
 
 export type EffectListType = {
   id: number;
   name: string;
   category: 'supportEffects' | 'initStatusUp';
   unit: 'integer' | 'percent' | 'level' | null;
-  values: Map<number, { card_id: number; card_name: string; effect_value: number }>;
+  values: Map<number, { card_id: number; card_name: string; effect_values: EffectValue[] }>;
 };
 
 const Status = (): JSX.Element => {
