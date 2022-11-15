@@ -1,14 +1,20 @@
 import { Text, HStack, VStack, Center } from '@chakra-ui/react';
 import Image from 'next/image';
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { EffectListType } from '..';
+import EffectValue from './EffectValue';
+
+import { RootState } from '@/app/store';
 
 type Props = {
   effectList: EffectListType[];
 };
 
 const EffectList: React.FC<Props> = ({ effectList }) => {
+  const deck = useSelector((state: RootState) => state.cardDeck);
+
   return (
     <VStack w='100%' p='4' gap='1'>
       {effectList.map((effect) => {
@@ -24,7 +30,7 @@ const EffectList: React.FC<Props> = ({ effectList }) => {
                 key={`${effect.name},${v.card_id}`}
               >
                 <Text>{effect.name}</Text>
-                <Text>{v.effect_values[0].value}</Text>
+                <EffectValue deck={deck} card_id={v.card_id} effect_values={v.effect_values} />
                 <Center boxSize={{ base: '16px', md: '36px' }}>
                   <Image
                     width='64px'
