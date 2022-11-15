@@ -8,17 +8,17 @@ import LimitBreak from './LimitBreak';
 import Card from '@/components/Card';
 
 import { useGetCardsQuery } from '@/services/card';
-import { LimitBreakSteps, SlotId } from '@/types/cardSlot';
+import { CardSlotType, SlotId } from '@/types/cardSlot';
 import { ImgSize } from '@/types/cards';
 
 type Props = {
-  slotId: SlotId;
-  cardId?: number | null;
-  limitBreakSteps: LimitBreakSteps;
+  deck: CardSlotType;
   imgSize: ImgSize;
 };
 
-const CardSlot: React.FC<Props> = ({ slotId, cardId, limitBreakSteps, imgSize }) => {
+const CardSlot: React.FC<Props> = ({ deck, imgSize }) => {
+  const { slotId, cardId, cardData, limitBreakStep } = deck;
+
   const { data: cards, error, isLoading } = useGetCardsQuery();
   const card = cards?.find((c) => c.card_id === cardId);
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId, limitBreakSteps, imgSize })
           <Card card={card!} imgSize={imgSize} />
         </Box>
 
-        <LimitBreak slotId={slotId} limitBreakSteps={limitBreakSteps} />
+        <LimitBreak slotId={slotId} cardData={cardData!} limitBreakStep={limitBreakStep} />
       </Box>
     );
 
