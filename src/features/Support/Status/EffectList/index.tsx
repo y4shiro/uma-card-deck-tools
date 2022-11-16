@@ -30,7 +30,12 @@ const EffectList: React.FC<Props> = ({ effectList }) => {
                 key={`${effect.name},${v.card_id}`}
               >
                 <Text>{effect.name}</Text>
-                <EffectValue deck={deck} card_id={v.card_id} effect_values={v.effect_values} />
+                <EffectValue
+                  deck={deck}
+                  card_id={v.card_id}
+                  effect_values={v.effect_values}
+                  unit={effect.unit}
+                />
                 <Center boxSize={{ base: '16px', md: '36px' }}>
                   <Image
                     width='64px'

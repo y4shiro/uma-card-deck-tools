@@ -1,5 +1,6 @@
 import { Text } from '@chakra-ui/react';
 
+import { EffectListType } from '../..';
 import { CardSlotType } from '@/types/cardSlot';
 import { EffectValue } from '@/types/cards';
 
@@ -7,18 +8,28 @@ type Props = {
   deck: CardSlotType[];
   card_id: number;
   effect_values: EffectValue[];
+  unit: EffectListType['unit'];
 };
 
-const EffectValue: React.FC<Props> = ({ deck, card_id, effect_values }) => {
+const generateValueString = (currentValue: number, unit: EffectListType['unit']) => {
+  if (unit === 'integer') return `${currentValue}`;
+  else if (unit === 'percent') return `${currentValue}%`;
+  else if (unit === 'level') return 'Lv' + currentValue;
+  else return `${currentValue}`;
+};
+
+const EffectValue: React.FC<Props> = ({ deck, card_id, effect_values, unit }) => {
   const limitBreakStep = deck.find((d) => d.cardId === card_id)?.limitBreakStep!;
   const defaultLimitBreakStep = effect_values.length - 5;
   const currentLevel = effect_values[defaultLimitBreakStep + limitBreakStep].level;
   const currentValue = effect_values[defaultLimitBreakStep + limitBreakStep].value;
 
+  const valueString = generateValueString(currentValue, unit);
+
   return (
     <>
       <Text>Level: {currentLevel}</Text>
-      <Text>{currentValue}</Text>
+      <Text>{valueString}</Text>
     </>
   );
 };
