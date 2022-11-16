@@ -17,7 +17,26 @@ export type CardType = {
 export type Effects = {
   id: number;
   name: string;
-  category: 'supportEffects' | 'initStatusUp';
+  category:
+    | 'friendShipBonus'
+    | 'motivationUp'
+    | 'statusBonus'
+    | 'trainingEffectUp'
+    | 'initStatusUp'
+    | 'initBondUp'
+    | 'raceBonus'
+    | 'fanBonus'
+    | 'hintLvUp'
+    | 'hintRateup'
+    | 'specialtyRateUp'
+    | 'limitStatusUp'
+    | 'eventRecoveryAmountUp'
+    | 'eventEffectUp'
+    | 'failureRateDown'
+    | 'energyDiscount'
+    | 'minigameEffectUp'
+    | 'skillPointUp'
+    | 'wisdomTrainingRecoveryUp';
   unit: 'integer' | 'percent' | 'level' | null;
   values: EffectValue[];
 };
