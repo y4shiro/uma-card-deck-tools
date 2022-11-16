@@ -1,4 +1,4 @@
-import { Text, HStack, VStack, Center } from '@chakra-ui/react';
+import { Center, HStack, SimpleGrid, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -16,7 +16,7 @@ const EffectList: React.FC<Props> = ({ effectList }) => {
   const deck = useSelector((state: RootState) => state.cardDeck);
 
   return (
-    <VStack w='100%' p='4' gap='1'>
+    <SimpleGrid w='100%' columns={{ base: 1, sm: 2 }} p='4' gap='2'>
       {effectList.map((effect) => {
         return (
           <React.Fragment key={`${effect.name}`}>
@@ -49,7 +49,7 @@ const EffectList: React.FC<Props> = ({ effectList }) => {
           </React.Fragment>
         );
       })}
-    </VStack>
+    </SimpleGrid>
   );
 };
 
