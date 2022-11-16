@@ -15,7 +15,7 @@ type Props = {
 const RarityLevelTable = {
   R: [20, 25, 30, 35, 40],
   SR: [20, 25, 30, 35, 40, 45],
-  SSR: [20, 25, 30, 35, 40, 50],
+  SSR: [20, 25, 30, 35, 40, 45, 50],
 };
 
 const LimitBreak: React.FC<Props> = ({ slotId, cardData, limitBreakStep }) => {
