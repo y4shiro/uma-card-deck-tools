@@ -7,11 +7,7 @@ import { generateEffectLists } from './generateEffectLists';
 import { RootState } from '@/app/store';
 import { Effects, EffectValue } from '@/types/cards';
 
-export type EffectListType = {
-  id: number;
-  name: string;
-  category: Effects['category'];
-  unit: 'integer' | 'percent' | 'level' | null;
+export type EffectListType = Omit<Effects, 'values'> & {
   values: Map<number, { card_id: number; card_name: string; effect_values: EffectValue[] }>;
 };
 
