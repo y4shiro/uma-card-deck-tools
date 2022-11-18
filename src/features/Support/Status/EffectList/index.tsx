@@ -1,10 +1,10 @@
-import { Box, Center, HStack, SimpleGrid, Text } from '@chakra-ui/react';
+import { Center, HStack, SimpleGrid, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { EffectListType } from '..';
-import EffectValue from './EffectValue';
+import EffectText from './EffectText';
 
 import { RootState } from '@/app/store';
 
@@ -34,7 +34,7 @@ const EffectList: React.FC<Props> = ({ effectList }) => {
                   key={`${effect.name},${v.card_id}`}
                 >
                   <Text>{effect.name}</Text>
-                  <EffectValue
+                  <EffectText
                     deck={deck}
                     card_id={v.card_id}
                     effect_values={v.effect_values}

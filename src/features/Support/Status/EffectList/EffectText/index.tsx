@@ -18,7 +18,7 @@ const generateValueString = (currentValue: number, unit: EffectListType['unit'])
   else return `${currentValue}`;
 };
 
-const EffectValue: React.FC<Props> = ({ deck, card_id, effect_values, unit }) => {
+const EffectText: React.FC<Props> = ({ deck, card_id, effect_values, unit }) => {
   const limitBreakStep = deck.find((d) => d.cardId === card_id)?.limitBreakStep!;
   const defaultLimitBreakStep = effect_values.length - 5;
   const currentLevel = effect_values[defaultLimitBreakStep + limitBreakStep].level;
@@ -34,4 +34,4 @@ const EffectValue: React.FC<Props> = ({ deck, card_id, effect_values, unit }) =>
   );
 };
 
-export default EffectValue;
+export default EffectText;
