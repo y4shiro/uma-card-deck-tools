@@ -1,10 +1,9 @@
-import { Center, HStack, SimpleGrid, Text } from '@chakra-ui/react';
-import Image from 'next/image';
+import { HStack, SimpleGrid, Text } from '@chakra-ui/react';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { EffectListType } from '..';
-import EffectText from './EffectText';
+import EffectItem from './EffectItem';
 
 import { RootState } from '@/app/store';
 
@@ -24,31 +23,13 @@ const EffectList: React.FC<Props> = ({ effectList }) => {
               <Text>{effect.name}</Text>
             </HStack>
             <SimpleGrid w='100%' columns={{ base: 1, sm: 2 }} px='4' pt='4' pb='12' gap='2'>
-              {[...effect.values].map(([_k, v]) => (
-                <HStack
-                  w='100%'
-                  p='4'
-                  bgColor='white'
-                  borderRadius='8'
-                  shadow='md'
-                  key={`${effect.name},${v.card_id}`}
-                >
-                  <Text>{effect.name}</Text>
-                  <EffectText
-                    deck={deck}
-                    card_id={v.card_id}
-                    effect_values={v.effect_values}
-                    unit={effect.unit}
-                  />
-                  <Center boxSize={{ base: '16px', md: '36px' }}>
-                    <Image
-                      width='64px'
-                      height='64px'
-                      src={`/uma-support-card/card-icons/${v.card_id}.png`}
-                      alt='サポートカードのアイコン'
-                    />
-                  </Center>
-                </HStack>
+              {[...effect.values].map(([_k, card]) => (
+                <EffectItem
+                  deck={deck}
+                  effect={effect}
+                  card={card}
+                  key={`${effect.name},${card.card_id}`}
+                />
               ))}
             </SimpleGrid>
           </React.Fragment>
