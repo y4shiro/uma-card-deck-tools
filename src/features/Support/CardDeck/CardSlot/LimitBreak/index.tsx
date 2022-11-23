@@ -1,4 +1,5 @@
-import { Button, HStack, VStack, Text } from '@chakra-ui/react';
+import { HStack, VStack, Text, IconButton } from '@chakra-ui/react';
+import { ImMinus, ImPlus } from 'react-icons/im';
 import { useDispatch } from 'react-redux';
 
 import { decrementLimitBreak, incrementLimitBreak } from '../../cardDeckSlice';
@@ -63,21 +64,21 @@ const LimitBreak: React.FC<Props> = ({ slotId, cardData, limitBreakStep }) => {
         {currentLimitBreakString(limitBreakStep)}
       </Text>
       <HStack justifyContent='space-around' spacing={{ base: 1, sm: 2 }}>
-        <Button
+        <IconButton
           size={{ base: 'xs', md: 'sm' }}
           colorScheme='red'
           onClick={() => decrementBreakLimit()}
-        >
-          -
-        </Button>
+          icon={<ImMinus />}
+          aria-label={'サポカの限界突破レベルをマイナスするボタン'}
+        />
         <Text fontSize={{ base: 'md', md: '2xl' }}>Lv:{currentLevel()}</Text>
-        <Button
+        <IconButton
           size={{ base: 'xs', md: 'sm' }}
           colorScheme='blue'
           onClick={() => incrementBreakLimit(slotId)}
-        >
-          +
-        </Button>
+          icon={<ImPlus />}
+          aria-label={'サポカの限界突破レベルをプラスするボタン'}
+        />
       </HStack>
     </VStack>
   );
