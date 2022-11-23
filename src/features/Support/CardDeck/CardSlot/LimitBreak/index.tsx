@@ -52,22 +52,23 @@ const LimitBreak: React.FC<Props> = ({ slotId, cardData, limitBreakStep }) => {
     <VStack
       position='absolute'
       w='100%'
-      top='70%'
+      top={{ base: '55%', sm: '65%' }}
       bottom='0'
-      padding='2'
+      padding={{ base: 1, sm: 2 }}
       bgColor='whiteAlpha.800'
       borderBottomRadius={{ base: 8, md: 12 }}
+      spacing={{ base: '0', sm: '2' }}
     >
-      <HStack justifyContent='space-around'>
+      <Text fontSize='xl'>{currentLimitBreakString(limitBreakStep)}</Text>
+      <HStack justifyContent='space-around' spacing={{ base: 1 }}>
         <Button size='xs' colorScheme='red' onClick={() => decrementBreakLimit()}>
           -
         </Button>
-        <Text fontSize='xl'>{currentLimitBreakString(limitBreakStep)}</Text>
+        <Text>Lv:{currentLevel()}</Text>
         <Button size='xs' colorScheme='blue' onClick={() => incrementBreakLimit(slotId)}>
           +
         </Button>
       </HStack>
-      <Text>Level:{currentLevel()}</Text>
     </VStack>
   );
 };
