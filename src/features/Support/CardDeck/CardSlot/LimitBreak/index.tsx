@@ -59,7 +59,9 @@ const LimitBreak: React.FC<Props> = ({ slotId, cardData, limitBreakStep }) => {
       borderBottomRadius={{ base: 8, md: 12 }}
       spacing={{ base: '0', sm: '2' }}
     >
-      <Text fontSize='xl'>{currentLimitBreakString(limitBreakStep)}</Text>
+      <Text fontSize={{ base: 'xl', sm: '3xl' }} textColor='twitter.600'>
+        {currentLimitBreakString(limitBreakStep)}
+      </Text>
       <HStack justifyContent='space-around' spacing={{ base: 1 }}>
         <Button size='xs' colorScheme='red' onClick={() => decrementBreakLimit()}>
           -
