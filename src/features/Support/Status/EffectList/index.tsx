@@ -1,4 +1,4 @@
-import { HStack, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, HStack, SimpleGrid, Text } from '@chakra-ui/react';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
@@ -15,7 +15,7 @@ const EffectList: React.FC<Props> = ({ effectList }) => {
   const deck = useSelector((state: RootState) => state.cardDeck);
 
   return (
-    <>
+    <Box w='95%'>
       {effectList.map((effect) => {
         return (
           <React.Fragment key={`${effect.name}`}>
@@ -35,7 +35,7 @@ const EffectList: React.FC<Props> = ({ effectList }) => {
           </React.Fragment>
         );
       })}
-    </>
+    </Box>
   );
 };
 
