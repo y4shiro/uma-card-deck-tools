@@ -1,10 +1,11 @@
-import { Text, VStack } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 
 import EffectList from './EffectList';
 import { generateEffectLists } from './generateEffectLists';
 
 import { RootState } from '@/app/store';
+import ComponentHeader from '@/components/ComponentHeader';
 import { Effects, EffectValue } from '@/types/cards';
 
 export type EffectListType = Omit<Effects, 'values'> & {
@@ -17,7 +18,7 @@ const Status = (): JSX.Element => {
 
   return (
     <VStack w='100%' bgColor='blue.100'>
-      <Text>Status</Text>
+      <ComponentHeader>Status</ComponentHeader>
 
       <EffectList effectList={array} />
     </VStack>
