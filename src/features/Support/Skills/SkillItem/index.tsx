@@ -1,6 +1,8 @@
-import { Box, Center, Divider, HStack, Spacer, Text, VStack } from '@chakra-ui/react';
+import { Center, Divider, HStack, Spacer, Text, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
 import React from 'react';
+
+import ItemText from '@/components/TextItem';
 
 type Props = {
   skillName: string;
@@ -11,7 +13,6 @@ type Props = {
 };
 
 const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, iconPath, cardName }) => {
-  const fontColor = '#653B21';
   const bgColors = {
     1: 'linear-gradient(90deg, #FCF3F2, #D9D7EB 50%, #C8C6DE 75%,#AAA9BE)', // 白
     2: 'linear-gradient(90deg, #FFFEEE, #F7D883 50%, #F2BA53)', // 金
@@ -26,6 +27,7 @@ const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, iconPath, card
     4: 'linear-gradient(90deg, #88F180, #A2CDE1 25%, #969FF2 50%, #B68BEC 75%, #EA88CE)',
     5: 'linear-gradient(90deg, #88F180, #A2CDE1 25%, #969FF2 50%, #B68BEC 75%, #EA88CE)',
   };
+  const dividerColor = '#653B21';
 
   return (
     <HStack
@@ -36,10 +38,7 @@ const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, iconPath, card
       borderRadius='16'
       background={`${bgColors[rarity]} padding-box, ${borderColors[rarity]} border-box`}
       border='2px solid transparent'
-      fontWeight='bold'
       fontSize={{ base: '12px', md: '16px' }}
-      textColor={fontColor}
-      textShadow='0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff'
       shadow='md'
     >
       <Center boxSize={{ base: '48px', md: '64px' }}>
@@ -51,16 +50,16 @@ const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, iconPath, card
         />
       </Center>
 
-      <VStack w='100%' divider={<Divider borderColor={fontColor} />}>
+      <VStack w='100%' divider={<Divider borderColor={dividerColor} />}>
         <HStack w='100%'>
-          <Text>{skillName}</Text>
+          <ItemText>{skillName}</ItemText>
           <Spacer />
-          {skillPt && <Text>{skillPt}Pt</Text>}
+          {skillPt && <ItemText>{skillPt}Pt</ItemText>}
         </HStack>
 
-        <Text w='100%' noOfLines={[1]}>
+        <ItemText w='100%' noOfLines={[1]}>
           {cardName}
-        </Text>
+        </ItemText>
       </VStack>
     </HStack>
   );

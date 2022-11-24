@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import { decrementLimitBreak, incrementLimitBreak } from '../../cardDeckSlice';
 
+import ItemText from '@/components/TextItem';
+
 import { LimitBreakSteps, SlotId } from '@/types/cardSlot';
 import { CardType } from '@/types/cards';
 
@@ -71,7 +73,7 @@ const LimitBreak: React.FC<Props> = ({ slotId, cardData, limitBreakStep }) => {
           icon={<ImMinus />}
           aria-label={'サポカの限界突破レベルをマイナスするボタン'}
         />
-        <Text fontSize={{ base: 'md', md: '2xl' }}>Lv:{currentLevel()}</Text>
+        <ItemText fontSize={{ base: 'md', md: '2xl' }}>Lv:{currentLevel()}</ItemText>
         <IconButton
           size={{ base: 'xs', md: 'sm' }}
           colorScheme='blue'
