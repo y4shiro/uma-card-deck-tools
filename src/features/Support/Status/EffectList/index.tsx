@@ -19,8 +19,16 @@ const EffectList: React.FC<Props> = ({ effectList }) => {
       {effectList.map((effect) => {
         return (
           <React.Fragment key={`${effect.name}`}>
-            <HStack w='100%' p='4' bgColor='green.300' borderRadius='8'>
-              <Text>{effect.name}</Text>
+            <HStack
+              w='100%'
+              px='4'
+              bgColor='#89c53d'
+              borderRadius='4'
+              clipPath='polygon(0 0, 100% 0%, 98% 100%, 0% 100%)'
+            >
+              <Text fontSize={{ base: 16, sm: 20 }} textColor='white' fontWeight='bold'>
+                {effect.name}
+              </Text>
             </HStack>
             <SimpleGrid w='100%' columns={{ base: 1, sm: 2 }} px='4' pt='4' pb='12' gap='2'>
               {[...effect.values].map(([_k, card]) => (
