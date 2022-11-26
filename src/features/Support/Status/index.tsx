@@ -18,7 +18,7 @@ const Status = (): JSX.Element => {
 
   return (
     <VStack w='100%' bgColor='blue.100'>
-      <ComponentHeader>Status</ComponentHeader>
+      <ComponentHeader>サポカ効果一覧</ComponentHeader>
 
       <EffectList effectList={array} />
     </VStack>
