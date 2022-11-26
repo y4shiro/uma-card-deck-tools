@@ -1,6 +1,7 @@
 import { Text } from '@chakra-ui/react';
 
 import { EffectListType } from '../..';
+import ItemText from '@/components/TextItem';
 import { CardSlotType } from '@/types/cardSlot';
 import { EffectValue } from '@/types/cards';
 
@@ -28,8 +29,8 @@ const EffectText: React.FC<Props> = ({ deck, card_id, effect_values, unit }) => 
 
   return (
     <>
-      <Text>Level: {currentLevel}</Text>
-      <Text>{valueString}</Text>
+      <ItemText fontSize={{ base: 14, sm: 18 }}>Lv: {currentLevel}</ItemText>
+      <ItemText fontSize={{ base: 14, sm: 18 }}>+{valueString}</ItemText>
     </>
   );
 };

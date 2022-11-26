@@ -30,7 +30,7 @@ const EffectList: React.FC<Props> = ({ effectList }) => {
                 {effect.name}
               </Text>
             </HStack>
-            <SimpleGrid w='100%' columns={{ base: 1, sm: 2 }} px='4' pt='4' pb='12' gap='2'>
+            <SimpleGrid w='100%' columns={{ base: 1, sm: 2 }} px='2' pt='4' pb='12' gap='2'>
               {[...effect.values].map(([_k, card]) => (
                 <EffectItem
                   deck={deck}
