@@ -14,7 +14,7 @@ const Home: NextPageWithLayout = () => (
     </Head>
 
     {/* sm: 30em(480px), md: 40em(768px), lg: 62em(992px), xl: 80em(1280px) */}
-    <Container as='main' w='100%' maxW='container.lg' px={{ base: 0, sm: 4 }} bgColor='gray.100'>
+    <Container as='main' w='100%' maxW='container.lg' px={{ base: 0, sm: 4 }} bgColor='gray.50'>
       <Support />
     </Container>
   </div>
