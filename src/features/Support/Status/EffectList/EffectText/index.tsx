@@ -20,7 +20,10 @@ const generateValueString = (currentValue: number, unit: EffectListType['unit'])
 };
 
 const EffectText: React.FC<Props> = ({ deck, card_id, effect_values, unit }) => {
-  const limitBreakStep = deck.find((d) => d.cardId === card_id)?.limitBreakStep!;
+  const limitBreakStep = deck.find((d) => d.cardId === card_id)?.limitBreakStep;
+
+  if (limitBreakStep === undefined) return <></>;
+
   const defaultLimitBreakStep = effect_values.length - 5;
   const currentLevel = effect_values[defaultLimitBreakStep + limitBreakStep].level;
   const currentValue = effect_values[defaultLimitBreakStep + limitBreakStep].value;
