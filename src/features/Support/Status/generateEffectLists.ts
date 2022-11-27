@@ -222,6 +222,8 @@ const initEffects: EffectListType[] = [
 ];
 
 const generateEffectLists = (deck: CardSlotType[]) => {
+  if (deck.filter((d) => d.cardId).length === 0) return [];
+
   const deckCards = deck.map((deck) => deck.cardData);
   const array = [...initEffects];
 
