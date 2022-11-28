@@ -8,8 +8,8 @@ const Support: React.FC = () => {
   return (
     <VStack w='100%' gap={{ base: 2, sm: 4 }}>
       <CardDeck />
-      {/* <Skills /> */}
       <Status />
+      <Skills />
     </VStack>
   );
 };
