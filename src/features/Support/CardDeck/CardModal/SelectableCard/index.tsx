@@ -27,8 +27,13 @@ const SelectableCard: React.FC<Props> = ({ card, imgSize, selectedCards, belongC
     !card.belong_charactor_ids.some((charaId) => currentCardSlotCharaIds?.includes(charaId)) && // 同じ Slot にセット済みカードと同じキャラ id なら選択可能
     card.belong_charactor_ids.some((charaId) => belongCharaIds.has(charaId)); // 他 Slot でセット済みのキャラ id は選択不可能にする
 
-  const changeHandler = ({ slotId, cardId, belongCharaIds }: CardSlotType) => {
-    dispatch(changeCard({ slotId, cardId, belongCharaIds }));
+  const changeHandler = ({
+    slotId,
+    cardId,
+    cardData,
+    belongCharaIds,
+  }: Omit<CardSlotType, 'limitBreakStep'>) => {
+    dispatch(changeCard({ slotId, cardId, cardData, belongCharaIds }));
     dispatch(closeModal());
   };
 
@@ -46,6 +51,7 @@ const SelectableCard: React.FC<Props> = ({ card, imgSize, selectedCards, belongC
         changeHandler({
           slotId: openSlotId!,
           cardId: card.card_id,
+          cardData: card,
           belongCharaIds: card.belong_charactor_ids,
         })
       }

@@ -21,8 +21,8 @@ const CardDeck: React.FC = () => {
     <Box w={{ base: '100%', sm: '480px', md: '640px' }} h='100%' bgColor='blue.100'>
       {/* sm: 30em(480px), md: 40em(768px), lg: 62em(992px), xl: 80em(1280px) */}
       <Grid p='4' gap={{ base: 2, sm: 4 }} templateColumns='repeat(3, 1fr)'>
-        {deck.map((d, index) => (
-          <CardSlot slotId={d.slotId} cardId={d.cardId} imgSize={imgSize} key={d.slotId} />
+        {deck.map((d) => (
+          <CardSlot deck={d} imgSize={imgSize} key={d.slotId} />
         ))}
       </Grid>
       <CardModal imgSize={imgSize} />

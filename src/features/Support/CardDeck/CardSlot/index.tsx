@@ -4,19 +4,21 @@ import { useDispatch } from 'react-redux';
 
 import { openModal } from '../modalSlice';
 
+import LimitBreak from './LimitBreak';
 import Card from '@/components/Card';
 
 import { useGetCardsQuery } from '@/services/card';
-import { SlotId } from '@/types/cardSlot';
+import { CardSlotType, SlotId } from '@/types/cardSlot';
 import { ImgSize } from '@/types/cards';
 
 type Props = {
-  slotId: SlotId;
-  cardId?: number | null;
+  deck: CardSlotType;
   imgSize: ImgSize;
 };
 
-const CardSlot: React.FC<Props> = ({ slotId, cardId, imgSize }) => {
+const CardSlot: React.FC<Props> = ({ deck, imgSize }) => {
+  const { slotId, cardId, cardData, limitBreakStep } = deck;
+
   const { data: cards, error, isLoading } = useGetCardsQuery();
   const card = cards?.find((c) => c.card_id === cardId);
   const dispatch = useDispatch();
@@ -27,13 +29,17 @@ const CardSlot: React.FC<Props> = ({ slotId, cardId, imgSize }) => {
 
   if (cardId)
     return (
-      <Box
-        cursor='pointer'
-        _hover={{ opacity: 0.75 }}
-        transition='0.25s'
-        onClick={() => openModalHandler(slotId)}
-      >
-        <Card card={card!} imgSize={imgSize} />
+      <Box position='relative'>
+        <Box
+          _hover={{ opacity: 0.7 }}
+          cursor='pointer'
+          onClick={() => openModalHandler(slotId)}
+          transition='0.25s'
+        >
+          <Card card={card!} imgSize={imgSize} />
+        </Box>
+
+        <LimitBreak slotId={slotId} cardData={cardData!} limitBreakStep={limitBreakStep} />
       </Box>
     );
 

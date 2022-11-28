@@ -6,10 +6,10 @@ import Status from './Status';
 
 const Support: React.FC = () => {
   return (
-    <VStack w='100%' gap={{ base: 2, sm: 4 }}>
+    <VStack w='100%' gap={{ base: 2, sm: 8 }}>
       <CardDeck />
-      <Skills />
       <Status />
+      <Skills />
     </VStack>
   );
 };
