@@ -18,7 +18,7 @@ export const cardDeckSlice = createSlice({
   name: 'cardDeck',
   initialState,
   reducers: {
-    changeCard: (state, action: PayloadAction<CardSlotType>) => {
+    changeCard: (state, action: PayloadAction<Omit<CardSlotType, 'limitBreakStep'>>) => {
       const { slotId, cardId, cardData, belongCharaIds } = action.payload;
       state[slotId] = { slotId, cardId, cardData, limitBreakStep: 0, belongCharaIds };
     },
