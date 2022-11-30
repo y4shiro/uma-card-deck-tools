@@ -32,13 +32,13 @@ type Props = {
 };
 
 const CardModal: React.FC<Props> = ({ imgSize }) => {
-  const { data, error, isLoading } = useGetCardsQuery();
+  const { data: cards, error, isLoading } = useGetCardsQuery();
   const { isOpen, openSlotId } = useSelector(selectModal);
   const filterState = useSelector(selectFilter);
   const dispatch = useDispatch();
 
   const filterLists = filterKeys.filter((key) => filterState[key] === true);
-  const cards = filterdCardLists(data!, filterLists);
+  const filterdCards = filterdCardLists(cards!, filterLists);
 
   const selectedCards = useSelector((state: RootState) => state.cardDeck)
     .map((card) => card.cardId)
@@ -80,7 +80,7 @@ const CardModal: React.FC<Props> = ({ imgSize }) => {
         </ModalHeader>
         <ModalBody bgColor='#eee' w='full' minH='360px' pt='0' textAlign='center'>
           <CardFilter />
-          {cards ? (
+          {filterdCards ? (
             <Grid
               gap={{ base: '1', sm: '2' }}
               templateColumns={{
@@ -90,7 +90,7 @@ const CardModal: React.FC<Props> = ({ imgSize }) => {
               }}
               justifyContent='center'
             >
-              {cards.map((card, index) => (
+              {filterdCards.map((card, index) => (
                 <GridItem key={index}>
                   <SelectableCard
                     card={card}
