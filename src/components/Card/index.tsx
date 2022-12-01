@@ -34,9 +34,9 @@ const Card: React.FC<Props> = ({ card, imgSize }) => {
         <Image
           layout='fill'
           objectFit='contain'
-          placeholder='blur'
-          blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOcXg8AAbMBGIpVIK8AAAAASUVORK5CYII='
-          // style={{ transition: '0.2s' }}
+          // placeholder='blur'
+          // blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mOcXg8AAbMBGIpVIK8AAAAASUVORK5CYII='
+          // style={{ transition: '0.1s' }}
           src={`w_${imgSize!.card.width},h_${imgSize!.card.height}/uma-support-card/card-images/${
             card.card_id
           }.png`}
