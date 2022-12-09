@@ -17,6 +17,7 @@ import { removeCard } from '../cardDeckSlice';
 import { closeModal, selectModal } from '../modalSlice';
 
 import CardFilter from './CardFilter';
+import MultipleObserver from './MultipleObserver';
 import SelectableCard from './SelectableCard';
 import { selectFilter, filterKeys } from './filterSlice';
 import { filterdCardLists } from './outputFilterdCardLists';
@@ -92,12 +93,14 @@ const CardModal: React.FC<Props> = ({ imgSize }) => {
             >
               {filterdCards.map((card, index) => (
                 <GridItem key={index}>
-                  <SelectableCard
-                    card={card}
-                    selectedCards={selectedCards}
-                    belongCharaIds={belongCharaIds}
-                    imgSize={imgSize}
-                  />
+                  <MultipleObserver>
+                    <SelectableCard
+                      card={card}
+                      selectedCards={selectedCards}
+                      belongCharaIds={belongCharaIds}
+                      imgSize={imgSize}
+                    />
+                  </MultipleObserver>
                 </GridItem>
               ))}
             </Grid>
