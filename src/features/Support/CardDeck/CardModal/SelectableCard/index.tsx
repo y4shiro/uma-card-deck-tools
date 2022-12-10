@@ -37,6 +37,8 @@ const SelectableCard: React.FC<Props> = ({ card, imgSize, selectedCards, belongC
     dispatch(closeModal());
   };
 
+  console.log(`${card.card_id} select card rendered.`);
+
   if (alreadySelectedCard)
     return <AlreadySelectedCard card={card} imgSize={imgSize} type={'selected'} />;
   else if (alreadyDuplicateCard)
