@@ -93,7 +93,7 @@ const CardModal: React.FC<Props> = ({ imgSize }) => {
             >
               {filterdCards.map((card, index) => (
                 <GridItem key={index}>
-                  <MultipleObserver>
+                  <MultipleObserver cardRarity={card.card_rarity}>
                     <SelectableCard
                       card={card}
                       selectedCards={selectedCards}
