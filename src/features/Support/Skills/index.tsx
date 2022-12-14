@@ -1,9 +1,10 @@
-import { Heading, VStack } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 
 import SkillList from './SkillList';
 
 import { RootState } from '@/app/store';
+import ComponentHeader from '@/components/ComponentHeader';
 import { useGetCardsQuery } from '@/services/card';
 
 const Skills = (): JSX.Element => {
@@ -32,8 +33,8 @@ const Skills = (): JSX.Element => {
     });
 
   return (
-    <VStack w='100%' py='2' px={{ base: '0', md: '2' }} gap='4' bgColor='blue.100'>
-      <Heading fontSize='4xl'>Skills</Heading>
+    <VStack w='100%' bgColor='#eee' borderRadius='12'>
+      <ComponentHeader>スキル一覧</ComponentHeader>
       <SkillList heading={'イベント取得スキル'} skillLists={cardEventSkills} />
       <SkillList heading={'トレーニング取得スキル'} skillLists={cardTrainingSkills} />
     </VStack>
