@@ -18,7 +18,7 @@ type Props = {
 
 const SkillList: React.FC<Props> = ({ heading, skillLists }) => {
   return (
-    <VStack w='100%' p='4' gap='2' bgColor='blue.200'>
+    <VStack w='100%' p='4' gap='2'>
       <Heading as='h2' fontSize='2xl'>
         {heading}
       </Heading>
