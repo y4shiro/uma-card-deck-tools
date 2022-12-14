@@ -13,7 +13,7 @@ export type EffectListType = Omit<Effects, 'values'> & {
   values: Map<number, { card_id: number; card_name: string; effect_values: EffectValue[] }>;
 };
 
-const Status = (): JSX.Element => {
+const Effects = (): JSX.Element => {
   const deck = useSelector((state: RootState) => state.cardDeck);
   const array = generateEffectLists(deck);
 
@@ -32,4 +32,4 @@ const Status = (): JSX.Element => {
   );
 };
 
-export default Status;
+export default Effects;

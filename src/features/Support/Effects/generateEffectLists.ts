@@ -1,4 +1,4 @@
-import { CardSlotType } from './../../../types/cardSlot';
+import { CardSlotType } from '../../../types/cardSlot';
 import { EffectListType } from '.';
 
 const initEffects: EffectListType[] = [
