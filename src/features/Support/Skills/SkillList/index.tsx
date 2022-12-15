@@ -22,7 +22,7 @@ const SkillList: React.FC<Props> = ({ heading, skillLists }) => {
     <VStack w='100%' p='4' gap='2'>
       <ComponentHeading>{heading}</ComponentHeading>
 
-      <SimpleGrid w='100%' columns={{ base: 1, md: 2 }} gap={{ base: '2', md: '4' }}>
+      <SimpleGrid w='100%' px='4' columns={{ base: 1, md: 2 }} gap={{ base: '2', md: '4' }}>
         {skillLists?.map((card) =>
           card.card_skills?.map((skill) => (
             <SkillItem

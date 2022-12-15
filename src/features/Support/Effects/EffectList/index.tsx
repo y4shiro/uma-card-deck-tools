@@ -16,7 +16,7 @@ const EffectList: React.FC<Props> = ({ effectList }) => {
   const deck = useSelector((state: RootState) => state.cardDeck);
 
   return (
-    <Box w='95%'>
+    <Box w='100%' p='4'>
       {effectList.map((effect) => {
         return (
           <React.Fragment key={`${effect.name}`}>
