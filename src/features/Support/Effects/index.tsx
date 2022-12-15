@@ -1,12 +1,14 @@
-import { Center, VStack } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 
 import EffectList from './EffectList';
 import { generateEffectLists } from './generateEffectLists';
 
 import { RootState } from '@/app/store';
+
 import ComponentHeader from '@/components/ComponentHeader';
-import ItemText from '@/components/TextItem';
+import ItemNotExistText from '@/components/ItemNotExistText';
+
 import { Effects, EffectValue } from '@/types/cards';
 
 export type EffectListType = Omit<Effects, 'values'> & {
@@ -24,9 +26,7 @@ const Effects = (): JSX.Element => {
       {array.length ? (
         <EffectList effectList={array} />
       ) : (
-        <Center w='100%' h={{ base: '96px', md: '120px' }}>
-          <ItemText fontSize={{ base: '20px', md: '24px' }}>サポカ効果が存在しません</ItemText>
-        </Center>
+        <ItemNotExistText>サポカ効果</ItemNotExistText>
       )}
     </VStack>
   );
