@@ -1,4 +1,4 @@
-import { Center, Divider, HStack, Spacer, Text, VStack } from '@chakra-ui/react';
+import { Center, Divider, HStack, Spacer, StackDivider, Text, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
 import React from 'react';
 
@@ -32,8 +32,8 @@ const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, iconPath, card
   return (
     <HStack
       w='100%'
-      px={{ base: '2', md: '4' }}
-      py='2'
+      px='2'
+      py='1'
       gap={{ base: '0', md: '2' }}
       borderRadius='16'
       background={`${bgColors[rarity]} padding-box, ${borderColors[rarity]} border-box`}
@@ -50,7 +50,7 @@ const SkillItem: React.FC<Props> = ({ skillName, rarity, skillPt, iconPath, card
         />
       </Center>
 
-      <VStack w='100%' divider={<Divider borderColor={dividerColor} />}>
+      <VStack w='100%' spacing='1' divider={<StackDivider borderColor={dividerColor} />}>
         <HStack w='100%'>
           <ItemText>{skillName}</ItemText>
           <Spacer />
