@@ -1,4 +1,4 @@
-import { Box, HStack, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, SimpleGrid, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
@@ -6,6 +6,7 @@ import { EffectListType } from '..';
 import EffectItem from './EffectItem';
 
 import { RootState } from '@/app/store';
+import ComponentHeading from '@/components/ComponentHeading';
 
 type Props = {
   effectList: EffectListType[];
@@ -15,22 +16,13 @@ const EffectList: React.FC<Props> = ({ effectList }) => {
   const deck = useSelector((state: RootState) => state.cardDeck);
 
   return (
-    <Box w='95%'>
+    <VStack w='100%' p={{ base: 2, md: 4 }} gap='2'>
       {effectList.map((effect) => {
         return (
-          <React.Fragment key={`${effect.name}`}>
-            <HStack
-              w='100%'
-              px='4'
-              bgColor='#89c53d'
-              borderRadius='4'
-              clipPath='polygon(0 0, 100% 0%, 98% 100%, 0% 100%)'
-            >
-              <Text fontSize={{ base: 16, sm: 20 }} textColor='white' fontWeight='bold'>
-                {effect.name}
-              </Text>
-            </HStack>
-            <SimpleGrid w='100%' columns={{ base: 1, sm: 2 }} px='2' pt='4' pb='12' gap='2'>
+          <Box w='100%' key={`${effect.name}`}>
+            <ComponentHeading>{effect.name}</ComponentHeading>
+
+            <SimpleGrid w='100%' columns={{ base: 1, sm: 2 }} p={{ base: 2, md: 4 }} gap='2'>
               {[...effect.values].map(([_k, card]) => (
                 <EffectItem
                   deck={deck}
@@ -40,10 +32,10 @@ const EffectList: React.FC<Props> = ({ effectList }) => {
                 />
               ))}
             </SimpleGrid>
-          </React.Fragment>
+          </Box>
         );
       })}
-    </Box>
+    </VStack>
   );
 };
 
