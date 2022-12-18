@@ -20,7 +20,7 @@ const Effects = (): JSX.Element => {
   const array = generateEffectLists(deck);
 
   return (
-    <VStack w='100%' bgColor='#eee' borderRadius='12'>
+    <VStack w='100%' bgColor='#eee' borderRadius='12' shadow='xl'>
       <ComponentHeader>サポカ効果一覧</ComponentHeader>
 
       {array.length ? (

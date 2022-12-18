@@ -33,7 +33,7 @@ const Skills = (): JSX.Element => {
     });
 
   return (
-    <VStack w='100%' bgColor='#eee' borderRadius='12'>
+    <VStack w='100%' bgColor='#eee' borderRadius='12' shadow='xl'>
       <ComponentHeader>スキル一覧</ComponentHeader>
       <SkillList heading={'イベント取得スキル'} skillLists={cardEventSkills} />
       <SkillList heading={'トレーニング取得スキル'} skillLists={cardTrainingSkills} />
