@@ -1,4 +1,4 @@
-import { Container } from '@chakra-ui/react';
+import { Box, Container } from '@chakra-ui/react';
 import type { NextPageWithLayout } from 'next';
 import Head from 'next/head';
 
@@ -6,7 +6,7 @@ import Support from '@/features/Support';
 import { Layout } from '@/layouts/Layout';
 
 const Home: NextPageWithLayout = () => (
-  <div>
+  <Box w='100%' bgColor='gray.50'>
     <Head>
       <title>Top - ウマ娘サポカ編成ツール</title>
       <meta name='description' content='ウマ娘サポートカード編成ツール' />
@@ -20,11 +20,10 @@ const Home: NextPageWithLayout = () => (
       maxW='container.lg'
       pb={{ base: '64px', sm: '96px' }}
       px={{ base: 0, sm: 4 }}
-      bgColor='gray.50'
     >
       <Support />
     </Container>
-  </div>
+  </Box>
 );
 
 Home.getLayout = (page) => <Layout>{page}</Layout>;
